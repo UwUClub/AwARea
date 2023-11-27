@@ -1,0 +1,22 @@
+name: Syncing two repo
+on:
+  push:
+    branches:
+      - main
+
+env:
+  SOURCE_REPO: "git@github.com:UwUClub/Area.git" #Insert source url of the git source repo
+  DEST_REPO: "git@github.com:EpitechPromo2026/B-DEV-500-TLS-5-2-area-valentin.gegoux.git" #Insert Destination url of the git dest repo
+
+jobs:
+  git-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: git-sync
+        uses: wei/git-sync@v3
+        with:
+          source_repo: ${{ env.SOURCE_REPO }}
+          source_branch: "main"
+          destination_repo: ${{ env.DEST_REPO }}
+          destination_branch: "main"
+          ssh_private_key: ${{ secrets.SSH_KEY }}
