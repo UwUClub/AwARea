@@ -1,6 +1,17 @@
 import express from 'express'
-const app = express()
+const router = express.Router()
 
-app.get('/', (req, res) => {
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     description: Returns the homepage
+ *     responses:
+ *       200:
+ *         description: hello world
+ */
+router.get('/', (req, res) => {
     res.send('Hello World!')
 })
+
+export default router
