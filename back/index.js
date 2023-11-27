@@ -1,6 +1,6 @@
 import express from 'express'
 
-import {runCron} from './cron.js'
+import {runCron} from './cron/cron.js'
 
 const app = express()
 const port = 8080
