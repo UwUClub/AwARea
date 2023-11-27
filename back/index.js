@@ -1,5 +1,7 @@
-const express = require('express')
-import{runCron} from './cron.ts'
+import express from 'express'
+
+import {runCron} from './cron.js'
+
 const app = express()
 const port = 8080
 
