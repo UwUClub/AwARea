@@ -2,6 +2,7 @@
 
 -   [NestJS](#nestjs)
     -   [Swagger](#swagger)
+    -   [Schedule](#schedule)
 -   [Flutter](#flutter)
 
 ## NestJS
@@ -19,6 +20,12 @@
 ### Swagger
 
 -   Swagger is a tool that can be used to document APIs. It provides a user-friendly interface for developers to view and test the API endpoints, and also generates documentation for the API. This is used to ensure that our API is well-documented and easy to use.
+
+### Schedule
+
+-   NestJS provides a built-in scheduler that can be used to run tasks at regular intervals. This is used to schedule the sending of notifications to users.
+-   It replaces the "Cron" package that was previously used for scheduling.
+-   The scheduler is used to refresh all the access tokens.
 
 ## Flutter
 
