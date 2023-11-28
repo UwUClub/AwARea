@@ -4,6 +4,12 @@
     -   [Swagger](#swagger)
     -   [Schedule](#schedule)
 -   [Flutter](#flutter)
+-   [MongoDB](#mongodb)
+    -   [Mongoose](#mongoose)
+-   [Passport](#passport)
+-   [Class Validator and Class Transformer](#class-validator-and-class-transformer)
+-   [bcrypt](#bcrypt)
+-   [JWT](#jwt)
 
 ## NestJS
 
@@ -60,3 +66,15 @@
 ## Class Validator and Class Transformer
 
 -   Validation: Class Validator and Class Transformer are used to validate and transform data in our API. This is crucial for ensuring that the data sent to our API is valid and conforms to the expected format.
+
+## bcrypt
+
+-   Password Hashing: bcrypt is a popular password hashing library for Node.js. It provides a secure way to store passwords by using a salted hash. This is used to securely store user passwords in our database.
+
+-   Security: bcrypt provides a secure way to store passwords by using a salted hash. This is crucial for ensuring that our API is secure.
+
+## JWT
+
+-   Authentication: JWT is a popular authentication mechanism for web applications. It provides a secure way to authenticate users by using a JSON Web Token (JWT). This is used to authenticate users for our API.
+
+-   Security: JWT provides a secure way to authenticate users by using a JSON Web Token (JWT). This is crucial for ensuring that our API is secure.
