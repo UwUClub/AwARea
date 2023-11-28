@@ -38,3 +38,25 @@
 -   Hot Reload Feature: The hot reload feature in Flutter enhances developer productivity by allowing instant viewing of changes without needing a full reload. This speeds up the development process and allows for rapid iteration.
 
 -   Documentation: Flutter is made by Google, it has a very good and easy to understand documentation.
+
+## MongoDB
+
+-   Flexibility and Scalability: MongoDB is a NoSQL database that offers high flexibility with its schema-less structure. This is ideal since our data structures can evolve over time. It also can handle large amounts of data and scale horizontally.
+
+-   JSON Data Format: MongoDB uses a JSON-like format for storing data, which aligns well with JavaScript-based technologies (like Node.js in NestJS). This makes it easy to work with and integrate with our backend.
+
+### Mongoose
+
+-   Data Modeling and Validation: Mongoose provides a straightforward solution for data modeling in MongoDB. It allows defining schemas for your data, which includes built-in type casting, validation, and query building.
+
+-   Ease of Use: Mongoose simplifies the interaction with MongoDB through its object modeling and provides a more intuitive and higher-level API for database operations.
+
+## Passport
+
+-   Authentication: Passport is a popular authentication middleware for Node.js. It provides a simple and flexible way to authenticate users using different strategies (e.g. local, OAuth, etc.). This is used to authenticate users for our API.
+
+-   Security: Passport provides a secure way to authenticate users by using a session store (e.g. Redis) and encrypting sensitive data (e.g. passwords). This is crucial for ensuring that our API is secure.
+
+## Class Validator and Class Transformer
+
+-   Validation: Class Validator and Class Transformer are used to validate and transform data in our API. This is crucial for ensuring that the data sent to our API is valid and conforms to the expected format.
