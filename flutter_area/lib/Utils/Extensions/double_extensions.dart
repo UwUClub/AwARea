@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-import '../contants.dart';
+import '../constants.dart';
 
 extension DoubleExtension on double {
   double ratioW() {

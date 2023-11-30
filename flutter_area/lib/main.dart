@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'Core/Locator/locator.dart';
 import 'Core/Manager/theme_manager.dart';
 import 'UI/Demo/demo_view.dart';
-import 'Utils/contants.dart';
+import 'Utils/constants.dart';
 import 'Utils/theme_data.dart';
 
 void main() {

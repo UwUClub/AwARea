@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/color_extensions.dart';
-import '../../Utils/contants.dart';
+import '../../Utils/constants.dart';
 
 class MkBackground extends StatefulWidget {
   const MkBackground({super.key, required this.child});
