@@ -14,6 +14,7 @@
 
 - Node.js
 - Npm
+- Flutter
 
 ## Communication
 
@@ -36,7 +37,7 @@ cd back && npm install && npm start
 ### Client
 Then start the client
 ```bash
-cd front && npm install && npm start
+cd flutter_area && flutter pub get && flutter run
 ```
 
 ## Credits
