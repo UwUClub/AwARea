@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'Core/Locator/locator.dart';
 import 'Core/Manager/theme_manager.dart';
@@ -33,6 +34,8 @@ class MyAppState extends State<MyApp> {
           themeMode: currentMode,
           home: const MyHomePage(),
           debugShowCheckedModeBanner: false,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
         );
       },
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Core/Locator/locator.dart';
 import '../../Core/Manager/theme_manager.dart';
@@ -20,11 +21,11 @@ class _DemoViewState extends State<DemoView> {
       child: Center(
           child: Column(
         children: <Widget>[
-          Text('OUI!', style: Theme.of(context).textTheme.titleLarge),
+          Text(AppLocalizations.of(context)!.hello, style: Theme.of(context).textTheme.titleLarge),
           ElevatedButton(
               onPressed: () => themeManager.inverseThemeMode(),
               child: Center(
-                  child: Text('Inverse',
+                  child: Text(AppLocalizations.of(context)!.changeMode,
                       style: Theme.of(context).textTheme.labelLarge)))
         ],
       )),
