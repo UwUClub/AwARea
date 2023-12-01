@@ -78,3 +78,7 @@
 -   Authentication: JWT is a popular authentication mechanism for web applications. It provides a secure way to authenticate users by using a JSON Web Token (JWT). This is used to authenticate users for our API.
 
 -   Security: JWT provides a secure way to authenticate users by using a JSON Web Token (JWT). This is crucial for ensuring that our API is secure.
+
+## Nest config
+
+-   Security: Keep all secrets and privates variable in the environement and manage them
