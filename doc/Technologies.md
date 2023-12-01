@@ -4,6 +4,10 @@
     -   [Swagger](#swagger)
     -   [Schedule](#schedule)
 -   [Flutter](#flutter)
+    -   [stacked](#stacked)
+    -   [get_it](#get_it)
+    -   [flutter_localizations](#flutter_localizations)
+    -   [intl](#intl)
 -   [MongoDB](#mongodb)
     -   [Mongoose](#mongoose)
 -   [Passport](#passport)
@@ -44,6 +48,44 @@
 -   Hot Reload Feature: The hot reload feature in Flutter enhances developer productivity by allowing instant viewing of changes without needing a full reload. This speeds up the development process and allows for rapid iteration.
 
 -   Documentation: Flutter is made by Google, it has a very good and easy to understand documentation.
+
+### stacked
+
+-   MVVM Architecture: Stacked follows the Model-View-ViewModel (MVVM) architectural model, helping to structure code more organizedly, separating business logic from the user interface.
+    
+-   State Management: It provides simplified state management essential for medium to large-scale applications.
+
+-   Reactivity: Stacked facilitates the creation of reactive user interfaces that respond to state changes effectively.
+
+-   Services and Dependency Injection: It allows easy integration of services and uses dependency injection for better modularity and testability of the code.
+
+### get_it
+
+-   Service Locator: GetIt is a service locator for Dart and Flutter, meaning it can be used to retrieve instances of your classes wherever needed in your application.
+
+-   Decoupled Dependencies: It helps to decouple instance creation logic and instance usage, beneficial for code maintenance and testing.
+
+-   Singletons and Lazy Singletons: GetIt allows for easy configuration of singletons and lazy singletons, useful for managing instances that need to be unique throughout the application.
+
+-   Flexibility: GetIt offers great flexibility in dependency management, suited to many development scenarios.
+
+### flutter_localizations
+
+-   Multi-Language Support: This package enables adding support for multiple languages in your Flutter application.
+
+-   Integrated Localization: It offers tight integration with the Flutter framework, making it easier to localize texts, dates, numbers, and more.
+
+-   Regional Format Support: It helps manage regional formats for dates, times, and numbers, crucial for applications intended for an international audience.
+
+### intl
+
+-   Internationalization and Localization: The Intl package provides tools for internationalizing and localizing applications, including support for date, number, and message formats.
+
+-   Date and Time Manipulation: It is particularly useful for formatting and parsing dates and times locally.
+
+-   Pluralization and Gender: Intl helps manage pluralization and gender selection in texts, essential for accurate localization.
+
+-   Flexibility and Customization: It offers great flexibility in defining custom formats and managing localized messages.
 
 ## MongoDB
 
