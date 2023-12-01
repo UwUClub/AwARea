@@ -155,90 +155,91 @@ migrate_working_dir/
 #.vscode/
 
 # Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-.packages
-.pub-cache/
-.pub/
-/build/
+flutter_area/**/doc/api/
+flutter_area/**/ios/Flutter/.last_build_id
+flutter_area/.dart_tool/
+flutter_area/.flutter-plugins
+flutter_area/.flutter-plugins-dependencies
+flutter_area/.packages
+flutter_area/.pub-cache/
+flutter_area/.pub/
+flutter_area/build/
 
 # Symbolication related
-app.*.symbols
+flutter_area/app.*.symbols
 
 # Obfuscation related
-app.*.map.json
+flutter_area/app.*.map.json
 
 # Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+flutter_area//android/app/debug
+flutter_area//android/app/profile
+flutter_area//android/app/release
 
 ### Flutter ###
 # Flutter/Dart/Pub related
-flutter**/doc/api/
-flutter.dart_tool/
-flutter.flutter-plugins
-flutter.flutter-plugins-dependencies
-flutter.fvm/flutter_sdk
-flutter.packages
-flutter.pub-cache/
-flutter.pub/
-flutterbuild/
-fluttercoverage/
-flutterlib/generated_plugin_registrant.dart
+flutter_area/flutter**/doc/api/
+flutter_area/flutter.dart_tool/
+flutter_area/flutter.flutter-plugins
+flutter_area/flutter.flutter-plugins-dependencies
+flutter_area/flutter.fvm/flutter_sdk
+flutter_area/flutter.packages
+flutter_area/flutter.pub-cache/
+flutter_area/flutter.pub/
+flutter_area/flutterbuild/
+flutter_area/fluttercoverage/
+flutter_area/flutterlib/generated_plugin_registrant.dart
+flutter_area/pubspec.lock
 # For library packages, don’t commit the pubspec.lock file.
 # Regenerating the pubspec.lock file lets you test your package against the latest compatible versions of its dependencies.
 # See https://dart.dev/guides/libraries/private-files#pubspeclock
 #pubspec.lock
 
 # Android related
-**/android/**/gradle-wrapper.jar
-**/android/.gradle
-**/android/captures/
-**/android/gradlew
-**/android/gradlew.bat
-**/android/key.properties
-**/android/local.properties
-**/android/**/GeneratedPluginRegistrant.java
+flutter_area/**/android/**/gradle-wrapper.jar
+flutter_area/**/android/.gradle
+flutter_area/**/android/captures/
+flutter_area/**/android/gradlew
+flutter_area/**/android/gradlew.bat
+flutter_area/**/android/key.properties
+flutter_area/**/android/local.properties
+flutter_area/**/android/**/GeneratedPluginRegistrant.java
 
 # iOS/XCode related
-**/ios/**/*.mode1v3
-**/ios/**/*.mode2v3
-**/ios/**/*.moved-aside
-**/ios/**/*.pbxuser
-**/ios/**/*.perspectivev3
-**/ios/**/*sync/
-**/ios/**/.sconsign.dblite
-**/ios/**/.tags*
-**/ios/**/.vagrant/
-**/ios/**/DerivedData/
-**/ios/**/Icon?
-**/ios/**/Pods/
-**/ios/**/.symlinks/
-**/ios/**/profile
-**/ios/**/xcuserdata
-**/ios/.generated/
-**/ios/Flutter/.last_build_id
-**/ios/Flutter/App.framework
-**/ios/Flutter/Flutter.framework
-**/ios/Flutter/Flutter.podspec
-**/ios/Flutter/Generated.xcconfig
-**/ios/Flutter/app.flx
-**/ios/Flutter/app.zip
-**/ios/Flutter/flutter_assets/
-**/ios/Flutter/flutter_export_environment.sh
-**/ios/ServiceDefinitions.json
-**/ios/Runner/GeneratedPluginRegistrant.*
+flutter_area/**/ios/**/*.mode1v3
+flutter_area/**/ios/**/*.mode2v3
+flutter_area/**/ios/**/*.moved-aside
+flutter_area/**/ios/**/*.pbxuser
+flutter_area/**/ios/**/*.perspectivev3
+flutter_area/**/ios/**/*sync/
+flutter_area/**/ios/**/.sconsign.dblite
+flutter_area/**/ios/**/.tags*
+flutter_area/**/ios/**/.vagrant/
+flutter_area/**/ios/**/DerivedData/
+flutter_area/**/ios/**/Icon?
+flutter_area/**/ios/**/Pods/
+flutter_area/**/ios/**/.symlinks/
+flutter_area/**/ios/**/profile
+flutter_area/**/ios/**/xcuserdata
+flutter_area/**/ios/.generated/
+flutter_area/**/ios/Flutter/.last_build_id
+flutter_area/**/ios/Flutter/App.framework
+flutter_area/**/ios/Flutter/Flutter.framework
+flutter_area/**/ios/Flutter/Flutter.podspec
+flutter_area/**/ios/Flutter/Generated.xcconfig
+flutter_area/**/ios/Flutter/app.flx
+flutter_area/**/ios/Flutter/app.zip
+flutter_area/**/ios/Flutter/flutter_assets/
+flutter_area/**/ios/Flutter/flutter_export_environment.sh
+flutter_area/**/ios/ServiceDefinitions.json
+flutter_area/**/ios/Runner/GeneratedPluginRegistrant.*
 
 # Exceptions to above rules.
-!**/ios/**/default.mode1v3
-!**/ios/**/default.mode2v3
-!**/ios/**/default.pbxuser
-!**/ios/**/default.perspectivev3
-!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+flutter_area/!**/ios/**/default.mode1v3
+flutter_area/!**/ios/**/default.mode2v3
+flutter_area/!**/ios/**/default.pbxuser
+flutter_area/!**/ios/**/default.perspectivev3
+flutter_area/!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
 ### VisualStudioCode ###
 .vscode/*
