@@ -37,6 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   stacked: ^3.4.1+1
   get_it: ^7.6.4
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
 dev_dependencies:
   flutter_test:
@@ -59,6 +62,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   assets:
     - assets/images/
