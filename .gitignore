@@ -7,6 +7,8 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
+.vscode/
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -128,3 +130,132 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+flutter_area/**/doc/api/
+flutter_area/**/ios/Flutter/.last_build_id
+flutter_area/.dart_tool/
+flutter_area/.flutter-plugins
+flutter_area/.flutter-plugins-dependencies
+flutter_area/.packages
+flutter_area/.pub-cache/
+flutter_area/.pub/
+flutter_area/build/
+
+# Symbolication related
+flutter_area/app.*.symbols
+
+# Obfuscation related
+flutter_area/app.*.map.json
+
+# Android Studio will place build artifacts here
+flutter_area//android/app/debug
+flutter_area//android/app/profile
+flutter_area//android/app/release
+
+### Flutter ###
+# Flutter/Dart/Pub related
+flutter_area/flutter**/doc/api/
+flutter_area/flutter.dart_tool/
+flutter_area/flutter.flutter-plugins
+flutter_area/flutter.flutter-plugins-dependencies
+flutter_area/flutter.fvm/flutter_sdk
+flutter_area/flutter.packages
+flutter_area/flutter.pub-cache/
+flutter_area/flutter.pub/
+flutter_area/flutterbuild/
+flutter_area/fluttercoverage/
+flutter_area/flutterlib/generated_plugin_registrant.dart
+flutter_area/pubspec.lock
+# For library packages, don’t commit the pubspec.lock file.
+# Regenerating the pubspec.lock file lets you test your package against the latest compatible versions of its dependencies.
+# See https://dart.dev/guides/libraries/private-files#pubspeclock
+#pubspec.lock
+
+# Android related
+flutter_area/**/android/**/gradle-wrapper.jar
+flutter_area/**/android/.gradle
+flutter_area/**/android/captures/
+flutter_area/**/android/gradlew
+flutter_area/**/android/gradlew.bat
+flutter_area/**/android/key.properties
+flutter_area/**/android/local.properties
+flutter_area/**/android/**/GeneratedPluginRegistrant.java
+
+# iOS/XCode related
+flutter_area/**/ios/**/*.mode1v3
+flutter_area/**/ios/**/*.mode2v3
+flutter_area/**/ios/**/*.moved-aside
+flutter_area/**/ios/**/*.pbxuser
+flutter_area/**/ios/**/*.perspectivev3
+flutter_area/**/ios/**/*sync/
+flutter_area/**/ios/**/.sconsign.dblite
+flutter_area/**/ios/**/.tags*
+flutter_area/**/ios/**/.vagrant/
+flutter_area/**/ios/**/DerivedData/
+flutter_area/**/ios/**/Icon?
+flutter_area/**/ios/**/Pods/
+flutter_area/**/ios/**/.symlinks/
+flutter_area/**/ios/**/profile
+flutter_area/**/ios/**/xcuserdata
+flutter_area/**/ios/.generated/
+flutter_area/**/ios/Flutter/.last_build_id
+flutter_area/**/ios/Flutter/App.framework
+flutter_area/**/ios/Flutter/Flutter.framework
+flutter_area/**/ios/Flutter/Flutter.podspec
+flutter_area/**/ios/Flutter/Generated.xcconfig
+flutter_area/**/ios/Flutter/app.flx
+flutter_area/**/ios/Flutter/app.zip
+flutter_area/**/ios/Flutter/flutter_assets/
+flutter_area/**/ios/Flutter/flutter_export_environment.sh
+flutter_area/**/ios/ServiceDefinitions.json
+flutter_area/**/ios/Runner/GeneratedPluginRegistrant.*
+
+# Exceptions to above rules.
+flutter_area/!**/ios/**/default.mode1v3
+flutter_area/!**/ios/**/default.mode2v3
+flutter_area/!**/ios/**/default.pbxuser
+flutter_area/!**/ios/**/default.perspectivev3
+flutter_area/!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide

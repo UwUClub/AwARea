@@ -1,0 +1,31 @@
+version: '3.5'
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - /opt/mongo:/etc/mongo
+    restart: always
+    
+  backend:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo
+    restart: always
+  
+  frontend:
+    build:
+      context: ./flutter_area
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - 8081:80
+    restart: always
