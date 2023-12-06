@@ -7,7 +7,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - /opt/mongo:/etc/mongo
+      - mongo_data:/data/db
     restart: always
     
   backend:
@@ -29,3 +29,6 @@ services:
     ports:
       - 8081:80
     restart: always
+
+volumes:
+  mongo_data:
