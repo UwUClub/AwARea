@@ -6,6 +6,9 @@ import { exit } from 'process';
 export class EnvironementVariables {
     @IsString()
     JWT_SECRET: string = 'secret';
+
+    @IsString()
+    MONGO_URI: string = 'mongodb://mongo/awarea';
 }
 
 export function validateEnv(config: Record<string, unknown>) {
