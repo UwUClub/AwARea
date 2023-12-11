@@ -7,19 +7,23 @@ import { AuthModule } from './auth/auth.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EnvironementVariables, validateEnv } from './_utils/config';
+import { NasaModule } from './nasa/nasa.module';
 
 @Module({
     imports: [
         ScheduleModule.forRoot(),
         MongooseModule.forRootAsync({
-            useFactory: async (configService: ConfigService<EnvironementVariables, true>) => ({
+            useFactory: async (
+                configService: ConfigService<EnvironementVariables, true>,
+            ) => ({
                 uri: configService.get('MONGO_URI'),
             }),
-            inject: [ConfigService]
+            inject: [ConfigService],
         }),
         UsersModule,
         AuthModule,
-        ConfigModule.forRoot({validate: validateEnv, isGlobal: true}),
+        NasaModule,
+        ConfigModule.forRoot({ validate: validateEnv, isGlobal: true }),
     ],
     controllers: [AppController],
     providers: [AppService, TasksService],
