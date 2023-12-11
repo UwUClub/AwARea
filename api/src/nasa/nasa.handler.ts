@@ -1,10 +1,11 @@
 import { HttpService } from '@nestjs/axios';
 import { AxiosResponse } from 'axios';
+import { NasaPhoto } from './_utils/dto/photoOfTheDay.dto';
 import { Observable, firstValueFrom } from 'rxjs';
 
 export class NasaHandler {
     private apiKey: string;
-    private latestPhoto: any;
+    private latestPhoto: NasaPhoto;
 
     constructor(private httpService: HttpService) {
         this.apiKey = process.env.NASA_API_KEY;
@@ -15,12 +16,11 @@ export class NasaHandler {
         return this.httpService.get(url);
     }
 
-    public async fetchPhotoOfTheDay() {
+    public async fetchPhotoOfTheDay(): Promise<NasaPhoto> {
         try {
             if (this.latestPhoto) {
                 const today = new Date();
-                const latestPhotoDate = new Date(this.latestPhoto.date);
-                if (today.getDate() === latestPhotoDate.getDate()) {
+                if (today.getDate() === this.latestPhoto.date.getDate()) {
                     return this.latestPhoto;
                 }
             }
@@ -30,7 +30,8 @@ export class NasaHandler {
                     throw new Error(err);
                 });
             this.latestPhoto = response;
-            return response;
+            this.latestPhoto.date = new Date(this.latestPhoto.date);
+            return this.latestPhoto;
         } catch (error) {
             throw new Error(error);
         }
