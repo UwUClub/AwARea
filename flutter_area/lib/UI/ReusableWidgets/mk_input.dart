@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
+import 'mk_button.dart';
 
 class MkInput extends StatefulWidget {
   const MkInput({super.key, required this.label, this.placeholder});
@@ -20,18 +22,17 @@ class _MkInputState extends State<MkInput> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(widget.label,
-            style: Theme.of(context)
-                .textTheme
-                .labelMedium
-                ?.merge(const TextStyle(color: Colors.red)),
+            style: Theme.of(context).textTheme.labelMedium,
             textAlign: TextAlign.left),
         SizedBox(height: 6.0.ratioH()),
         TextField(
           style: Theme.of(context).textTheme.displayMedium,
           decoration: InputDecoration(
+              hintText: widget.placeholder,
+              hintStyle: Theme.of(context).textTheme.displayMedium,
               filled: true,
               fillColor: Theme.of(context).colorScheme.lightColor3,
-              border: OutlineInputBorder(
+              enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                       color: Theme.of(context).colorScheme.lightColor4,
                       width: 0.5)),

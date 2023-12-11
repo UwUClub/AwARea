@@ -35,9 +35,15 @@ class _LoginFormState extends State<LoginForm> {
               color: Theme.of(context).colorScheme.lightColor4,
             ),
             SizedBox(height: 53.0.ratioH()),
-            MkInput(label: AppLocalizations.of(context)!.emailOrUsername),
-            SizedBox(height: 20.0.ratioH()),
-            MkInput(label: AppLocalizations.of(context)!.password),
+            MkInput(
+                label: AppLocalizations.of(context)!.emailOrUsername,
+                placeholder:
+                    AppLocalizations.of(context)!.emailOrUsernamePlaceholder),
+            //SizedBox(height: 20.0.ratioH()),
+            MkInput(
+                label: AppLocalizations.of(context)!.password,
+                placeholder: AppLocalizations.of(context)!.passwordPlaceholder),
+            SizedBox(height: 48.0.ratioH()),
           ]),
         ),
       ),
