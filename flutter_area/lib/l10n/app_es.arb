@@ -3,5 +3,19 @@
     "subslogan": "",
     "login": "",
     "signup": "",
-    "changeMode": "Cambiar modo"
+    "loginTitle": "",
+    "googleLogin": "",
+    "emailOrUsername": "",
+    "emailOrUsernamePlaceholder": "",
+    "password": "",
+    "passwordPlaceholder": "",
+    "loginButton": "",
+    "signUpTitle": "", 
+    "completeName": "",
+    "completeNamePlaceholder": "",
+    "username": "",
+    "usernamePlaceholder": "",
+    "email": "",
+    "emailPlaceholder": "",
+    "changeMode": ""
 }
