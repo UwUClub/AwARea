@@ -1,4 +1,7 @@
 {
-    "hello": "Hola",
+    "slogan": "",
+    "subslogan": "",
+    "login": "",
+    "signup": "",
     "changeMode": "Cambiar modo"
 }
