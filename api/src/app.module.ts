@@ -7,7 +7,6 @@ import { AuthModule } from './auth/auth.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EnvironementVariables, validateEnv } from './_utils/config';
-import { NasaModule } from './nasa/nasa.module';
 
 @Module({
     imports: [
@@ -22,7 +21,6 @@ import { NasaModule } from './nasa/nasa.module';
         }),
         UsersModule,
         AuthModule,
-        NasaModule,
         ConfigModule.forRoot({ validate: validateEnv, isGlobal: true }),
     ],
     controllers: [AppController],
