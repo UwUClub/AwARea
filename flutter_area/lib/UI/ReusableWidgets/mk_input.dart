@@ -6,10 +6,12 @@ import '../../Utils/Extensions/double_extensions.dart';
 import 'mk_button.dart';
 
 class MkInput extends StatefulWidget {
-  const MkInput({super.key, required this.label, this.placeholder});
+  const MkInput(
+      {super.key, required this.label, this.placeholder, this.onChanged});
 
   final String label;
   final String? placeholder;
+  final Function(String)? onChanged;
 
   @override
   State<MkInput> createState() => _MkInputState();
@@ -20,13 +22,14 @@ class _MkInputState extends State<MkInput> {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: <Widget>[
         Text(widget.label,
             style: Theme.of(context).textTheme.labelMedium,
             textAlign: TextAlign.left),
         SizedBox(height: 6.0.ratioH()),
         TextField(
           style: Theme.of(context).textTheme.displayMedium,
+          onChanged: widget.onChanged,
           decoration: InputDecoration(
               hintText: widget.placeholder,
               hintStyle: Theme.of(context).textTheme.displayMedium,

@@ -53,13 +53,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     )
                   ]),
               SizedBox(height: 40.0.ratioH()),
-              Flex(direction: Axis.horizontal, children: [
-                MkButton(
-                  label: AppLocalizations.of(context)!.login,
+              Flex(direction: Axis.horizontal, children: <Widget>[
+                Flexible(
+                  child: MkButton(
+                    labelColor: Theme.of(context).colorScheme.redColor,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.redLightColor,
+                    label: AppLocalizations.of(context)!.login,
+                  ),
                 ),
                 SizedBox(width: 31.0.ratioW()),
-                MkButton(
-                  label: AppLocalizations.of(context)!.signup,
+                Flexible(
+                  child: MkButton(
+                    labelColor: Theme.of(context).colorScheme.redColor,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.redLightColor,
+                    label: AppLocalizations.of(context)!.signup,
+                  ),
                 ),
               ]),
               SizedBox(height: 14.0.ratioH()),
