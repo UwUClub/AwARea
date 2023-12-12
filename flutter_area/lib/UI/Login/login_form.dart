@@ -20,7 +20,7 @@ class _LoginFormState extends State<LoginForm> {
   final ThemeManager themeManager = locator<ThemeManager>();
   final UserManager userManager = locator<UserManager>();
 
-  String _email = '';
+  String _emailOrUsername = '';
   String _password = '';
 
   @override
@@ -43,7 +43,8 @@ class _LoginFormState extends State<LoginForm> {
             SizedBox(height: 53.0.ratioH()),
             MkInput(
                 label: AppLocalizations.of(context)!.emailOrUsername,
-                onChanged: (String text) => setState(() => _email = text),
+                onChanged: (String text) =>
+                    setState(() => _emailOrUsername = text),
                 placeholder:
                     AppLocalizations.of(context)!.emailOrUsernamePlaceholder),
             //SizedBox(height: 20.0.ratioH()),
@@ -57,7 +58,7 @@ class _LoginFormState extends State<LoginForm> {
                 backgroundColor: Theme.of(context).colorScheme.lightColor1,
                 label: '${AppLocalizations.of(context)!.login}...',
                 onPressed: () {
-                  userManager.login(_email, _password);
+                  userManager.login(_emailOrUsername, _password);
                 }),
           ]),
         ),
