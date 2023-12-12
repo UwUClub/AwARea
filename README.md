@@ -4,6 +4,7 @@
 
 -   [Requirements](#requirements)
 -   [Communication](#communication)
+-   [Services](#services)
 -   [Installation from source](#installation-from-source)
 -   [Using the application](#using-the-application)
 -   [Credits](#credits)
@@ -18,6 +19,15 @@
 ## Communication
 
 -   If you have a bug or an issue, please contact us.
+
+## Services
+
+-   [x] Timer -> 2 actions -> Recurring / One time
+-   [x] Weather -> 1 action -> OnGetWeather
+-   [x] Nasa -> 1 action -> OnGetPicture
+-   [x] GMail -> 2 actions -> OnNewMail / OnNewMailFrom / WriteMail
+-   [x] Github
+-   [x] Slack
 
 ## Installation from source
 
