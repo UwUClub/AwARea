@@ -1,4 +1,4 @@
-import { IsString, validateSync } from "class-validator";
+import { IsString, validateSync } from 'class-validator';
 import { plainToInstance } from 'class-transformer';
 import { Logger } from '@nestjs/common';
 import { exit } from 'process';
@@ -15,7 +15,9 @@ export function validateEnv(config: Record<string, unknown>) {
     const validatedConfig = plainToInstance(EnvironementVariables, config, {
         enableImplicitConversion: true,
     });
-    const errors = validateSync(validatedConfig, { skipMissingProperties: false });
+    const errors = validateSync(validatedConfig, {
+        skipMissingProperties: false,
+    });
 
     if (errors.length) {
         new Logger(validateEnv.name).error(errors.toString());
