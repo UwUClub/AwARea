@@ -22,6 +22,7 @@ class _LoginFormState extends State<LoginForm> {
 
   String _emailOrUsername = '';
   String _password = '';
+  String? _errorMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -53,12 +54,25 @@ class _LoginFormState extends State<LoginForm> {
                 onChanged: (String text) => setState(() => _password = text),
                 placeholder: AppLocalizations.of(context)!.passwordPlaceholder),
             SizedBox(height: 48.0.ratioH()),
+            if (_errorMessage == null)
+              const SizedBox()
+            else
+              Text(_errorMessage!,
+                  style: Theme.of(context).textTheme.headlineLarge?.merge(
+                      TextStyle(
+                          color: Theme.of(context).colorScheme.redColor))),
             MkButton(
                 labelColor: Theme.of(context).colorScheme.darkColor1,
                 backgroundColor: Theme.of(context).colorScheme.lightColor1,
                 label: '${AppLocalizations.of(context)!.login}...',
-                onPressed: () {
-                  userManager.login(_emailOrUsername, _password);
+                onPressed: () async {
+                  final (bool success, String? error) =
+                      await userManager.login(_emailOrUsername, _password);
+                  if (success) {
+                    print('TODO navigate to home screen');
+                  } else {
+                    setState(() => _errorMessage = error);
+                  }
                 }),
           ]),
         ),

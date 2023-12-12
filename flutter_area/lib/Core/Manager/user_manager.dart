@@ -8,49 +8,43 @@ class UserManager {
   String? email;
   String? accessToken;
 
-  void signUp(String email, String password, String username, String fullName) {
-    print('signup $email $password $username $fullName');
-    http
-        .post(Uri.parse('http://localhost:8080/auth/register'),
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: jsonEncode(<String, String>{
-              'email': email,
-              'password': password,
-              'username': username,
-              'fullName': fullName
-            }))
-        .then((http.Response res) {
-      print(res.body);
-      if (res.statusCode == 201) {
-        _storeData(jsonDecode(res.body));
-        print('signUp success $username $fullName $email $accessToken');
-      } else {
-        print('signUp failed');
-      }
-    });
+  Future<(bool, String?)> signUp(
+      String email, String password, String username, String fullName) async {
+    final http.Response res = await http.post(
+        Uri.parse('http://localhost:8080/auth/register'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'email': email,
+          'password': password,
+          'username': username,
+          'fullName': fullName
+        }));
+    final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
+    if (res.statusCode == 201) {
+      _storeData(jsonBody);
+      return (true, null);
+    }
+    return (false, _parseErrorMessage(jsonBody['message']));
   }
 
-  void login(String usernameOrEmail, String password) {
-    print('login $usernameOrEmail $password');
-    http
-        .post(Uri.parse('http://localhost:8080/auth/login'),
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: jsonEncode(<String, String>{
-              'usernameOrEmail': usernameOrEmail,
-              'password': password
-            }))
-        .then((http.Response res) {
-      if (res.statusCode == 201) {
-        _storeData(jsonDecode(res.body));
-        print('login success $username $fullName $email $accessToken');
-      } else {
-        print('login failed');
-      }
-    });
+  Future<(bool, String?)> login(String usernameOrEmail, String password) async {
+    final http.Response res = await http.post(
+        Uri.parse('http://localhost:8080/auth/login'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'usernameOrEmail': usernameOrEmail,
+          'password': password
+        }));
+    final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
+    if (res.statusCode == 201) {
+      _storeData(jsonBody);
+      return (true, null);
+    }
+    return (false, _parseErrorMessage(jsonBody['message']));
   }
 
   void _storeData(dynamic jsonBody) {
@@ -60,5 +54,15 @@ class UserManager {
     fullName = user['fullName'] as String;
     email = user['email'] as String;
     accessToken = body['accessToken'] as String;
+  }
+
+  String? _parseErrorMessage(dynamic msg) {
+    if (msg is String) {
+      return msg;
+    }
+    if (msg is List) {
+      return msg.join(', ');
+    }
+    return null;
   }
 }
