@@ -27,5 +27,5 @@ extension ColorExtension on ColorScheme {
 
   Color get redColor => const Color(0xFFEC465A);
 
-  Color get redLightColor => const Color(0x0AEC465A);
+  Color get redLightColor => const Color(0x80EC465A);
 }

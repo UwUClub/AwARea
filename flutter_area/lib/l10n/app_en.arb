@@ -1,4 +1,6 @@
 {
     "hello": "Hello",
-    "changeMode": "Change mode"
+    "changeMode": "Change mode",
+    "newTask": "New task",
+    "settings": "Settings and account"
 }
