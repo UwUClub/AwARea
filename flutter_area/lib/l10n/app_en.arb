@@ -2,5 +2,10 @@
     "hello": "Hello",
     "changeMode": "Change mode",
     "newTask": "New task",
-    "settings": "Settings and account"
+    "settings": "Settings",
+    "mySettings": "My settings",
+    "appearance": "Appearance",
+    "changeAppearance": "Change the light or dark appearance of Maker on your device",
+    "connection": "Connections",
+    "profile": "Profile"
 }

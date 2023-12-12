@@ -2,5 +2,10 @@
     "hello": "Hola",
     "changeMode": "Cambiar modo",
     "newTask": "",
-    "settings": ""
+    "settings": "",
+    "mySettings": "",
+    "appearance": "",
+    "changeAppearance": "",
+    "connection": "",
+    "profile": ""
 }

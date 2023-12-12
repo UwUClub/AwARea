@@ -8,6 +8,9 @@ import '../../Core/Manager/theme_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
 import '../ReusableWidgets/mk_background.dart';
+import '../ReusableWidgets/mk_switch.dart';
+
+import '../Settings/settings_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -75,7 +78,7 @@ class _HomeViewState extends State<HomeView> {
             title: Row(
               children: [  
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: SvgPicture.asset('assets/images/Logo.svg',
                   semanticsLabel: 'Logo',
                   width: 28.0.ratioW(),
@@ -84,18 +87,13 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ],  
             ),
-            footer: TextButton(
-              onPressed: () => themeManager.inverseThemeMode(),
-                child: BottomAppBar(
-                  child: Text(AppLocalizations.of(context)!.changeMode,
-                      style: Theme.of(context).textTheme.labelLarge))),
             items: [
               SideMenuItem(
-                title: AppLocalizations.of(context)!.newTask,
+                title: AppLocalizations.of(context)!.profile,
                 onTap: (int index, _) {
                   sideMenu.changePage(index);
                 },
-                icon: const Icon(Icons.add),
+                icon: const Icon(Icons.person),
               ),
               SideMenuItem(
                 title: AppLocalizations.of(context)!.settings,
@@ -103,6 +101,21 @@ class _HomeViewState extends State<HomeView> {
                   sideMenu.changePage(index);
                 },
                 icon: const Icon(Icons.settings),
+              ),
+              SideMenuItem(
+                title: AppLocalizations.of(context)!.connection,
+                onTap: (int index, _) {
+                  sideMenu.changePage(index);
+                },
+                icon: const Icon(Icons.share),
+              ),
+
+              SideMenuItem(
+                title: AppLocalizations.of(context)!.newTask,
+                onTap: (int index, _) {
+                  sideMenu.changePage(index);
+                },
+                icon: const Icon(Icons.add),
               ),
               SideMenuItem(
                 builder: (BuildContext context, SideMenuDisplayMode displayMode) {
@@ -119,10 +132,14 @@ class _HomeViewState extends State<HomeView> {
               controller: pageController,
               children: [
                 Center(
-                  child: Text(AppLocalizations.of(context)!.newTask),
+                  child: Text(AppLocalizations.of(context)!.profile),
+                ),
+                const SettingsView(),
+                Center(
+                  child: Text(AppLocalizations.of(context)!.connection),
                 ),
                 Center(
-                  child: Text(AppLocalizations.of(context)!.settings),
+                  child: Text(AppLocalizations.of(context)!.newTask),
                 ),
               ],
             ),
