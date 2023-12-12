@@ -34,7 +34,6 @@ class _MkButtonState extends State<MkButton> {
             backgroundColor: widget.backgroundColor ??
                 Theme.of(context).colorScheme.lightColor2),
         child: Center(
-            //padding: EdgeInsets.symmetric(vertical: 9.0.ratioH()),
             child: Text(
           widget.label,
           textAlign: TextAlign.center,
