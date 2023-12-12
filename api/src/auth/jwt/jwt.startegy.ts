@@ -9,7 +9,10 @@ import { EnvironementVariables } from '../../_utils/config';
 export class JwtStrategy extends PassportStrategy(Strategy) {
     constructor(
         private readonly usersRepository: UsersRepository,
-        private readonly configService: ConfigService<EnvironementVariables, true>,
+        private readonly configService: ConfigService<
+            EnvironementVariables,
+            true
+        >,
     ) {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

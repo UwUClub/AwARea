@@ -13,13 +13,15 @@ import { EnvironementVariables } from 'src/_utils/config';
         UsersModule,
         PassportModule,
         JwtModule.registerAsync({
-            useFactory: async (configService: ConfigService<EnvironementVariables, true>) => ({
+            useFactory: async (
+                configService: ConfigService<EnvironementVariables, true>,
+            ) => ({
                 global: true,
                 secret: configService.get('JWT_SECRET'),
                 signOptions: { expiresIn: '1d' },
             }),
-            inject: [ConfigService]
-        })
+            inject: [ConfigService],
+        }),
     ],
     controllers: [AuthController],
     providers: [AuthService, JwtStrategy],
