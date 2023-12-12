@@ -103,11 +103,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 const LoginForm()
               else
                 const SignupForm(),
-              ElevatedButton(
-                  onPressed: () => themeManager.inverseThemeMode(),
-                  child: Center(
-                      child: Text(AppLocalizations.of(context)!.changeMode,
-                          style: Theme.of(context).textTheme.labelLarge))),
+              //   ElevatedButton(
+              //       onPressed: () => themeManager.inverseThemeMode(),
+              //       child: Center(
+              //           child: Text(AppLocalizations.of(context)!.changeMode,
+              //               style: Theme.of(context).textTheme.labelLarge))),
+              if (kDeviceWidth <= kLargeScreenWidth)
+                if (_currentForm == FormType.login)
+                  GestureDetector(
+                      onTap: () =>
+                          setState(() => _currentForm = FormType.signUp),
+                      child: Text(
+                        AppLocalizations.of(context)!.signup,
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelLarge
+                            ?.merge(const TextStyle(
+                              decoration: TextDecoration.underline,
+                            )),
+                      ))
+                else
+                  GestureDetector(
+                      onTap: () =>
+                          setState(() => _currentForm = FormType.login),
+                      child: Text(AppLocalizations.of(context)!.login,
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelLarge
+                              ?.merge(const TextStyle(
+                                decoration: TextDecoration.underline,
+                              )))),
             ],
           ),
         ),

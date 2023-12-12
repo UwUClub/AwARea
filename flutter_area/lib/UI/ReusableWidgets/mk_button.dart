@@ -23,8 +23,8 @@ class MkButton extends StatefulWidget {
 class _MkButtonState extends State<MkButton> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 27.0.ratioH(),
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 10.0.ratioH()),
       child: TextButton(
         onPressed: widget.onPressed ?? () {},
         style: TextButton.styleFrom(

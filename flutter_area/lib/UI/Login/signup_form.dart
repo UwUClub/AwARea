@@ -6,6 +6,7 @@ import '../../Core/Manager/theme_manager.dart';
 import '../../Core/Manager/user_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
+import '../../Utils/constants.dart';
 import '../ReusableWidgets/mk_button.dart';
 import '../ReusableWidgets/mk_input.dart';
 
@@ -36,7 +37,7 @@ class SignupFormState extends State<SignupForm> {
           : Theme.of(context).colorScheme.darkColor2,
       child: Center(
         child: SizedBox(
-          width: 333.0.ratioW(),
+          width: kDeviceWidth > kLargeScreenWidth ? 333.0.ratioW() : null,
           child: Column(children: <Widget>[
             Text(AppLocalizations.of(context)!.signUpTitle,
                 style: Theme.of(context).textTheme.headlineLarge),
