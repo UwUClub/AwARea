@@ -29,10 +29,10 @@ class _MkButtonState extends State<MkButton> {
         onPressed: widget.onPressed ?? () {},
         style: TextButton.styleFrom(
             surfaceTintColor: Theme.of(context).colorScheme.transparentColor,
-            foregroundColor: widget.labelColor ??
-                Theme.of(context).colorScheme.transparentColor,
+            foregroundColor:
+                widget.labelColor ?? Theme.of(context).colorScheme.darkColor1,
             backgroundColor: widget.backgroundColor ??
-                Theme.of(context).colorScheme.transparentColor),
+                Theme.of(context).colorScheme.lightColor2),
         child: Center(
             //padding: EdgeInsets.symmetric(vertical: 9.0.ratioH()),
             child: Text(

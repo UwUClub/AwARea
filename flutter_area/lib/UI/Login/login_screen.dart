@@ -9,6 +9,9 @@ import '../../Utils/Extensions/double_extensions.dart';
 import '../ReusableWidgets/mk_background.dart';
 import '../ReusableWidgets/mk_button.dart';
 import 'login_form.dart';
+import 'signup_form.dart';
+
+enum FormType { login, signUp }
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,6 +22,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   ThemeManager themeManager = locator<ThemeManager>();
+
+  FormType _currentForm = FormType.login;
 
   @override
   Widget build(BuildContext context) {
@@ -55,25 +60,37 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 40.0.ratioH()),
               Flex(direction: Axis.horizontal, children: <Widget>[
                 Flexible(
-                  child: MkButton(
-                    labelColor: Theme.of(context).colorScheme.redColor,
-                    backgroundColor:
-                        Theme.of(context).colorScheme.redLightColor,
-                    label: AppLocalizations.of(context)!.login,
-                  ),
-                ),
+                    child: MkButton(
+                  labelColor: _currentForm == FormType.login
+                      ? Theme.of(context).colorScheme.redColor
+                      : null,
+                  backgroundColor: _currentForm == FormType.login
+                      ? Theme.of(context).colorScheme.redLightColor
+                      : null,
+                  label: AppLocalizations.of(context)!.login,
+                  onPressed: () =>
+                      setState(() => _currentForm = FormType.login),
+                )),
                 SizedBox(width: 31.0.ratioW()),
                 Flexible(
                   child: MkButton(
-                    labelColor: Theme.of(context).colorScheme.redColor,
-                    backgroundColor:
-                        Theme.of(context).colorScheme.redLightColor,
+                    labelColor: _currentForm == FormType.signUp
+                        ? Theme.of(context).colorScheme.redColor
+                        : null,
+                    backgroundColor: _currentForm == FormType.signUp
+                        ? Theme.of(context).colorScheme.redLightColor
+                        : null,
                     label: AppLocalizations.of(context)!.signup,
+                    onPressed: () =>
+                        setState(() => _currentForm = FormType.signUp),
                   ),
                 ),
               ]),
               SizedBox(height: 14.0.ratioH()),
-              const LoginForm(),
+              if (_currentForm == FormType.login)
+                const LoginForm()
+              else
+                const SignupForm(),
               ElevatedButton(
                   onPressed: () => themeManager.inverseThemeMode(),
                   child: Center(
