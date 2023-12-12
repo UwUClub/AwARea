@@ -6,6 +6,7 @@
 -   [Communication](#communication)
 -   [Installation from source](#installation-from-source)
 -   [Using the application](#using-the-application)
+-   [Troubleshooting](#troubleshooting)
 -   [Credits](#credits)
 -   [License](#license)
 
@@ -44,6 +45,16 @@ Then start the client
 ```bash
 cd flutter_area && flutter pub get && flutter run
 ```
+
+## Troubleshooting
+
+If you get blocked by CORS policy on Chrome:
+
+```bash
+rm {your_flutter_directory}/bin/cache/flutter_tools.stamp
+```
+
+And add ``'--disable-web-security'`` under ``'--disable-extensions'`` in ``{your_flutter_directory}/packages/flutter_tools/lib/src/web/chrome.dart``
 
 ## Credits
 
