@@ -48,20 +48,22 @@ class SignupFormState extends State<SignupForm> {
                 label: AppLocalizations.of(context)!.fullName,
                 onChanged: (String text) => setState(() => _fullName = text),
                 placeholder: AppLocalizations.of(context)!.fullNamePlaceholder),
+            SizedBox(height: 20.0.ratioH()),
             MkInput(
                 label: AppLocalizations.of(context)!.username,
                 onChanged: (String text) => setState(() => _username = text),
                 placeholder: AppLocalizations.of(context)!.usernamePlaceholder),
+            SizedBox(height: 20.0.ratioH()),
             MkInput(
                 label: AppLocalizations.of(context)!.email,
                 onChanged: (String text) => setState(() => _email = text),
                 placeholder: AppLocalizations.of(context)!.emailPlaceholder),
-            //SizedBox(height: 20.0.ratioH()),
+            SizedBox(height: 20.0.ratioH()),
             MkInput(
                 label: AppLocalizations.of(context)!.password,
                 onChanged: (String text) => setState(() => _password = text),
                 placeholder: AppLocalizations.of(context)!.passwordPlaceholder),
-            SizedBox(height: 48.0.ratioH()),
+            SizedBox(height: 28.0.ratioH()),
             if (_errorMessage == null)
               const SizedBox()
             else
@@ -69,9 +71,10 @@ class SignupFormState extends State<SignupForm> {
                   style: Theme.of(context).textTheme.headlineLarge?.merge(
                       TextStyle(
                           color: Theme.of(context).colorScheme.redColor))),
+            SizedBox(height: 20.0.ratioH()),
             MkButton(
                 labelColor: Theme.of(context).colorScheme.darkColor1,
-                backgroundColor: Theme.of(context).colorScheme.lightColor1,
+                backgroundColor: Theme.of(context).colorScheme.lightColor3,
                 label: '${AppLocalizations.of(context)!.signup}...',
                 onPressed: () async {
                   final (bool success, String? error) = await userManager

@@ -6,6 +6,7 @@ import '../../Core/Locator/locator.dart';
 import '../../Core/Manager/theme_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
+import '../../Utils/constants.dart';
 import '../ReusableWidgets/mk_background.dart';
 import '../ReusableWidgets/mk_button.dart';
 import 'login_form.dart';
@@ -32,15 +33,16 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Padding(
           padding: EdgeInsets.only(
               top: 50.0.ratioH(),
-              left: 237.0.ratioW(),
-              right: 237.0.ratioW(),
+              left: kDeviceWidth > largeScreenWidth ? 237.0.ratioW() : 0,
+              right: kDeviceWidth > largeScreenWidth ? 237.0.ratioW() : 0,
               bottom: 36.0.ratioH()),
           child: Column(
             children: <Widget>[
               Text(
-                AppLocalizations.of(context)!.slogan,
-                style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
+                AppLocalizations.of(context)!.slogan,
+                style: Theme.of(context).textTheme.titleLarge?.merge(TextStyle(
+                    fontSize: (kDeviceWidth > largeScreenWidth ? 36 : 22))),
               ),
               SizedBox(height: 8.0.ratioH()),
               Row(
@@ -53,39 +55,45 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(width: 9.0.ratioW()),
                     Text(
                       AppLocalizations.of(context)!.subslogan,
-                      style: Theme.of(context).textTheme.headlineLarge,
+                      style: Theme.of(context).textTheme.headlineLarge?.merge(
+                          TextStyle(
+                              fontSize:
+                                  kDeviceWidth > largeScreenWidth ? 26 : 13)),
                       textAlign: TextAlign.center,
                     )
                   ]),
               SizedBox(height: 40.0.ratioH()),
-              Flex(direction: Axis.horizontal, children: <Widget>[
-                Flexible(
-                    child: MkButton(
-                  labelColor: _currentForm == FormType.login
-                      ? Theme.of(context).colorScheme.redColor
-                      : null,
-                  backgroundColor: _currentForm == FormType.login
-                      ? Theme.of(context).colorScheme.redLightColor
-                      : null,
-                  label: AppLocalizations.of(context)!.login,
-                  onPressed: () =>
-                      setState(() => _currentForm = FormType.login),
-                )),
-                SizedBox(width: 31.0.ratioW()),
-                Flexible(
-                  child: MkButton(
-                    labelColor: _currentForm == FormType.signUp
+              if (kDeviceWidth > largeScreenWidth)
+                Flex(direction: Axis.horizontal, children: <Widget>[
+                  Flexible(
+                      child: MkButton(
+                    labelColor: _currentForm == FormType.login
                         ? Theme.of(context).colorScheme.redColor
                         : null,
-                    backgroundColor: _currentForm == FormType.signUp
+                    backgroundColor: _currentForm == FormType.login
                         ? Theme.of(context).colorScheme.redLightColor
                         : null,
-                    label: AppLocalizations.of(context)!.signup,
+                    label: AppLocalizations.of(context)!.login,
                     onPressed: () =>
-                        setState(() => _currentForm = FormType.signUp),
+                        setState(() => _currentForm = FormType.login),
+                  )),
+                  SizedBox(width: 31.0.ratioW()),
+                  Flexible(
+                    child: MkButton(
+                      labelColor: _currentForm == FormType.signUp
+                          ? Theme.of(context).colorScheme.redColor
+                          : null,
+                      backgroundColor: _currentForm == FormType.signUp
+                          ? Theme.of(context).colorScheme.redLightColor
+                          : null,
+                      label: AppLocalizations.of(context)!.signup,
+                      onPressed: () =>
+                          setState(() => _currentForm = FormType.signUp),
+                    ),
                   ),
-                ),
-              ]),
+                ])
+              else
+                const SizedBox(),
               SizedBox(height: 14.0.ratioH()),
               if (_currentForm == FormType.login)
                 const LoginForm()
