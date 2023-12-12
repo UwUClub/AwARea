@@ -33,8 +33,12 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Padding(
           padding: EdgeInsets.only(
               top: 50.0.ratioH(),
-              left: kDeviceWidth > largeScreenWidth ? 237.0.ratioW() : 0,
-              right: kDeviceWidth > largeScreenWidth ? 237.0.ratioW() : 0,
+              left: kDeviceWidth > kLargeScreenWidth
+                  ? 237.0.ratioW()
+                  : 33.0.ratioW(),
+              right: kDeviceWidth > kLargeScreenWidth
+                  ? 237.0.ratioW()
+                  : 33.0.ratioW(),
               bottom: 36.0.ratioH()),
           child: Column(
             children: <Widget>[
@@ -42,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 textAlign: TextAlign.center,
                 AppLocalizations.of(context)!.slogan,
                 style: Theme.of(context).textTheme.titleLarge?.merge(TextStyle(
-                    fontSize: (kDeviceWidth > largeScreenWidth ? 36 : 22))),
+                    fontSize: (kDeviceWidth > kLargeScreenWidth ? 36 : 22))),
               ),
               SizedBox(height: 8.0.ratioH()),
               Row(
@@ -58,12 +62,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: Theme.of(context).textTheme.headlineLarge?.merge(
                           TextStyle(
                               fontSize:
-                                  kDeviceWidth > largeScreenWidth ? 26 : 13)),
+                                  kDeviceWidth > kLargeScreenWidth ? 26 : 13)),
                       textAlign: TextAlign.center,
                     )
                   ]),
               SizedBox(height: 40.0.ratioH()),
-              if (kDeviceWidth > largeScreenWidth)
+              if (kDeviceWidth > kLargeScreenWidth)
                 Flex(direction: Axis.horizontal, children: <Widget>[
                   Flexible(
                       child: MkButton(
@@ -103,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () => themeManager.inverseThemeMode(),
                   child: Center(
                       child: Text(AppLocalizations.of(context)!.changeMode,
-                          style: Theme.of(context).textTheme.labelLarge)))
+                          style: Theme.of(context).textTheme.labelLarge))),
             ],
           ),
         ),

@@ -29,21 +29,27 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-          vertical: kDeviceWidth > largeScreenWidth ? 108.0.ratioH() : 0),
+          vertical: kDeviceWidth > kLargeScreenWidth ? 108.0.ratioH() : 0),
       width: MediaQuery.of(context).size.width,
       color: Theme.of(context).brightness == Brightness.light
           ? Theme.of(context).colorScheme.lightColor2
           : Theme.of(context).colorScheme.darkColor2,
       child: Center(
-        child: SizedBox(
-          width: kDeviceWidth > largeScreenWidth ? 333.0.ratioW() : null,
+        child: Container(
+          padding: kDeviceWidth > kLargeScreenWidth
+              ? null
+              : EdgeInsets.symmetric(horizontal: 30.0.ratioH()),
+          width: kDeviceWidth > kLargeScreenWidth ? 333.0.ratioW() : null,
           child: Column(children: <Widget>[
             Text(AppLocalizations.of(context)!.loginTitle,
                 style: Theme.of(context).textTheme.headlineLarge),
             Divider(
               color: Theme.of(context).colorScheme.lightColor4,
             ),
-            SizedBox(height: 53.0.ratioH()),
+            SizedBox(
+                height: kDeviceWidth > kLargeScreenWidth
+                    ? 53.0.ratioH()
+                    : 150.0.ratioH()),
             MkInput(
                 label: AppLocalizations.of(context)!.emailOrUsername,
                 onChanged: (String text) =>
