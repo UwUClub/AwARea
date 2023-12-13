@@ -44,6 +44,7 @@ jobs:
 
             - name: Publish Tagged Release
               uses: softprops/action-gh-release@v1
+              if: ${{ startsWith(github.ref, 'refs/tags/') }}
               with:
                   files: |
                       ./flutter_area/build/app/outputs/flutter-apk/app-release.apk
