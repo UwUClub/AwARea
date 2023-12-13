@@ -6,6 +6,8 @@ on:
             - main
             - dev
             - AW-35-Tests-unitaires
+        tags:
+            - "*"
         paths:
             - "flutter_area/**"
     pull_request:
