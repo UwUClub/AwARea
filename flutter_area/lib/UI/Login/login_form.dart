@@ -78,7 +78,7 @@ class _LoginFormState extends State<LoginForm> {
                   final (bool success, String? error) =
                       await userManager.login(_emailOrUsername, _password);
                   if (success) {
-                    print('TODO navigate to home screen');
+                    Navigator.of(context).pushNamed('/home');
                   } else {
                     setState(() => _errorMessage = error);
                   }

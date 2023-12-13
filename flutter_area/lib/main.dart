@@ -24,20 +24,25 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final ThemeManager themeManager = locator<ThemeManager>();
+    kDeviceHeight = MediaQuery.of(context).size.height;
+    kDeviceWidth = MediaQuery.of(context).size.width;
 
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeManager.themeModeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return MaterialApp(
-          title: "No Man's land",
-          theme: themeDataLight(context),
-          darkTheme: themeDataDark(context),
-          themeMode: currentMode,
-          home: const MyHomePage(),
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-        );
+            title: "No Man's land",
+            theme: themeDataLight(context),
+            darkTheme: themeDataDark(context),
+            themeMode: currentMode,
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            initialRoute: '/login',
+            routes: <String, WidgetBuilder>{
+              '/login': (BuildContext context) => const LoginScreen(),
+              '/home': (BuildContext context) => const MyHomePage(),
+            });
       },
     );
   }
@@ -53,8 +58,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    kDeviceHeight = MediaQuery.of(context).size.height;
-    kDeviceWidth = MediaQuery.of(context).size.width;
-    return const Scaffold(resizeToAvoidBottomInset: false, body: LoginScreen());
+    return const Scaffold(resizeToAvoidBottomInset: false, body: HomeView());
   }
 }
