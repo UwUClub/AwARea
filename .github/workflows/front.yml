@@ -47,5 +47,4 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                  mv flutter_area/build/app/outputs/flutter-apk/app-release.apk flutter_area/build/app/outputs/flutter-apk/maker.apk
-                  gh release upload ${{ needs.release-create.outputs.release }} ./flutter_area/build/app/outputs/flutter-apk/maker.apk
+                  gh release upload ${{ needs.release-create.outputs.release }} ./flutter_area/build/app/outputs/flutter-apk/app-release.apk
