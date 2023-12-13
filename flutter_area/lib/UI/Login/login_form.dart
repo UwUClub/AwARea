@@ -86,8 +86,14 @@ class _LoginFormState extends State<LoginForm> {
                 labelColor: Theme.of(context).colorScheme.darkColor1,
                 backgroundColor: Theme.of(context).colorScheme.lightColor3,
                 label: '${AppLocalizations.of(context)!.login}...',
-                onPressed: () {
-                  login();
+                onPressed: () async {
+                  final (bool success, String? error) =
+                      await userManager.login(_emailOrUsername, _password);
+                  if (success) {
+                    Navigator.of(context).pushNamed('/home');
+                  } else {
+                    setState(() => _errorMessage = error);
+                  }
                 }),
           ]),
         ),
