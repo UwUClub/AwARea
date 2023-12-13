@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { UsersMapper } from './users.mapper';
 import { Protect } from '../auth/_utils/decorators/protect.decorator';
-import { ConnectedUser } from 'src/auth/_utils/decorators/connected-user.decorator';
+import { ConnectedUser } from '../auth/_utils/decorators/connected-user.decorator';
 import { UserDocument } from './users.schema';
 
 @Controller('users')
