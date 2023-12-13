@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../Core/Manager/action_manager.dart';
-import '../../Utils/Extensions/color_extensions.dart';
-import 'action_selection.dart';
 
 class TaskCard extends StatefulWidget {
   const TaskCard({super.key, required this.action, required this.delete});
