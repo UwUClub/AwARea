@@ -31,16 +31,13 @@ jobs:
 
             - id: release
               name: Create Release
-              if: github.repository != 'EpitechPromo2026/B-DEV-500-TLS-5-2-area-romain.panno.git'
+              if: github.repository != 'EpitechPromo2026/B-DEV-500-TLS-5-2-area-valentin.gegoux.git'
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                  if [[ "${{ github.ref }}" == 'refs/heads/main' ]]; then
-                      export GITHUB_OUTPUT=$GITHUB_OUTPUT
-                      bash ./.github/workflows/release.sh "${{ env.BRANCH }}"
-                  else
-                      echo "release_tag=0.0.0" >> $GITHUB_OUTPUT
-                  fi
+                  export GITHUB_OUTPUT=$GITHUB_OUTPUT
+                  bash ./.github/workflows/release.sh "${{ env.BRANCH }}"
+
     build-apk:
         runs-on: ubuntu-latest
 
