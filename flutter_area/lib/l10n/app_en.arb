@@ -7,7 +7,7 @@
     "appearance": "Appearance",
     "changeAppearance": "Change the light or dark appearance of Maker on your device",
     "connection": "Connections",
-    "profile": "Profile"
+    "profile": "Profile",
     "slogan": "",
     "subslogan": "",
     "login": "",
@@ -25,5 +25,5 @@
     "username": "",
     "usernamePlaceholder": "",
     "email": "",
-    "emailPlaceholder": "",
+    "emailPlaceholder": ""
 }

@@ -7,7 +7,7 @@
     "appearance": "Apparence",
     "changeAppearance": "Modifier l’apparence en clair ou sombre de Maker sur votre appareil",
     "connection": "Connexions",
-    "profile": "Profil"
+    "profile": "Profil",
     "slogan": "Effort minimal, impact maximal.\nAutomatisez vos tâches avec fluidité et intuition.",
     "subslogan": "Maker est l’option qui vous fait gagner du temps.",
     "login": "Se connecter",
@@ -25,5 +25,5 @@
     "username": "Pseudo",
     "usernamePlaceholder": "Entrez un pseudo...",
     "email": "E-mail",
-    "emailPlaceholder": "Tapez votre adresse e-mail...",
+    "emailPlaceholder": "Tapez votre adresse e-mail..."
 }
