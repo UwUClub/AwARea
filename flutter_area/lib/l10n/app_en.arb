@@ -1,4 +1,21 @@
 {
-    "hello": "Hello",
-    "changeMode": "Change mode"
+    "slogan": "",
+    "subslogan": "",
+    "login": "",
+    "signup": "",
+    "loginTitle": "",
+    "googleLogin": "",
+    "emailOrUsername": "",
+    "emailOrUsernamePlaceholder": "",
+    "password": "",
+    "passwordPlaceholder": "",
+    "loginButton": "",
+    "signUpTitle": "", 
+    "fullName": "",
+    "fullNamePlaceholder": "",
+    "username": "",
+    "usernamePlaceholder": "",
+    "email": "",
+    "emailPlaceholder": "",
+    "changeMode": ""
 }

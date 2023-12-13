@@ -40,6 +40,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: any
+  flutter_svg: ^2.0.9
+  http: ^1.1.2
 
 dev_dependencies:
   flutter_test:
