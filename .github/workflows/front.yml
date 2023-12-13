@@ -1,0 +1,43 @@
+name: Flutter APK Build
+
+on:
+    push:
+        branches:
+            - main
+            - dev
+            - AW-35-Tests-unitaires
+        paths:
+            - "flutter_area/**"
+    pull_request:
+        branches:
+            - main
+            - dev
+        paths:
+            - "flutter_area/**"
+
+jobs:
+    build-apk:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Set up Flutter
+              uses: subosito/flutter-action@v2.12.0
+              with:
+                  flutter-version: "3.16"
+
+            - name: Install Dependencies
+              run: flutter pub get
+              working-directory: ./flutter_area
+
+            - name: Build APK
+              run: flutter build apk
+              working-directory: ./flutter_area
+
+            - name: Upload APK
+              uses: actions/upload-artifact@v3.1.3
+              with:
+                  name: app-release.apk
+                  path: ./flutter_area/build/app/outputs/flutter-apk/app-release.apk
