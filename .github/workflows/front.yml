@@ -8,6 +8,8 @@ on:
             - AW-35-Tests-unitaires
         paths:
             - "flutter_area/**"
+        tags:
+            - "*"
     pull_request:
         branches:
             - main
