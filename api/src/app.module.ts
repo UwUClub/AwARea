@@ -12,14 +12,16 @@ import { EnvironementVariables, validateEnv } from './_utils/config';
     imports: [
         ScheduleModule.forRoot(),
         MongooseModule.forRootAsync({
-            useFactory: async (configService: ConfigService<EnvironementVariables, true>) => ({
+            useFactory: async (
+                configService: ConfigService<EnvironementVariables, true>,
+            ) => ({
                 uri: configService.get('MONGO_URI'),
             }),
-            inject: [ConfigService]
+            inject: [ConfigService],
         }),
         UsersModule,
         AuthModule,
-        ConfigModule.forRoot({validate: validateEnv, isGlobal: true}),
+        ConfigModule.forRoot({ validate: validateEnv, isGlobal: true }),
     ],
     controllers: [AppController],
     providers: [AppService, TasksService],
