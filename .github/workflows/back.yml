@@ -1,0 +1,45 @@
+name: NestJS CI
+
+on:
+    push:
+        branches:
+            - main
+            - dev
+            - AW-35-Tests-unitaires
+        paths:
+            - "api/**"
+    pull_request:
+        branches:
+            - main
+            - dev
+        paths:
+            - "api/**"
+
+jobs:
+    build-and-test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "21"
+                  cache: "pnpm"
+
+            - name: Install pnpm
+              run: npm install -g pnpm
+
+            - name: Install Dependencies
+              run: pnpm install --save
+              working-directory: ./api
+
+            - name: Build
+              run: pnpm run build
+              working-directory: ./api
+
+            - name: Run Tests
+              run: pnpm test
+              working-directory: ./api
