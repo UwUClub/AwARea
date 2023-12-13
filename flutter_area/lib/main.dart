@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'Core/Locator/locator.dart';
+import 'Core/Manager/action_manager.dart';
 import 'Core/Manager/theme_manager.dart';
 import 'UI/Home/home_view.dart';
 import 'UI/Login/login_screen.dart';

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import '../../Core/Locator/locator.dart';
 import '../../Core/Manager/action_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
+import '../ReusableWidgets/mk_background.dart';
 import 'action_selection.dart';
-import 'task_card.dart';
+import 'action_card.dart';
+import 'reaction_card.dart';
 
 class NewTaskView extends StatefulWidget {
   const NewTaskView({super.key});
@@ -15,6 +18,14 @@ class NewTaskView extends StatefulWidget {
 class _NewTaskViewState extends State<NewTaskView> {
   List<MkAction> actions = <MkAction>[];
 
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      actions = locator<ActionManager>().actions;
+    });
+  }
+
   void addAction(MkAction action) {
     setState(() {
       actions.add(action);
@@ -23,22 +34,36 @@ class _NewTaskViewState extends State<NewTaskView> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return MkBackground(
       child: Row(children: <Widget>[
         Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(70.0.ratioW()),
-            child: Wrap(
-              children: <Widget>[
-                for (final MkAction action in actions)
-                  TaskCard(
-                      action: action,
-                      delete: () {
-                        setState(() {
-                          actions.remove(action);
-                        });
-                      }),
-              ],
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.all(70.0.ratioW()),
+              constraints:
+                  BoxConstraints(minHeight: MediaQuery.of(context).size.height),
+              child: Column(
+                children: <Widget>[
+                  for (final MkAction action in actions)
+                    Row(children: <Widget>[
+                      ActionCard(
+                          action: action,
+                          delete: () {
+                            setState(() {
+                              actions.remove(action);
+                            });
+                          }),
+                      ReactionCard(
+                        reaction: action.reaction,
+                        setReaction: (MkReaction? reaction) {
+                          setState(() {
+                            action.reaction = reaction;
+                          });
+                        },
+                      ),
+                    ]),
+                ],
+              ),
             ),
           ),
         ),
@@ -53,14 +78,20 @@ class _NewTaskViewState extends State<NewTaskView> {
                 ActionSelection(
                   label: 'Météo',
                   actions: <MkAction>[
-                    MkAction(name: 'Get meteo', description: 'toto'),
+                    MkAction(
+                        service: 'Weather',
+                        name: 'Get meteo',
+                        description: 'toto'),
                   ],
                   addAction: addAction,
                 ),
                 ActionSelection(
                   label: 'Clock',
                   actions: <MkAction>[
-                    MkAction(name: 'Every n minutes', description: 'toto'),
+                    MkAction(
+                        service: 'Clock',
+                        name: 'Every n minutes',
+                        description: 'toto'),
                   ],
                   addAction: addAction,
                 ),
