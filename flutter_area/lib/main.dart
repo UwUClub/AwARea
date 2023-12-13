@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'Core/Locator/locator.dart';
 import 'Core/Manager/theme_manager.dart';
-import 'UI/Home/home_view.dart';
 import 'UI/Login/login_screen.dart';
 import 'Utils/constants.dart';
 import 'Utils/theme_data.dart';
@@ -29,7 +28,7 @@ class MyAppState extends State<MyApp> {
       valueListenable: themeManager.themeModeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return MaterialApp(
-          title: "No Man's land",
+          title: 'Maker',
           theme: themeDataLight(context),
           darkTheme: themeDataDark(context),
           themeMode: currentMode,
@@ -55,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     kDeviceHeight = MediaQuery.of(context).size.height;
     kDeviceWidth = MediaQuery.of(context).size.width;
+    kIsPc = kDeviceHeight > kLargeScreenWidth;
     return const Scaffold(resizeToAvoidBottomInset: false, body: LoginScreen());
   }
 }

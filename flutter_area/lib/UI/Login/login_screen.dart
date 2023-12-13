@@ -54,8 +54,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: <Widget>[
                     SvgPicture.asset('assets/images/Logo.svg',
                         semanticsLabel: 'Logo',
-                        width: 38.0.ratioW(),
-                        height: 41.0.ratioH()),
+                        width: 40.0.ratioW(),
+                        height: 40.0.ratioH()),
                     SizedBox(width: 9.0.ratioW()),
                     Text(
                       AppLocalizations.of(context)!.subslogan,
