@@ -16,6 +16,31 @@ on:
             - "flutter_area/**"
 
 jobs:
+    release-create:
+        permissions: write-all
+        runs-on: ubuntu-latest
+
+        outputs:
+            release: ${{ steps.release.outputs.release_tag }}
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - id: release
+              name: Create Release
+              if: github.repository != 'EpitechPromo2026/B-DEV-500-TLS-5-2-area-romain.panno.git'
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  if [[ "${{ github.ref }}" == 'refs/heads/main' ]]; then
+                      export GITHUB_OUTPUT=$GITHUB_OUTPUT
+                      bash ./.github/workflows/release.sh "${{ env.BRANCH }}"
+                  else
+                      echo "release_tag=0.0.0" >> $GITHUB_OUTPUT
+                  fi
     build-apk:
         runs-on: ubuntu-latest
 
@@ -49,20 +74,9 @@ jobs:
               env:
                   GITHUB_REF: ${{ github.ref }}
 
-            - name: Create Release
-              id: create_release
-              uses: actions/create-release@v1.1.4
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              with:
-                  tag_name: ${{ steps.tag_name.outputs.tag }}
-                  release_name: Release ${{ steps.tag_name.outputs.tag }}
-                  draft: false
-                  prerelease: false
-
             - name: Upload To Release
               working-directory: ./flutter_area
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
-                  gh release upload ${{ steps.create_release.outputs.upload_url }} ./flutter_area/build/app/outputs/flutter-apk/app-release.apk
+                  gh release upload ${{ needs.release-create.outputs.release }} ./flutter_area/build/app/outputs/flutter-apk/app-release.apk
