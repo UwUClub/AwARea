@@ -7,9 +7,22 @@ import '../../Core/Locator/locator.dart';
 import '../../Core/Manager/theme_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+import '../NewTask/new_task_view.dart';
+>>>>>>> bd2c011 (Add starting connections page without connection for now)
 import '../../Utils/constants.dart';
 import '../NewTask/new_task_view.dart';
 import '../ReusableWidgets/mk_background.dart';
+<<<<<<< HEAD
+=======
+
+=======
+import '../Connections/connections_view.dart';
+import '../ReusableWidgets/mk_background.dart';
+>>>>>>> 5a3d889 (Add starting connections page without connection for now)
+>>>>>>> bd2c011 (Add starting connections page without connection for now)
 import '../Settings/settings_view.dart';
 import 'home_mobile_view.dart';
 
@@ -122,6 +135,7 @@ class _HomeViewState extends State<HomeView> {
                   },
                   icon: const Icon(Icons.settings),
                 ),
+<<<<<<< HEAD
                 SideMenuItem(
                   title: AppLocalizations.of(context)!.connection,
                   onTap: (int index, _) {
@@ -144,6 +158,12 @@ class _HomeViewState extends State<HomeView> {
                       indent: 8,
                     );
                   },
+=======
+                const SettingsView(),
+                const ConnectionsView(),
+                Center(
+                  child: Text(AppLocalizations.of(context)!.newTask),
+>>>>>>> 5a3d889 (Add starting connections page without connection for now)
                 ),
               ],
             ),
