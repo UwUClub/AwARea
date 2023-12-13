@@ -43,7 +43,6 @@ jobs:
                   path: ./flutter_area/build/app/outputs/flutter-apk/app-release.apk
 
             - name: Upload To Release
-              if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/AW-35-Tests-unitaires'
               working-directory: ./flutter_area
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
