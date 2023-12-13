@@ -23,44 +23,50 @@ class _NewTaskViewState extends State<NewTaskView> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: <Widget>[
-      Expanded(
-          child: Row(
-        children: <Widget>[
-          for (final MkAction action in actions)
-            TaskCard(
-                action: action,
-                delete: () {
-                  setState(() {
-                    actions.remove(action);
-                  });
-                }),
-        ],
-      )),
-      Container(
-          padding: EdgeInsets.all(30.0.ratioW()),
-          decoration: BoxDecoration(
-              color: Theme.of(context).brightness == Brightness.light
-                  ? Theme.of(context).colorScheme.lightColor2
-                  : Theme.of(context).colorScheme.darkColor2),
-          child: Column(
-            children: <Widget>[
-              ActionSelection(
-                label: 'Météo',
-                actions: <MkAction>[
-                  MkAction(name: 'Get meteo', description: 'toto'),
-                ],
-                addAction: addAction,
-              ),
-              ActionSelection(
-                label: 'Clock',
-                actions: <MkAction>[
-                  MkAction(name: 'Every n minutes', description: 'toto'),
-                ],
-                addAction: addAction,
-              ),
-            ],
-          ))
-    ]);
+    return SingleChildScrollView(
+      child: Row(children: <Widget>[
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(70.0.ratioW()),
+            child: Wrap(
+              children: <Widget>[
+                for (final MkAction action in actions)
+                  TaskCard(
+                      action: action,
+                      delete: () {
+                        setState(() {
+                          actions.remove(action);
+                        });
+                      }),
+              ],
+            ),
+          ),
+        ),
+        Container(
+            padding: EdgeInsets.all(30.0.ratioW()),
+            decoration: BoxDecoration(
+                color: Theme.of(context).brightness == Brightness.light
+                    ? Theme.of(context).colorScheme.lightColor2
+                    : Theme.of(context).colorScheme.darkColor2),
+            child: Column(
+              children: <Widget>[
+                ActionSelection(
+                  label: 'Météo',
+                  actions: <MkAction>[
+                    MkAction(name: 'Get meteo', description: 'toto'),
+                  ],
+                  addAction: addAction,
+                ),
+                ActionSelection(
+                  label: 'Clock',
+                  actions: <MkAction>[
+                    MkAction(name: 'Every n minutes', description: 'toto'),
+                  ],
+                  addAction: addAction,
+                ),
+              ],
+            ))
+      ]),
+    );
   }
 }
