@@ -42,7 +42,7 @@ jobs:
               uses: actions/upload-artifact@v3.1.3
               with:
                   name: maker.apk
-                  path: ./flutter_area/build/app/outputs/flutter-apk/maker.apk
+                  path: ./flutter_area/build/app/outputs/flutter-apk/app-release.apk
 
             - name: Upload To Release
               if: github.ref == 'refs/heads/main'
