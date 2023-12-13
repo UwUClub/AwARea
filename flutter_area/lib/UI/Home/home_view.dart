@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../Core/Locator/locator.dart';
+import '../../Core/Manager/action_manager.dart';
 import '../../Core/Manager/theme_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
@@ -11,6 +12,8 @@ import '../ReusableWidgets/mk_background.dart';
 import '../ReusableWidgets/mk_switch.dart';
 
 import '../Settings/settings_view.dart';
+import 'action_selection.dart';
+import 'new_task_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -34,60 +37,66 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return MkBackground(child: Scaffold(
+    return MkBackground(
+        child: Scaffold(
       backgroundColor: Theme.of(context).brightness == Brightness.light
-                        ? Theme.of(context).colorScheme.lightColor1
-                        : Theme.of(context).colorScheme.darkColor1,
+          ? Theme.of(context).colorScheme.lightColor1
+          : Theme.of(context).colorScheme.darkColor1,
       body: Row(
-        children: [
+        children: <Widget>[
           SideMenu(
             controller: sideMenu,
             style: SideMenuStyle(
               displayMode: SideMenuDisplayMode.open,
               compactSideMenuWidth: 60,
               hoverColor: Theme.of(context).brightness == Brightness.light
-                                  ? Theme.of(context).colorScheme.lightColor3
-                                  : Theme.of(context).colorScheme.darkColor3,
-              selectedHoverColor: Theme.of(context).brightness == Brightness.light
-                                  ? Theme.of(context).colorScheme.lightColor3
-                                  : Theme.of(context).colorScheme.darkColor3,
+                  ? Theme.of(context).colorScheme.lightColor3
+                  : Theme.of(context).colorScheme.darkColor3,
+              selectedHoverColor:
+                  Theme.of(context).brightness == Brightness.light
+                      ? Theme.of(context).colorScheme.lightColor3
+                      : Theme.of(context).colorScheme.darkColor3,
               selectedColor: Theme.of(context).brightness == Brightness.light
-                                  ? Theme.of(context).colorScheme.lightColor4
-                                  : Theme.of(context).colorScheme.darkColor4,
-              selectedTitleTextStyle: Theme.of(context).brightness == Brightness.light
-                                  ? TextStyle(color: Theme.of(context).colorScheme.darkColor2)
-                                  : TextStyle(color: Theme.of(context).colorScheme.lightColor2),
-              unselectedTitleTextStyle: Theme.of(context).brightness == Brightness.light
-                                  ? TextStyle(color: Theme.of(context).colorScheme.darkColor2)
-                                  : TextStyle(color: Theme.of(context).colorScheme.lightColor2),
-              selectedIconColor: Theme.of(context).brightness == Brightness.light
-                                  ? Theme.of(context).colorScheme.darkColor2
-                                  : Theme.of(context).colorScheme.lightColor2,
-              unselectedIconColor: Theme.of(context).brightness == Brightness.light
-                                  ? Theme.of(context).colorScheme.darkColor2
-                                  : Theme.of(context).colorScheme.lightColor2,
+                  ? Theme.of(context).colorScheme.lightColor4
+                  : Theme.of(context).colorScheme.darkColor4,
+              selectedTitleTextStyle: Theme.of(context).brightness ==
+                      Brightness.light
+                  ? TextStyle(color: Theme.of(context).colorScheme.darkColor2)
+                  : TextStyle(color: Theme.of(context).colorScheme.lightColor2),
+              unselectedTitleTextStyle: Theme.of(context).brightness ==
+                      Brightness.light
+                  ? TextStyle(color: Theme.of(context).colorScheme.darkColor2)
+                  : TextStyle(color: Theme.of(context).colorScheme.lightColor2),
+              selectedIconColor:
+                  Theme.of(context).brightness == Brightness.light
+                      ? Theme.of(context).colorScheme.darkColor2
+                      : Theme.of(context).colorScheme.lightColor2,
+              unselectedIconColor:
+                  Theme.of(context).brightness == Brightness.light
+                      ? Theme.of(context).colorScheme.darkColor2
+                      : Theme.of(context).colorScheme.lightColor2,
               backgroundColor: Theme.of(context).brightness == Brightness.light
-                                  ? Theme.of(context).colorScheme.lightColor2
-                                  : Theme.of(context).colorScheme.darkColor2,
+                  ? Theme.of(context).colorScheme.lightColor2
+                  : Theme.of(context).colorScheme.darkColor2,
               toggleColor: Theme.of(context).brightness == Brightness.light
-                                  ? Theme.of(context).colorScheme.darkColor2
-                                  : Theme.of(context).colorScheme.lightColor2,
+                  ? Theme.of(context).colorScheme.darkColor2
+                  : Theme.of(context).colorScheme.lightColor2,
               itemInnerSpacing: 13.0,
             ),
             showToggle: true,
             title: Row(
-              children: [  
+              children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: SvgPicture.asset('assets/images/Logo.svg',
-                  semanticsLabel: 'Logo',
-                  width: 28.0.ratioW(),
-                  height: 28.0.ratioH(),
-                  )
-                ),
-              ],  
+                    padding: const EdgeInsets.all(12.0),
+                    child: SvgPicture.asset(
+                      'assets/images/Logo.svg',
+                      semanticsLabel: 'Logo',
+                      width: 28.0.ratioW(),
+                      height: 28.0.ratioH(),
+                    )),
+              ],
             ),
-            items: [
+            items: <SideMenuItem>[
               SideMenuItem(
                 title: AppLocalizations.of(context)!.profile,
                 onTap: (int index, _) {
@@ -109,7 +118,6 @@ class _HomeViewState extends State<HomeView> {
                 },
                 icon: const Icon(Icons.share),
               ),
-
               SideMenuItem(
                 title: AppLocalizations.of(context)!.newTask,
                 onTap: (int index, _) {
@@ -118,7 +126,8 @@ class _HomeViewState extends State<HomeView> {
                 icon: const Icon(Icons.add),
               ),
               SideMenuItem(
-                builder: (BuildContext context, SideMenuDisplayMode displayMode) {
+                builder:
+                    (BuildContext context, SideMenuDisplayMode displayMode) {
                   return const Divider(
                     endIndent: 8,
                     indent: 8,
@@ -130,7 +139,7 @@ class _HomeViewState extends State<HomeView> {
           Expanded(
             child: PageView(
               controller: pageController,
-              children: [
+              children: <Widget>[
                 Center(
                   child: Text(AppLocalizations.of(context)!.profile),
                 ),
@@ -138,8 +147,8 @@ class _HomeViewState extends State<HomeView> {
                 Center(
                   child: Text(AppLocalizations.of(context)!.connection),
                 ),
-                Center(
-                  child: Text(AppLocalizations.of(context)!.newTask),
+                const Center(
+                  child: NewTaskView(),
                 ),
               ],
             ),
