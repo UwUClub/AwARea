@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
-import 'mk_button.dart';
 
 class MkInput extends StatefulWidget {
   const MkInput(
@@ -11,7 +9,7 @@ class MkInput extends StatefulWidget {
 
   final String label;
   final String? placeholder;
-  final Function(String)? onChanged;
+  final void Function(String)? onChanged;
 
   @override
   State<MkInput> createState() => _MkInputState();

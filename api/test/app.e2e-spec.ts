@@ -21,4 +21,60 @@ describe('AppController (e2e)', () => {
             .expect(200)
             .expect('Hello World!');
     });
+
+    it('/auth/register success (POST)', () => {
+        return request(app.getHttpServer())
+            .post('/auth/register')
+            .send({
+                email: 'test@user.com',
+                password: 'testpassword',
+                username: 'testuser',
+                fullname: 'Test User',
+            })
+            .expect(201);
+    });
+
+    it('/auth/register error (POST)', () => {
+        return request(app.getHttpServer())
+            .post('/auth/register')
+            .send({
+                email: 'testuser',
+                password: 'testpassword',
+                username: 'testuser',
+                fullname: 'Test User',
+            })
+            .expect(401);
+    });
+
+    it('/auth/login success (POST)', () => {
+        request(app.getHttpServer()).post('/auth/register').send({
+            email: 'test@user.com',
+            password: 'testpassword',
+            username: 'testuser',
+            fullname: 'Test User',
+        });
+        return request(app.getHttpServer())
+            .post('/auth/login')
+            .send({
+                email: 'test@user.com',
+                password: 'testpassword',
+            })
+            .expect(201);
+    });
+
+    it('/auth/login error (POST)', () => {
+        request(app.getHttpServer()).post('/auth/register').send({
+            email: 'test@user.com',
+            password: 'testpassword',
+            username: 'testuser',
+            fullname: 'Test User',
+        });
+        return request(app.getHttpServer())
+            .post('/auth/login')
+            .send({
+                email: 'test',
+                password: 'testpassword',
+            })
+            .expect(401);
+    });
 });
