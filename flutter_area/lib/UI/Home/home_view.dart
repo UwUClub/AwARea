@@ -7,10 +7,9 @@ import '../../Core/Locator/locator.dart';
 import '../../Core/Manager/theme_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
-import '../NewTask/new_task_view.dart';
 import '../../Utils/constants.dart';
+import '../NewTask/new_task_view.dart';
 import '../ReusableWidgets/mk_background.dart';
-
 import '../Settings/settings_view.dart';
 import 'home_mobile_view.dart';
 

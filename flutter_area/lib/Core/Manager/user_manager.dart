@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+
 class UserManager {
   String? username;
   String? fullName;
   String? email;
   String? accessToken;
+  String? githubToken;
 
   Future<(bool, String?)> signUp(
       String email, String password, String username, String fullName) async {
@@ -73,6 +75,11 @@ class UserManager {
     fullName = user['fullName'] as String;
     email = user['email'] as String;
     accessToken = body['accessToken'] as String;
+  }
+
+  Future<(bool, String?)> _storeGithubToken(void) async {
+    
+    githubToken = token;
   }
 
   String? _parseErrorMessage(dynamic msg) {
