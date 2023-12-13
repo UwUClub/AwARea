@@ -16,28 +16,6 @@ on:
             - "flutter_area/**"
 
 jobs:
-    release-create:
-        permissions: write-all
-        runs-on: ubuntu-latest
-
-        outputs:
-            release: ${{ steps.release.outputs.release_tag }}
-
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-              with:
-                  fetch-depth: 0
-
-            - id: release
-              name: Create Release
-              if: github.repository != 'EpitechPromo2026/B-DEV-500-TLS-5-2-area-valentin.gegoux.git'
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                  export GITHUB_OUTPUT=$GITHUB_OUTPUT
-                  bash ./.github/workflows/release.sh "${{ env.BRANCH }}"
-
     build-apk:
         runs-on: ubuntu-latest
 
@@ -64,16 +42,8 @@ jobs:
                   name: maker.apk
                   path: ./flutter_area/build/app/outputs/flutter-apk/app-release.apk
 
-            - name: Extract Tag Name
-              id: tag_name
-              run: |
-                  echo "##[set-output name=tag;]$(echo ${GITHUB_REF#refs/tags/})"
-              env:
-                  GITHUB_REF: ${{ github.ref }}
-
-            - name: Upload To Release
-              working-directory: ./flutter_area
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                  gh release upload ${{ needs.release-create.outputs.release }} ./flutter_area/build/app/outputs/flutter-apk/app-release.apk
+            - name: Publish Tagged Release
+              uses: softprops/action-gh-release@v1
+              with:
+                  files: |
+                      ./flutter_area/build/app/outputs/flutter-apk/app-release.apk
