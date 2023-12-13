@@ -1,4 +1,13 @@
 {
+    "hello": "Hola",
+    "changeMode": "Cambiar modo",
+    "newTask": "",
+    "settings": "",
+    "mySettings": "",
+    "appearance": "",
+    "changeAppearance": "",
+    "connection": "",
+    "profile": ""
     "slogan": "",
     "subslogan": "",
     "login": "",
@@ -17,5 +26,4 @@
     "usernamePlaceholder": "",
     "email": "",
     "emailPlaceholder": "",
-    "changeMode": ""
 }

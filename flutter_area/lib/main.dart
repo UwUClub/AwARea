@@ -3,6 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'Core/Locator/locator.dart';
 import 'Core/Manager/theme_manager.dart';
+import 'UI/Demo/demo_view.dart';
+import 'UI/Home/home_view.dart';
 import 'UI/Login/login_screen.dart';
 import 'Utils/constants.dart';
 import 'Utils/theme_data.dart';

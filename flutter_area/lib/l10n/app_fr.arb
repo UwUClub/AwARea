@@ -1,4 +1,13 @@
 {
+    "hello": "Salut",
+    "changeMode": "Changer de mode",
+    "newTask": "Nouvelle tâche",
+    "settings": "Paramètres",
+    "mySettings": "Mes paramètres",
+    "appearance": "Apparence",
+    "changeAppearance": "Modifier l’apparence en clair ou sombre de Maker sur votre appareil",
+    "connection": "Connexions",
+    "profile": "Profil"
     "slogan": "Effort minimal, impact maximal.\nAutomatisez vos tâches avec fluidité et intuition.",
     "subslogan": "Maker est l’option qui vous fait gagner du temps.",
     "login": "Se connecter",
@@ -17,5 +26,4 @@
     "usernamePlaceholder": "Entrez un pseudo...",
     "email": "E-mail",
     "emailPlaceholder": "Tapez votre adresse e-mail...",
-    "changeMode": "Changer de mode"
 }
