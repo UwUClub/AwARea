@@ -5,14 +5,16 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { EnvironementVariables, validateEnv } from './_utils/config';
+import { EnvironmentVariables, validateEnv } from './_utils/config';
+import { WeatherModule } from './weather/weather.module';
+import { NasaModule } from './nasa/nasa.module';
 
 @Module({
     imports: [
         ScheduleModule.forRoot(),
         MongooseModule.forRootAsync({
             useFactory: async (
-                configService: ConfigService<EnvironementVariables, true>,
+                configService: ConfigService<EnvironmentVariables, true>,
             ) => ({
                 uri: configService.get('MONGO_URI'),
             }),
@@ -21,6 +23,8 @@ import { EnvironementVariables, validateEnv } from './_utils/config';
         UsersModule,
         AuthModule,
         ConfigModule.forRoot({ validate: validateEnv, isGlobal: true }),
+        WeatherModule,
+        NasaModule,
     ],
     providers: [TasksService],
 })

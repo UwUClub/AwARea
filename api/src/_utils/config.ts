@@ -3,16 +3,22 @@ import { plainToInstance } from 'class-transformer';
 import { Logger } from '@nestjs/common';
 import { exit } from 'process';
 
-export class EnvironementVariables {
+export class EnvironmentVariables {
     @IsString()
     JWT_SECRET: string = 'secret';
 
     @IsString()
     MONGO_URI: string = 'mongodb://mongo/awarea';
+
+    @IsString()
+    WEATHER_KEY: string = 'c4b';
+
+    @IsString()
+    NASA_API_KEY: string = 'c4b';
 }
 
 export function validateEnv(config: Record<string, unknown>) {
-    const validatedConfig = plainToInstance(EnvironementVariables, config, {
+    const validatedConfig = plainToInstance(EnvironmentVariables, config, {
         enableImplicitConversion: true,
     });
     const errors = validateSync(validatedConfig, {
