@@ -9,6 +9,11 @@ import { ApiTags } from '@nestjs/swagger';
 export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
+    /**
+     * Endpoint for user login.
+     * @param signInDto - The sign-in data transfer object.
+     * @returns The result of the sign-in operation.
+     */
     @Post('login')
     signIn(@Body() signInDto: SignInDto) {
         return this.authService.signIn(signInDto);
