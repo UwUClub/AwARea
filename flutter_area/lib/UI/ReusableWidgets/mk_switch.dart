@@ -13,7 +13,6 @@ class SwitchExample extends StatefulWidget {
 }
 
 class _SwitchExampleState extends State<SwitchExample> {
-  bool light = true;
   ThemeManager themeManager = locator<ThemeManager>();
 
   final MaterialStateProperty<Icon?> thumbIcon =
@@ -30,15 +29,12 @@ class _SwitchExampleState extends State<SwitchExample> {
   Widget build(BuildContext context) {
     return Switch(
       // This bool value toggles the switch.
-      value: light,
+      value: Theme.of(context).brightness == Brightness.light ? true : false,
       thumbIcon: thumbIcon,
       activeColor: Theme.of(context).brightness == Brightness.light
           ? Theme.of(context).colorScheme.lightColor4
           : Theme.of(context).colorScheme.darkColor4,
       onChanged: (bool value) {
-        setState(() {
-          light = value;
-        });
         themeManager.inverseThemeMode();
       },
     );
