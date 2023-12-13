@@ -25,5 +25,9 @@
     "username": "",
     "usernamePlaceholder": "",
     "email": "",
-    "emailPlaceholder": ""
+    "emailPlaceholder": "",
+    "connections": "",
+    "github": " ",
+    "connectGithub": "",
+    "connect": "" 
 }

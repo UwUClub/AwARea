@@ -7,9 +7,8 @@ import '../../Core/Locator/locator.dart';
 import '../../Core/Manager/theme_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
+import '../Connections/connections_view.dart';
 import '../ReusableWidgets/mk_background.dart';
-import '../ReusableWidgets/mk_switch.dart';
-
 import '../Settings/settings_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -135,9 +134,7 @@ class _HomeViewState extends State<HomeView> {
                   child: Text(AppLocalizations.of(context)!.profile),
                 ),
                 const SettingsView(),
-                Center(
-                  child: Text(AppLocalizations.of(context)!.connection),
-                ),
+                const ConnectionsView(),
                 Center(
                   child: Text(AppLocalizations.of(context)!.newTask),
                 ),
