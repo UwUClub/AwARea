@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../Core/Manager/action_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
+import '../../Utils/Extensions/double_extensions.dart';
 import 'action_selection.dart';
 import 'task_card.dart';
 
@@ -37,8 +38,11 @@ class _NewTaskViewState extends State<NewTaskView> {
         ],
       )),
       Container(
-          decoration:
-              BoxDecoration(color: Theme.of(context).colorScheme.lightColor2),
+          padding: EdgeInsets.all(30.0.ratioW()),
+          decoration: BoxDecoration(
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Theme.of(context).colorScheme.lightColor2
+                  : Theme.of(context).colorScheme.darkColor2),
           child: Column(
             children: <Widget>[
               ActionSelection(
@@ -52,13 +56,6 @@ class _NewTaskViewState extends State<NewTaskView> {
                 label: 'Clock',
                 actions: <MkAction>[
                   MkAction(name: 'Every n minutes', description: 'toto'),
-                ],
-                addAction: addAction,
-              ),
-              ActionSelection(
-                label: 'Github',
-                actions: <MkAction>[
-                  MkAction(name: '', description: 'toto'),
                 ],
                 addAction: addAction,
               ),

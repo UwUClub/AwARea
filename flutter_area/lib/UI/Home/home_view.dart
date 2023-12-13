@@ -8,12 +8,11 @@ import '../../Core/Manager/action_manager.dart';
 import '../../Core/Manager/theme_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
+import '../NewTask/new_task_view.dart';
 import '../ReusableWidgets/mk_background.dart';
 import '../ReusableWidgets/mk_switch.dart';
 
 import '../Settings/settings_view.dart';
-import 'action_selection.dart';
-import 'new_task_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
