@@ -28,20 +28,20 @@ class _SettingsViewState extends State<SettingsView> {
             right: 137.0.ratioW(),
             bottom: 36.0.ratioH()),
             child: Column(
-              children: [
-                Row(children: [
+              children: <Widget>[
+                Row(children: <Widget>[
                   Text(AppLocalizations.of(context)!.mySettings, style: Theme.of(context).textTheme.titleMedium)
                   ]),
                 const Divider(
                     endIndent: 0,
                     indent: 0,
                   ),
-                Row(children: [
+                Row(children: <Widget>[
                   Text(AppLocalizations.of(context)!.appearance, style: Theme.of(context).textTheme.labelLarge)
                   ]),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: <Widget>[
                     Text(AppLocalizations.of(context)!.changeAppearance, style: Theme.of(context).textTheme.labelMedium),
                     const SwitchExample(),
                   ],

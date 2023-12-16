@@ -12,7 +12,7 @@ class MkButton extends StatefulWidget {
       this.backgroundColor});
 
   final String label;
-  final Function()? onPressed;
+  final void Function()? onPressed;
   final Color? labelColor;
   final Color? backgroundColor;
 

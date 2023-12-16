@@ -27,12 +27,13 @@ class MyAppState extends State<MyApp> {
     final ThemeManager themeManager = locator<ThemeManager>();
     kDeviceHeight = MediaQuery.of(context).size.height;
     kDeviceWidth = MediaQuery.of(context).size.width;
+    kIsPc = kDeviceWidth > kLargeScreenWidth;
 
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeManager.themeModeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return MaterialApp(
-            title: "No Man's land",
+            title: 'Maker',
             theme: themeDataLight(context),
             darkTheme: themeDataDark(context),
             themeMode: currentMode,
@@ -42,23 +43,10 @@ class MyAppState extends State<MyApp> {
             initialRoute: '/login',
             routes: <String, WidgetBuilder>{
               '/login': (BuildContext context) => const LoginScreen(),
-              '/home': (BuildContext context) => const MyHomePage(),
+              '/home': (BuildContext context) => const Scaffold(
+                  resizeToAvoidBottomInset: false, body: HomeView()),
             });
       },
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(resizeToAvoidBottomInset: false, body: HomeView());
   }
 }
