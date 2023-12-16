@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../Core/Manager/action_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
+import '../ReusableWidgets/mk_button.dart';
 
 class ReactionCard extends StatefulWidget {
   const ReactionCard({super.key, this.reaction, required this.setReaction});
@@ -26,12 +27,12 @@ class _ReactionCardState extends State<ReactionCard> {
       width: 312.0.ratioW(),
       height: 138.0.ratioH(),
       child: widget.reaction == null
-          ? GestureDetector(
-              onTap: () {
+          ? MkButton(
+              onPressed: () {
                 widget.setReaction(MkReaction(
                     service: 'test', name: 'test', description: 'test'));
               },
-              child: const Text('test'))
+              label: 'test')
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
