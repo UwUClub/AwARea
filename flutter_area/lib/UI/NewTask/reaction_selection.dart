@@ -6,18 +6,16 @@ import '../../Utils/Extensions/double_extensions.dart';
 
 import '../ReusableWidgets/mk_button.dart';
 
-class ActionSelection extends StatelessWidget {
-  const ActionSelection(
+class ReactionSelection extends StatelessWidget {
+  const ReactionSelection(
       {super.key,
       required this.label,
-      this.actions,
       this.reactions,
-      required this.addAction});
+      required this.setReaction});
 
   final String label;
-  final List<MkAction>? actions;
   final List<MkReaction>? reactions;
-  final Function(MkAction) addAction;
+  final Function(MkReaction) setReaction;
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +25,11 @@ class ActionSelection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(label, style: Theme.of(context).textTheme.headlineMedium),
-              for (final MkAction action in actions!)
+              for (final MkReaction reaction in reactions!)
                 Row(
                   children: <Widget>[
                     MkButton(
-                      label: action.name,
+                      label: reaction.name,
                       backgroundColor:
                           Theme.of(context).brightness == Brightness.light
                               ? Theme.of(context).colorScheme.lightColor3
@@ -41,7 +39,7 @@ class ActionSelection extends StatelessWidget {
                               ? Theme.of(context).colorScheme.darkTransColor2
                               : Theme.of(context).colorScheme.lightTransColor2,
                       onPressed: () {
-                        addAction(action);
+                        setReaction(reaction);
                       },
                     ),
                   ],

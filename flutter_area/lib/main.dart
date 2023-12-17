@@ -42,7 +42,7 @@ class MyAppState extends State<MyApp> {
             initialRoute: '/login',
             routes: <String, WidgetBuilder>{
               '/login': (BuildContext context) => const LoginScreen(),
-              //'/home': (BuildContext context) => const HomeView(),
+              '/home': (BuildContext context) => const HomeView(),
             });
       },
     );
