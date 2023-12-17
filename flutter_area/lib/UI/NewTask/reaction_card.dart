@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../Core/Manager/action_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
-import '../ReusableWidgets/mk_button.dart';
+import 'reaction_selection.dart';
 
 class ReactionCard extends StatefulWidget {
   const ReactionCard({super.key, this.reaction, required this.setReaction});
@@ -34,12 +34,20 @@ class _ReactionCardState extends State<ReactionCard> {
       width: 312.0.ratioW(),
       height: 138.0.ratioH(),
       child: widget.reaction == null
-          ? MkButton(
-              onPressed: () {
-                widget.setReaction(MkReaction(
-                    service: 'test', name: 'test', description: 'test'));
-              },
-              label: 'test')
+          ? ReactionSelection(
+              label: 'Google',
+              reactions: <MkReaction>[
+                MkReaction(
+                    service: 'Gmail',
+                    name: 'Send a mail',
+                    description: 'description'),
+                MkReaction(
+                    service: 'Drive',
+                    name: 'Upload a file',
+                    description: 'description'),
+              ],
+              setReaction: setReaction,
+            )
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
