@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     kDeviceHeight = MediaQuery.of(context).size.height;
     kDeviceWidth = MediaQuery.of(context).size.width;
-    kIsPc = kDeviceHeight > kLargeScreenWidth;
+    kIsPc = true;
     return const Scaffold(resizeToAvoidBottomInset: false, body: HomeView());
   }
 }

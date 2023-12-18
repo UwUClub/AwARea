@@ -26,7 +26,9 @@
     "email": "Correo electrónico",
     "emailPlaceholder": "Escribe tu dirección de correo electrónico...",
     "connections": "",
-    "github": " ",
+    "github": " Github",
     "connectGithub": "",
-    "connect": ""
+    "connect": "",
+    "google": " Google",
+    "connectGoogle": ""
 }

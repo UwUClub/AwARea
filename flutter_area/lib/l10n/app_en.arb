@@ -28,5 +28,7 @@
     "connections": "My connections",
     "github": " Github",
     "connectGithub": "Log to Github to access its services",
-    "connect": "Log in" 
+    "connect": "Log in",
+    "google": " Google",
+    "connectGoogle": "Log to Google to access its services"
 }
