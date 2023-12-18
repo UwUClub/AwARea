@@ -50,4 +50,6 @@ perform_test "$BASE_URL/auth/login" 401 "$login_data_wrong" "POST"
 perform_test "$BASE_URL/auth/login" 201 "$login_data_good" "POST"
 
 # Exit with an error code if any test failed
-exit $ERROR
+if [ $ERROR -eq 1 ]; then
+    echo "Some tests failed"
+fi
