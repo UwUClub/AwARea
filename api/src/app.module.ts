@@ -8,6 +8,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EnvironmentVariables, validateEnv } from './_utils/config';
 import { WeatherModule } from './weather/weather.module';
 import { NasaModule } from './nasa/nasa.module';
+import { AboutModule } from './about/about.module';
 
 @Module({
     imports: [
@@ -25,6 +26,7 @@ import { NasaModule } from './nasa/nasa.module';
         ConfigModule.forRoot({ validate: validateEnv, isGlobal: true }),
         WeatherModule,
         NasaModule,
+        AboutModule,
     ],
     providers: [TasksService],
 })
