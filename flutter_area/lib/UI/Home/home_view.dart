@@ -95,12 +95,19 @@ class _HomeViewState extends State<HomeView> {
                       child: SvgPicture.asset(
                         'assets/images/Logo.svg',
                         semanticsLabel: 'Logo',
-                        width: 28.0.ratioW(),
-                        height: 28.0.ratioH(),
+                        width: 18.0.ratioW(),
+                        height: 18.0.ratioH(),
                       )),
                 ],
               ),
               items: <SideMenuItem>[
+                SideMenuItem(
+                  title: AppLocalizations.of(context)!.home,
+                  onTap: (int index, _) {
+                    sideMenu.changePage(index);
+                  },
+                  icon: const Icon(Icons.home),
+                ),
                 SideMenuItem(
                   title: AppLocalizations.of(context)!.profile,
                   onTap: (int index, _) {
@@ -127,7 +134,7 @@ class _HomeViewState extends State<HomeView> {
                   onTap: (int index, _) {
                     sideMenu.changePage(index);
                   },
-                  icon: const Icon(Icons.add),
+                  icon: const Icon(Icons.add_circle),
                 ),
                 SideMenuItem(
                   builder:
@@ -144,6 +151,9 @@ class _HomeViewState extends State<HomeView> {
               child: PageView(
                 controller: pageController,
                 children: <Widget>[
+                  Center(
+                    child: Text(AppLocalizations.of(context)!.home),
+                  ),
                   Center(
                     child: Text(AppLocalizations.of(context)!.profile),
                   ),

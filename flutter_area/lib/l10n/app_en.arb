@@ -30,5 +30,6 @@
     "connectGithub": "Log to Github to access its services",
     "connect": "Log in",
     "google": " Google",
-    "connectGoogle": "Log to Google to access its services"
+    "connectGoogle": "Log to Google to access its services",
+    "home": "Home"
 }
