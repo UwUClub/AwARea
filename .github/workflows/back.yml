@@ -43,6 +43,7 @@ jobs:
             - name: Run Tests
               run: |
                   pnpm run start:dev &
+                  sleep 5
                   chmod +x ./test.sh
                   ./test.sh
                   if [ $? -eq 0 ]; then
