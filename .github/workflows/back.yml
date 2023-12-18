@@ -5,6 +5,7 @@ on:
         branches:
             - main
             - dev
+            - AW-35-Tests-unitaires
         paths:
             - "api/**"
     pull_request:
