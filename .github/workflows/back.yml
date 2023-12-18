@@ -42,8 +42,13 @@ jobs:
               # Get the output of ./test.sh
             - name: Run Tests
               run: |
+                  pnpm run start:dev &
                   chmod +x ./test.sh
-                  if ! ./test.sh; then
+                  ./test.sh
+                  if [ $? -eq 0 ]; then
+                      echo "Tests passed"
+                  else
+                      echo "Tests failed"
                       exit 1
                   fi
               working-directory: ./api
