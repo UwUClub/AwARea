@@ -10,6 +10,7 @@ import '../../Utils/Extensions/double_extensions.dart';
 import '../../Utils/constants.dart';
 import '../ReusableWidgets/mk_button.dart';
 import '../ReusableWidgets/mk_input.dart';
+import 'google_button.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -29,6 +30,8 @@ class _LoginFormState extends State<LoginForm> {
   Future<void> loginWithGoogle() async {
     const List<String> scopes = <String>[
       'email',
+      'https://www.googleapis.com/auth/gmail.addons.current.action.compose',
+      'https://www.googleapis.com/auth/gmail.compose',
     ];
 
     final GoogleSignIn googleSignIn = GoogleSignIn(
@@ -61,7 +64,7 @@ class _LoginFormState extends State<LoginForm> {
               : EdgeInsets.symmetric(horizontal: 30.0.ratioH()),
           width: kDeviceWidth > kLargeScreenWidth ? 333.0.ratioW() : null,
           child: Column(children: <Widget>[
-            TextButton(onPressed: loginWithGoogle, child: const Text('google')),
+            GoogleButton(onPressed: loginWithGoogle),
             Text(AppLocalizations.of(context)!.loginTitle,
                 style: Theme.of(context).textTheme.headlineLarge),
             Divider(
