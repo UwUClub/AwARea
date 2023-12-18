@@ -39,17 +39,8 @@ jobs:
               run: pnpm run build
               working-directory: ./api
 
-              # Get the output of ./test.sh
-            - name: Run Tests
-              run: |
-                  pnpm run start:dev &
-                  sleep 10
-                  chmod +x ./test.sh
-                  ./test.sh
-                  if [ $? -eq 0 ]; then
-                      echo "Tests passed"
-                  else
-                      echo "Tests failed"
-                      exit 1
-                  fi
-              working-directory: ./api
+            - name: Set up Docker Compose
+              run: docker-compose -f docker-compose.yml up -d
+
+            - name: Execute Shell Script
+              run: docker exec backend ./test.sh
