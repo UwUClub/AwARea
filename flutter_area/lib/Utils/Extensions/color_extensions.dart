@@ -9,7 +9,7 @@ extension ColorExtension on ColorScheme {
 
   Color get lightColor4 => const Color(0xFFC2C2C2);
 
-  Color get lightTransColor1 => const Color(0x46E1E1E1);
+  Color get lightTransColor1 => const Color(0x66E1E1E1);
 
   Color get lightTransColor2 => const Color(0x28E1E1E1);
 
@@ -23,7 +23,7 @@ extension ColorExtension on ColorScheme {
 
   Color get darkTransColor1 => const Color(0xB31F1F1F);
 
-  Color get darkTransColor2 => const Color(0x281F1F1F);
+  Color get darkTransColor2 => const Color(0x661F1F1F);
 
   Color get redColor => const Color(0xFFEC465A);
 

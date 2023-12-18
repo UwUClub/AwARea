@@ -81,7 +81,7 @@ class SignupFormState extends State<SignupForm> {
                   final (bool success, String? error) = await userManager
                       .signUp(_email, _password, _username, _fullName);
                   if (success) {
-                    print('TODO navigate to home screen');
+                    Navigator.of(context).pushNamed('/home');
                   } else {
                     setState(() => _errorMessage = error);
                   }

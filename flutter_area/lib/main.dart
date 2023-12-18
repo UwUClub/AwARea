@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'Core/Locator/locator.dart';
 import 'Core/Manager/theme_manager.dart';
+import 'UI/Home/home_view.dart';
 import 'UI/Login/login_screen.dart';
 import 'Utils/constants.dart';
 import 'Utils/theme_data.dart';
@@ -23,38 +24,27 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final ThemeManager themeManager = locator<ThemeManager>();
+    kDeviceHeight = MediaQuery.of(context).size.height;
+    kDeviceWidth = MediaQuery.of(context).size.width;
+    kIsPc = kDeviceWidth > kLargeScreenWidth;
 
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeManager.themeModeNotifier,
       builder: (_, ThemeMode currentMode, __) {
         return MaterialApp(
-          title: 'Maker',
-          theme: themeDataLight(context),
-          darkTheme: themeDataDark(context),
-          themeMode: currentMode,
-          home: const MyHomePage(),
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-        );
+            title: 'Maker',
+            theme: themeDataLight(context),
+            darkTheme: themeDataDark(context),
+            themeMode: currentMode,
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            initialRoute: '/login',
+            routes: <String, WidgetBuilder>{
+              '/login': (BuildContext context) => const LoginScreen(),
+              '/home': (BuildContext context) => const HomeView(),
+            });
       },
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    kDeviceHeight = MediaQuery.of(context).size.height;
-    kDeviceWidth = MediaQuery.of(context).size.width;
-    kIsPc = kDeviceHeight > kLargeScreenWidth;
-    return const Scaffold(resizeToAvoidBottomInset: false, body: LoginScreen());
   }
 }

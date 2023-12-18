@@ -7,6 +7,7 @@ import '../../Core/Locator/locator.dart';
 import '../../Core/Manager/theme_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
+import '../NewTask/new_task_view.dart';
 import '../../Utils/constants.dart';
 import '../ReusableWidgets/mk_background.dart';
 
@@ -151,8 +152,8 @@ class _HomeViewState extends State<HomeView> {
                   Center(
                     child: Text(AppLocalizations.of(context)!.connection),
                   ),
-                  Center(
-                    child: Text(AppLocalizations.of(context)!.newTask),
+                  const Center(
+                    child: NewTaskView(),
                   ),
                 ],
               ),
