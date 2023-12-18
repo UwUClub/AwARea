@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../Core/Locator/locator.dart';
 import '../../Core/Manager/theme_manager.dart';
@@ -25,6 +26,25 @@ class _LoginFormState extends State<LoginForm> {
   String _password = '';
   String? _errorMessage;
 
+  Future<void> loginWithGoogle() async {
+    const List<String> scopes = <String>[
+      'email',
+    ];
+
+    final GoogleSignIn googleSignIn = GoogleSignIn(
+      scopes: scopes,
+    );
+
+    //final bool isAuthorized = await googleSignIn.requestScopes(scopes);
+
+    try {
+      final GoogleSignInAccount? res = await googleSignIn.signIn();
+      print('signin $res');
+    } catch (error) {
+      print(error);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,6 +61,7 @@ class _LoginFormState extends State<LoginForm> {
               : EdgeInsets.symmetric(horizontal: 30.0.ratioH()),
           width: kDeviceWidth > kLargeScreenWidth ? 333.0.ratioW() : null,
           child: Column(children: <Widget>[
+            TextButton(onPressed: loginWithGoogle, child: const Text('google')),
             Text(AppLocalizations.of(context)!.loginTitle,
                 style: Theme.of(context).textTheme.headlineLarge),
             Divider(
