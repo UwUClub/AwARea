@@ -5,7 +5,6 @@ on:
         branches:
             - main
             - dev
-            - AW-35-Tests-unitaires
         paths:
             - "api/**"
     pull_request:
@@ -39,8 +38,6 @@ jobs:
               run: pnpm run build
               working-directory: ./api
 
-            - name: Set up Docker Compose
-              run: docker-compose -f docker-compose.yml up -d
-
-            - name: Execute Shell Script
-              run: docker exec backend ./test.sh
+            - name: Test
+              run: pnpm run test
+              working-directory: ./api
