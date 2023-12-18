@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../Core/Locator/locator.dart';
 import '../../Core/Manager/theme_manager.dart';
@@ -38,17 +39,24 @@ class _ConnectionsViewState extends State<ConnectionsView> {
                     indent: 0,
                   ),
                 Row(children: [
-                  SvgPicture.asset('../../../assets/images/github.svg',
-                  semanticsLabel: 'Logo',
-                  width: 20.0.ratioW(),
-                  height: 20.0.ratioH(),
-                  ),
+                  const Icon(FontAwesomeIcons.github, size: 20),
                   Text(AppLocalizations.of(context)!.github, style: Theme.of(context).textTheme.labelLarge)
                   ]),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(AppLocalizations.of(context)!.connectGithub, style: Theme.of(context).textTheme.labelMedium),
+                    MkButton(label: AppLocalizations.of(context)!.connect, onPressed: () {},),
+                  ],
+                ),
+                Row(children: [
+                  const Icon(FontAwesomeIcons.google, size: 20),
+                  Text(AppLocalizations.of(context)!.google, style: Theme.of(context).textTheme.labelLarge)
+                ]),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(AppLocalizations.of(context)!.connectGoogle, style: Theme.of(context).textTheme.labelMedium),
                     MkButton(label: AppLocalizations.of(context)!.connect, onPressed: () {},),
                   ],
                 ),

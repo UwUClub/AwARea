@@ -24,5 +24,11 @@
     "username": "Username",
     "usernamePlaceholder": "Enter a username...",
     "email": "Email",
-    "emailPlaceholder": "Type your email address..."
+    "emailPlaceholder": "Type your email address...",
+    "connections": "My connections",
+    "github": " Github",
+    "connectGithub": "Log to Github to access its services",
+    "connect": "Log in",
+    "google": " Google",
+    "connectGoogle": "Log to Google to access its services"
 }
