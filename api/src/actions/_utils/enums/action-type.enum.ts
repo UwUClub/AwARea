@@ -1,0 +1,4 @@
+export enum ActionTypeEnum {
+    NASA_GET_APOD = 'NASA_GET_APOD',
+    WEATHER_GET_CURRENT = 'WEATHER_GET_CURRENT',
+}
