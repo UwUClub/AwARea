@@ -9,6 +9,7 @@ import '../../Utils/Extensions/double_extensions.dart';
 import '../../Utils/constants.dart';
 import '../ReusableWidgets/mk_button.dart';
 import '../ReusableWidgets/mk_input.dart';
+import 'google_button.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
@@ -39,6 +40,7 @@ class SignupFormState extends State<SignupForm> {
         child: SizedBox(
           width: kDeviceWidth > kLargeScreenWidth ? 333.0.ratioW() : null,
           child: Column(children: <Widget>[
+            const GoogleButton(),
             Text(AppLocalizations.of(context)!.signUpTitle,
                 style: Theme.of(context).textTheme.headlineLarge),
             Divider(
