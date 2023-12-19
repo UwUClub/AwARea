@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../Core/Locator/locator.dart';
+
 import '../../Core/Manager/action_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
 import '../ReusableWidgets/mk_background.dart';
-import 'action_selection.dart';
 import 'action_card.dart';
+import 'action_selection.dart';
 import 'reaction_card.dart';
 
 class NewTaskView extends StatefulWidget {
@@ -17,14 +17,6 @@ class NewTaskView extends StatefulWidget {
 
 class _NewTaskViewState extends State<NewTaskView> {
   List<MkAction> actions = <MkAction>[];
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      actions = locator<ActionManager>().actions;
-    });
-  }
 
   void addAction(MkAction action) {
     setState(() {

@@ -24,5 +24,12 @@
     "username": "Nombre de usuario",
     "usernamePlaceholder": "Ingresa un nombre de usuario...",
     "email": "Correo electrónico",
-    "emailPlaceholder": "Escribe tu dirección de correo electrónico..."
+    "emailPlaceholder": "Escribe tu dirección de correo electrónico...",
+    "connections": "",
+    "github": " Github",
+    "connectGithub": "",
+    "connect": "",
+    "google": " Google",
+    "connectGoogle": "",
+    "home": ""
 }

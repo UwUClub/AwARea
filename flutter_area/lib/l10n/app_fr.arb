@@ -24,5 +24,12 @@
     "username": "Pseudo",
     "usernamePlaceholder": "Entrez un pseudo...",
     "email": "E-mail",
-    "emailPlaceholder": "Tapez votre adresse e-mail..."
+    "emailPlaceholder": "Tapez votre adresse e-mail...",
+    "connections": "Mes connexions",
+    "github": " Github",
+    "connectGithub": "Se connecter à Github pour accèder à ses services",
+    "connect": "Se connecter",
+    "google": " Google",
+    "connectGoogle": "Se connecter à Google pour accèder à ses services",
+    "home": "Accueil"
 }

@@ -15,7 +15,7 @@ class ReactionSelection extends StatelessWidget {
 
   final String label;
   final List<MkReaction>? reactions;
-  final Function(MkReaction) setReaction;
+  final void Function(MkReaction) setReaction;
 
   @override
   Widget build(BuildContext context) {

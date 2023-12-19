@@ -16,6 +16,7 @@ RUN flutter upgrade
 RUN mkdir /app/
 COPY . /app/
 WORKDIR /app/
+RUN flutter pub upgrade
 RUN flutter build web
 
 FROM nginx:1.21.1-alpine
