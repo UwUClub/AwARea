@@ -18,7 +18,7 @@ export class WeatherService {
         this.apiKey = configService.get('WEATHER_KEY');
     }
 
-    private async getWeather(city: string): Promise<any> {
+    async getWeather(city: string): Promise<any> {
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.apiKey}&units=metric&lang=fr`;
 
         try {

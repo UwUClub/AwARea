@@ -1,9 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './users.schema';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { CreateUserDto } from './_utils/dto/request/create-user.dto';
 import { hashSync } from 'bcrypt';
+import { GoogleUserCreationInterface } from './_utils/google-user-creation.interface';
 
 @Injectable()
 export class UsersRepository {
@@ -19,6 +20,19 @@ export class UsersRepository {
             password: hashSync(userDto.password, 10),
         });
 
+    createOAuthUser = (userInfo: GoogleUserCreationInterface) =>
+        this.userModel.create({
+            fullName: userInfo.fullName,
+            email: userInfo.email,
+            password: null,
+            username: null,
+            googleId: userInfo.googleId,
+            googleAccessToken: userInfo.googleAccessToken,
+        });
+
+    findOneByGoogleId = (googleId: string) =>
+        this.userModel.findOne({ googleId: googleId }).exec();
+
     findOneByEmail = (email: string) =>
         this.userModel.findOne({ email: email }).exec();
 
@@ -30,4 +44,7 @@ export class UsersRepository {
             .findById(id)
             .orFail(new NotFoundException('User not found'))
             .exec();
+
+    updateOneById = (id: Types.ObjectId, update: Partial<UserDocument>) =>
+        this.userModel.findByIdAndUpdate(id, update, { new: true }).exec();
 }

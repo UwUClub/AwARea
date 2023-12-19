@@ -5,8 +5,8 @@ export type UserDocument = HydratedDocument<User>;
 
 @Schema()
 export class User {
-    @Prop({ required: true })
-    username: string;
+    @Prop({ default: null })
+    username: string | null;
 
     @Prop({ required: true })
     fullName: string;
@@ -14,8 +14,17 @@ export class User {
     @Prop({ required: true })
     email: string;
 
-    @Prop({ required: true })
-    password: string;
+    @Prop({ default: null })
+    password: string | null;
+
+    @Prop({ default: null })
+    googleId: string | null;
+
+    @Prop({ default: null })
+    googleAccessToken: string | null;
+
+    @Prop({ default: null })
+    googleRefreshToken: string | null;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
