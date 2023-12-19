@@ -9,7 +9,7 @@ class ReactionCard extends StatefulWidget {
   const ReactionCard({super.key, this.reaction, required this.setReaction});
 
   final MkReaction? reaction;
-  final Function(MkReaction?) setReaction;
+  final void Function(MkReaction?) setReaction;
 
   @override
   State<ReactionCard> createState() => _ReactionCardState();

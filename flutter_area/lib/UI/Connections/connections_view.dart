@@ -19,7 +19,6 @@ class ConnectionsView extends StatefulWidget {
 
 class _ConnectionsViewState extends State<ConnectionsView> {
   ThemeManager themeManager = locator<ThemeManager>();
-  String? token;
 
   @override
   Widget build(BuildContext context) {
@@ -49,15 +48,12 @@ class _ConnectionsViewState extends State<ConnectionsView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                    token != null
-                        ? token!
-                        : AppLocalizations.of(context)!.connectGithub,
+                Text(AppLocalizations.of(context)!.connectGithub,
                     style: Theme.of(context).textTheme.labelMedium),
                 MkButton(
                   label: AppLocalizations.of(context)!.connect,
                   onPressed: () async {
-                    token = await signInWithGitHub();
+                    await signInWithGitHub();
                   },
                 ),
                 Row(children: [

@@ -10,6 +10,7 @@ import '../../Core/Manager/theme_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
 import '../../Utils/constants.dart';
+import '../Connections/connections_view.dart';
 import '../NewTask/new_task_view.dart';
 import '../ReusableWidgets/mk_background.dart';
 import '../Settings/settings_view.dart';
@@ -160,9 +161,7 @@ class _HomeViewState extends State<HomeView> {
                     child: Text(AppLocalizations.of(context)!.profile),
                   ),
                   const SettingsView(),
-                  Center(
-                    child: Text(AppLocalizations.of(context)!.connection),
-                  ),
+                  const ConnectionsView(),
                   const Center(
                     child: NewTaskView(),
                   ),

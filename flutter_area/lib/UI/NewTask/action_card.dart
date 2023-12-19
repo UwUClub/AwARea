@@ -7,7 +7,7 @@ class ActionCard extends StatefulWidget {
   const ActionCard({super.key, required this.action, required this.delete});
 
   final MkAction action;
-  final Function() delete;
+  final void Function() delete;
 
   @override
   State<ActionCard> createState() => _ActionCardState();

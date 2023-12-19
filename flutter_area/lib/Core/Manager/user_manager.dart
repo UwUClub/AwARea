@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-
 class UserManager {
   String? username;
   String? fullName;
@@ -27,6 +26,7 @@ class UserManager {
       _storeData(jsonBody);
       return (true, null);
     }
+    // ignore: avoid_dynamic_calls
     return (false, _parseErrorMessage(jsonBody['message']));
   }
 
@@ -45,6 +45,7 @@ class UserManager {
       _storeData(jsonBody);
       return (true, null);
     }
+    // ignore: avoid_dynamic_calls
     return (false, _parseErrorMessage(jsonBody['message']));
   }
 
@@ -75,11 +76,6 @@ class UserManager {
     fullName = user['fullName'] as String;
     email = user['email'] as String;
     accessToken = body['accessToken'] as String;
-  }
-
-  Future<(bool, String?)> _storeGithubToken(void) async {
-    
-    githubToken = token;
   }
 
   String? _parseErrorMessage(dynamic msg) {
