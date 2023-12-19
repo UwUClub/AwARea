@@ -8,6 +8,7 @@ import '../../Core/Manager/theme_manager.dart';
 import '../../Utils/Extensions/double_extensions.dart';
 import '../ReusableWidgets/mk_background.dart';
 import '../ReusableWidgets/mk_button.dart';
+import 'connection_github.dart';
 
 class ConnectionsView extends StatefulWidget {
   const ConnectionsView({super.key});
@@ -18,6 +19,7 @@ class ConnectionsView extends StatefulWidget {
 
 class _ConnectionsViewState extends State<ConnectionsView> {
   ThemeManager themeManager = locator<ThemeManager>();
+  String? token;
 
   @override
   Widget build(BuildContext context) {
@@ -47,21 +49,31 @@ class _ConnectionsViewState extends State<ConnectionsView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(AppLocalizations.of(context)!.connectGithub,
+                Text(
+                    token != null
+                        ? token!
+                        : AppLocalizations.of(context)!.connectGithub,
                     style: Theme.of(context).textTheme.labelMedium),
                 MkButton(
                   label: AppLocalizations.of(context)!.connect,
-                  onPressed: () async {},
+                  onPressed: () async {
+                    token = await signInWithGitHub();
+                  },
                 ),
                 Row(children: [
                   const Icon(FontAwesomeIcons.google, size: 20),
-                  Text(AppLocalizations.of(context)!.google, style: Theme.of(context).textTheme.labelLarge)
+                  Text(AppLocalizations.of(context)!.google,
+                      style: Theme.of(context).textTheme.labelLarge)
                 ]),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(AppLocalizations.of(context)!.connectGoogle, style: Theme.of(context).textTheme.labelMedium),
-                    MkButton(label: AppLocalizations.of(context)!.connect, onPressed: () {},),
+                    Text(AppLocalizations.of(context)!.connectGoogle,
+                        style: Theme.of(context).textTheme.labelMedium),
+                    MkButton(
+                      label: AppLocalizations.of(context)!.connect,
+                      onPressed: () {},
+                    ),
                   ],
                 ),
               ],
