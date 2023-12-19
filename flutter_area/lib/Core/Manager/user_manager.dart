@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import '../../Utils/mk_print.dart';
+
 class UserManager {
   String? username;
   String? fullName;
@@ -10,36 +12,46 @@ class UserManager {
 
   Future<(bool, String?)> signUp(
       String email, String password, String username, String fullName) async {
-    final http.Response res = await http.post(
-        Uri.parse('http://localhost:8080/auth/register'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(<String, String>{
-          'email': email,
-          'password': password,
-          'username': username,
-          'fullName': fullName
-        }));
-    final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
-    if (res.statusCode == 201) {
-      _storeData(jsonBody);
-      return (true, null);
+    try {
+      final http.Response res = await http.post(
+          Uri.parse('http://localhost:8080/auth/register'),
+          headers: <String, String>{
+            'Content-Type': 'application/json',
+            'accept': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          body: jsonEncode(<String, String>{
+            'email': email,
+            'password': password,
+            'username': username,
+            'fullName': fullName
+          }));
+      final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
+      if (res.statusCode == 201) {
+        _storeData(jsonBody);
+        return (true, null);
+      }
+      // ignore: avoid_dynamic_calls
+      return (false, _parseErrorMessage(jsonBody['message']));
+    } catch (e) {
+      mkPrint('Error: $e');
+      return (false, e.toString());
     }
-    // ignore: avoid_dynamic_calls
-    return (false, _parseErrorMessage(jsonBody['message']));
   }
 
   Future<(bool, String?)> login(String usernameOrEmail, String password) async {
     final http.Response res = await http.post(
         Uri.parse('http://localhost:8080/auth/login'),
         headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
+          'Content-Type': 'application/json',
+          'accept': 'application/json',
+          'Access-Control-Allow-Origin': '*'
         },
         body: jsonEncode(<String, String>{
           'usernameOrEmail': usernameOrEmail,
           'password': password
         }));
+    mkPrint(res.body);
     final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
     if (res.statusCode == 201) {
       _storeData(jsonBody);

@@ -72,17 +72,6 @@ class _ConnectionsViewState extends State<ConnectionsView> {
                     ),
                   ],
                 ),
-                Row(children: [
-                  const Icon(FontAwesomeIcons.google, size: 20),
-                  Text(AppLocalizations.of(context)!.google, style: Theme.of(context).textTheme.labelLarge)
-                ]),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(AppLocalizations.of(context)!.connectGoogle, style: Theme.of(context).textTheme.labelMedium),
-                    MkButton(label: AppLocalizations.of(context)!.connect, onPressed: () {},),
-                  ],
-                ),
               ],
             ),
           ],
