@@ -7,11 +7,13 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt/jwt.startegy';
 import { ConfigService } from '@nestjs/config';
 import { EnvironmentVariables } from 'src/_utils/config';
+import { GoogleApiModule } from '../google-api/google-api.module';
 
 @Module({
     imports: [
         UsersModule,
         PassportModule,
+        GoogleApiModule,
         JwtModule.registerAsync({
             useFactory: async (
                 configService: ConfigService<EnvironmentVariables, true>,

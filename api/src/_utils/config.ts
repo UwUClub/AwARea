@@ -15,6 +15,21 @@ export class EnvironmentVariables {
 
     @IsString()
     NASA_API_KEY: string = 'c4b';
+
+    @IsString()
+    GITHUB_CLIENT_ID: string = 'c4b';
+
+    @IsString()
+    GITHUB_CLIENT_SECRET: string = 'c4b';
+
+    @IsString()
+    GOOGLE_CLIENT_ID: string = 'c4b';
+
+    @IsString()
+    GOOGLE_CLIENT_SECRET: string = 'c4b';
+
+    @IsString()
+    GOOGLE_CALLBACK_URL: string = 'c4b';
 }
 
 export function validateEnv(config: Record<string, unknown>) {
