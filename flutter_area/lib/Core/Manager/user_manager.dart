@@ -98,10 +98,9 @@ class UserManager {
           Uri.parse('http://localhost:8080/action-reaction/mvp'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
-            'Bearer': accessToken!,
+            'Authorization': 'Bearer $accessToken',
           },
           body: jsonEncode(<String, String>{'name': name, 'email': email}));
-      mkPrint(res.body);
       if (res.statusCode == 201) {
         return true;
       }
