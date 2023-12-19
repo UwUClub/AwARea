@@ -43,6 +43,8 @@ class _LoginFormState extends State<LoginForm> {
     try {
       final GoogleSignInAccount? res = await googleSignIn.signIn();
       print('signin $res');
+      final GoogleSignInAuthentication token = await res!.authentication;
+      print('token ${token.accessToken}');
     } catch (error) {
       print(error);
     }
