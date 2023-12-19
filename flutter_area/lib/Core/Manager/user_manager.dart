@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:stacked/stacked.dart';
 
 import '../../Utils/mk_print.dart';
 
@@ -66,6 +67,7 @@ class UserManager {
     final http.Response res = await http.post(
         Uri.parse('http://localhost:8080/auth/google-login'),
         headers: <String, String>{
+          'accept': 'application/json',
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(<String, String>{
@@ -88,6 +90,24 @@ class UserManager {
     fullName = user['fullName'] as String;
     email = user['email'] as String;
     accessToken = body['accessToken'] as String;
+  }
+
+  Future<bool> createDraft(String name, String email) async {
+    try {
+      final http.Response res = await http.post(
+          Uri.parse('http://localhost:8080/action-reaction/mvp'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(<String, String>{'name': name, 'email': email}));
+      mkPrint(res.body);
+      if (res.statusCode == 201) {
+        return true;
+      }
+    } catch (e) {
+      mkPrint('Error: $e');
+    }
+    return false;
   }
 
   String? _parseErrorMessage(dynamic msg) {

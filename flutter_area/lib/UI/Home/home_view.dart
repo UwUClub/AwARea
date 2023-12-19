@@ -7,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../Core/Locator/locator.dart';
 import '../../Core/Manager/theme_manager.dart';
+import '../../Core/Manager/user_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
 import '../../Utils/constants.dart';
@@ -26,9 +27,11 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   ThemeManager themeManager = locator<ThemeManager>();
+  UserManager userManager = locator<UserManager>();
   PageController pageController = PageController();
   SideMenuController sideMenu = SideMenuController();
 
+  TextEditingController nameController = TextEditingController(text: '');
   TextEditingController emailController = TextEditingController(text: '');
 
   @override
@@ -178,15 +181,29 @@ class _HomeViewState extends State<HomeView> {
                           child: Column(
                             children: <Widget>[
                               TextField(
+                                  controller: nameController,
+                                  decoration: const InputDecoration(
+                                      hintText: 'Enter a name')),
+                              SizedBox(height: 50.0.ratioH()),
+                              TextField(
                                   controller: emailController,
                                   decoration: const InputDecoration(
                                       hintText: 'Enter an email')),
                               SizedBox(height: 50.0.ratioH()),
                               ElevatedButton(
-                                  onPressed: () {
-                                    mkPrint(emailController.text);
+                                  onPressed: () async {
+                                    if (nameController.text.isEmpty ||
+                                        emailController.text.isEmpty) {
+                                      return;
+                                    }
+                                    mkPrint(await userManager.createDraft(
+                                        nameController.text,
+                                        emailController.text));
                                   },
-                                  child: Text('Send an email', style: Theme.of(context).textTheme.bodyLarge)),
+                                  child: Text('Send an email',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge)),
                             ],
                           ),
                         )
