@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../Core/Locator/locator.dart';
 import '../../Core/Manager/theme_manager.dart';
@@ -37,33 +36,6 @@ class _LoginFormState extends State<LoginForm> {
     }
   }
 
-  Future<void> loginWithGoogle() async {
-    const List<String> scopes = <String>[
-      'email',
-      'https://www.googleapis.com/auth/gmail.addons.current.action.compose',
-      'https://www.googleapis.com/auth/gmail.compose',
-    ];
-
-    final GoogleSignIn googleSignIn = GoogleSignIn(
-      scopes: scopes,
-    );
-
-    try {
-      final GoogleSignInAccount? res = await googleSignIn.signIn();
-      final GoogleSignInAuthentication token = await res!.authentication;
-      if (token.accessToken == null || res.displayName == null) {
-        return;
-      }
-      final bool success = await userManager.loginWithGoogle(
-          token.accessToken!, res.displayName!, res.email);
-      if (success) {
-        Navigator.of(context).pushNamed('/home');
-      }
-    } catch (error) {
-      print(error);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -80,9 +52,7 @@ class _LoginFormState extends State<LoginForm> {
               : EdgeInsets.symmetric(horizontal: 30.0.ratioH()),
           width: kDeviceWidth > kLargeScreenWidth ? 333.0.ratioW() : null,
           child: Column(children: <Widget>[
-            GoogleButton(onPressed: () {
-              loginWithGoogle();
-            }),
+            const GoogleButton(),
             Text(AppLocalizations.of(context)!.loginTitle,
                 style: Theme.of(context).textTheme.headlineLarge),
             Divider(

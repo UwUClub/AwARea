@@ -28,8 +28,6 @@ class SignupFormState extends State<SignupForm> {
   String _password = '';
   String? _errorMessage;
 
-  void signupWithGoogle() {}
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,7 +40,7 @@ class SignupFormState extends State<SignupForm> {
         child: SizedBox(
           width: kDeviceWidth > kLargeScreenWidth ? 333.0.ratioW() : null,
           child: Column(children: <Widget>[
-            GoogleButton(onPressed: signupWithGoogle),
+            const GoogleButton(),
             Text(AppLocalizations.of(context)!.signUpTitle,
                 style: Theme.of(context).textTheme.headlineLarge),
             Divider(
