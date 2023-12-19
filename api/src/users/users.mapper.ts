@@ -7,7 +7,7 @@ export class UsersMapper {
     toGetUserDto = (user: UserDocument): GetUserDto => ({
         id: user._id.toString(),
         username: user.username,
-        fullName: user.fullName,
+        fullName: user.fullName ?? undefined,
         email: user.email,
     });
 }

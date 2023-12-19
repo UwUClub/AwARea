@@ -9,6 +9,10 @@ import { EnvironmentVariables, validateEnv } from './_utils/config';
 import { WeatherModule } from './weather/weather.module';
 import { NasaModule } from './nasa/nasa.module';
 import { AboutModule } from './about/about.module';
+import { ActionReactionModule } from './action-reaction/action-reaction.module';
+import { ActionsModule } from './actions/actions.module';
+import { ReactionsModule } from './reactions/reactions.module';
+import { GoogleApiModule } from './google-api/google-api.module';
 
 @Module({
     imports: [
@@ -27,6 +31,10 @@ import { AboutModule } from './about/about.module';
         WeatherModule,
         NasaModule,
         AboutModule,
+        ActionReactionModule,
+        ActionsModule,
+        ReactionsModule,
+        GoogleApiModule,
     ],
     providers: [TasksService],
 })
