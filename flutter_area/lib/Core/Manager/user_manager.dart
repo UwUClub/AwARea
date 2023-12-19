@@ -46,10 +46,30 @@ class UserManager {
     return (false, _parseErrorMessage(jsonBody['message']));
   }
 
+  Future<bool> loginWithGoogle(
+      String accessToken, String completeName, String email) async {
+    final http.Response res = await http.post(
+        Uri.parse('http://localhost:8080/auth/google-login'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'accessToken': accessToken,
+          'completeName': completeName,
+          'email': email
+        }));
+    final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
+    if (res.statusCode == 201) {
+      _storeData(jsonBody);
+      return true;
+    }
+    return false;
+  }
+
   void _storeData(dynamic jsonBody) {
     final Map<String, dynamic> body = jsonBody as Map<String, dynamic>;
     final Map<String, dynamic> user = body['user'] as Map<String, dynamic>;
-    username = user['username'] as String;
+    username = user['username'] as String?;
     fullName = user['fullName'] as String;
     email = user['email'] as String;
     accessToken = body['accessToken'] as String;

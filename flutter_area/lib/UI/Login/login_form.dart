@@ -27,6 +27,16 @@ class _LoginFormState extends State<LoginForm> {
   String _password = '';
   String? _errorMessage;
 
+  Future<void> login() async {
+    final (bool success, String? error) =
+        await userManager.login(_emailOrUsername, _password);
+    if (success) {
+      Navigator.of(context).pushNamed('/home');
+    } else {
+      setState(() => _errorMessage = error);
+    }
+  }
+
   Future<void> loginWithGoogle() async {
     const List<String> scopes = <String>[
       'email',
@@ -38,13 +48,17 @@ class _LoginFormState extends State<LoginForm> {
       scopes: scopes,
     );
 
-    //final bool isAuthorized = await googleSignIn.requestScopes(scopes);
-
     try {
       final GoogleSignInAccount? res = await googleSignIn.signIn();
-      print('signin $res');
       final GoogleSignInAuthentication token = await res!.authentication;
-      print('token ${token.accessToken}');
+      if (token.accessToken == null || res.displayName == null) {
+        return;
+      }
+      final bool success = await userManager.loginWithGoogle(
+          token.accessToken!, res.displayName!, res.email);
+      if (success) {
+        Navigator.of(context).pushNamed('/home');
+      }
     } catch (error) {
       print(error);
     }
@@ -66,7 +80,9 @@ class _LoginFormState extends State<LoginForm> {
               : EdgeInsets.symmetric(horizontal: 30.0.ratioH()),
           width: kDeviceWidth > kLargeScreenWidth ? 333.0.ratioW() : null,
           child: Column(children: <Widget>[
-            GoogleButton(onPressed: loginWithGoogle),
+            GoogleButton(onPressed: () {
+              loginWithGoogle();
+            }),
             Text(AppLocalizations.of(context)!.loginTitle,
                 style: Theme.of(context).textTheme.headlineLarge),
             Divider(
@@ -100,14 +116,8 @@ class _LoginFormState extends State<LoginForm> {
                 labelColor: Theme.of(context).colorScheme.darkColor1,
                 backgroundColor: Theme.of(context).colorScheme.lightColor3,
                 label: '${AppLocalizations.of(context)!.login}...',
-                onPressed: () async {
-                  final (bool success, String? error) =
-                      await userManager.login(_emailOrUsername, _password);
-                  if (success) {
-                    Navigator.of(context).pushNamed('/home');
-                  } else {
-                    setState(() => _errorMessage = error);
-                  }
+                onPressed: () {
+                  login();
                 }),
           ]),
         ),
