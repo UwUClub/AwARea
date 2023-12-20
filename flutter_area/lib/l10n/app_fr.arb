@@ -30,5 +30,7 @@
     "connectGithub": "Se connecter à Github pour accèder à ses services",
     "connect": "Se connecter",
     "google": " Google",
-    "connectGoogle": "Se connecter à Google pour accèder à ses services"
+    "connectGoogle": "Se connecter à Google pour accèder à ses services",
+    "slack": " Slack",
+    "connectSlack": "Se connecter à Slack pour accèder à ses services"
 }

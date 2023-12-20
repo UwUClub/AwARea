@@ -30,5 +30,7 @@
     "connectGithub": "",
     "connect": "",
     "google": " Google",
-    "connectGoogle": ""
+    "connectGoogle": "",
+    "slack": " Slack",
+    "connectSlack": ""
 }

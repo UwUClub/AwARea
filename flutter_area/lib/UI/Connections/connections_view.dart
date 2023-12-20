@@ -60,6 +60,17 @@ class _ConnectionsViewState extends State<ConnectionsView> {
                     MkButton(label: AppLocalizations.of(context)!.connect, onPressed: () {},),
                   ],
                 ),
+                Row(children: [
+                  const Icon(FontAwesomeIcons.slack, size: 20),
+                  Text(AppLocalizations.of(context)!.slack, style: Theme.of(context).textTheme.labelLarge)
+                ]),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(AppLocalizations.of(context)!.connectSlack, style: Theme.of(context).textTheme.labelMedium),
+                    MkButton(label: AppLocalizations.of(context)!.connect, onPressed: () {},),
+                  ],
+                ),
               ],
             ),
       ),
