@@ -2,16 +2,12 @@ FROM node:18
 
 WORKDIR /usr/src/app
 
-RUN npm install -g pnpm
-
 COPY package*.json ./
 
-RUN pnpm install
+RUN npm install
 
 COPY . .
 
-RUN pnpm run build
+RUN npm run build
 
-RUN pnpm test
-
-CMD [ "pnpm", "start" ]
+CMD [ "npm", "start" ]

@@ -45,7 +45,7 @@ git clone git@github.com:UwUClub/AwArea.git
 First start the server
 
 ```bash
-cd api && pnpm install && pnpm start
+cd api && npm install && npmstart
 ```
 
 ### Client
@@ -64,7 +64,7 @@ If you get blocked by CORS policy on Chrome:
 rm {your_flutter_directory}/bin/cache/flutter_tools.stamp
 ```
 
-And add ``'--disable-web-security'`` under ``'--disable-extensions'`` in ``{your_flutter_directory}/packages/flutter_tools/lib/src/web/chrome.dart``
+And add `'--disable-web-security'` under `'--disable-extensions'` in `{your_flutter_directory}/packages/flutter_tools/lib/src/web/chrome.dart`
 
 ## Credits
 

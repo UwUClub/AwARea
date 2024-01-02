@@ -1,3 +1,5 @@
+// ignore_for_file: duplicate_import
+
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -5,12 +7,15 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../Core/Locator/locator.dart';
 import '../../Core/Manager/theme_manager.dart';
+import '../../Core/Manager/user_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
 import '../Connections/connections_view.dart';
 import '../../Utils/constants.dart';
+import '../../Utils/mk_print.dart';
+import '../Connections/connections_view.dart';
+import '../NewTask/new_task_view.dart';
 import '../ReusableWidgets/mk_background.dart';
-
 import '../Settings/settings_view.dart';
 import 'home_mobile_view.dart';
 
@@ -23,8 +28,12 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   ThemeManager themeManager = locator<ThemeManager>();
+  UserManager userManager = locator<UserManager>();
   PageController pageController = PageController();
   SideMenuController sideMenu = SideMenuController();
+
+  TextEditingController nameController = TextEditingController(text: '');
+  TextEditingController emailController = TextEditingController(text: '');
 
   @override
   void initState() {
@@ -96,12 +105,19 @@ class _HomeViewState extends State<HomeView> {
                       child: SvgPicture.asset(
                         'assets/images/Logo.svg',
                         semanticsLabel: 'Logo',
-                        width: 28.0.ratioW(),
-                        height: 28.0.ratioH(),
+                        width: 18.0.ratioW(),
+                        height: 18.0.ratioH(),
                       )),
                 ],
               ),
               items: <SideMenuItem>[
+                SideMenuItem(
+                  title: AppLocalizations.of(context)!.home,
+                  onTap: (int index, _) {
+                    sideMenu.changePage(index);
+                  },
+                  icon: const Icon(Icons.home),
+                ),
                 SideMenuItem(
                   title: AppLocalizations.of(context)!.profile,
                   onTap: (int index, _) {
@@ -128,7 +144,7 @@ class _HomeViewState extends State<HomeView> {
                   onTap: (int index, _) {
                     sideMenu.changePage(index);
                   },
-                  icon: const Icon(Icons.add),
+                  icon: const Icon(Icons.add_circle),
                 ),
                 SideMenuItem(
                   builder:
@@ -145,13 +161,63 @@ class _HomeViewState extends State<HomeView> {
               child: PageView(
                 controller: pageController,
                 children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: 100.0.ratioW(), horizontal: 100.0.ratioH()),
+                    child: Column(
+                      children: <Widget>[
+                        Center(
+                          child: Text(AppLocalizations.of(context)!.home),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: Theme.of(context).brightness ==
+                                      Brightness.light
+                                  ? Theme.of(context).colorScheme.lightColor2
+                                  : Theme.of(context).colorScheme.darkColor2),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 50.0.ratioW(),
+                              horizontal: 50.0.ratioH()),
+                          child: Column(
+                            children: <Widget>[
+                              TextField(
+                                  controller: nameController,
+                                  decoration: const InputDecoration(
+                                      hintText: 'Enter a name')),
+                              SizedBox(height: 50.0.ratioH()),
+                              TextField(
+                                  controller: emailController,
+                                  decoration: const InputDecoration(
+                                      hintText: 'Enter an email')),
+                              SizedBox(height: 50.0.ratioH()),
+                              ElevatedButton(
+                                  onPressed: () async {
+                                    if (nameController.text.isEmpty ||
+                                        emailController.text.isEmpty) {
+                                      return;
+                                    }
+                                    mkPrint(await userManager.createDraft(
+                                        nameController.text,
+                                        emailController.text));
+                                  },
+                                  child: Text('Send an email',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge)),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                   Center(
                     child: Text(AppLocalizations.of(context)!.profile),
                   ),
                   const SettingsView(),
                   const ConnectionsView(),
-                  Center(
-                    child: Text(AppLocalizations.of(context)!.newTask),
+                  const Center(
+                    child: NewTaskView(),
                   ),
                 ],
               ),

@@ -9,6 +9,7 @@ import '../../Utils/Extensions/double_extensions.dart';
 import '../../Utils/constants.dart';
 import '../ReusableWidgets/mk_button.dart';
 import '../ReusableWidgets/mk_input.dart';
+import 'google_button.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -24,6 +25,16 @@ class _LoginFormState extends State<LoginForm> {
   String _emailOrUsername = '';
   String _password = '';
   String? _errorMessage;
+
+  Future<void> login() async {
+    final (bool success, String? error) =
+        await userManager.login(_emailOrUsername, _password);
+    if (success) {
+      Navigator.of(context).pushNamed('/home');
+    } else {
+      setState(() => _errorMessage = error);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +52,7 @@ class _LoginFormState extends State<LoginForm> {
               : EdgeInsets.symmetric(horizontal: 30.0.ratioH()),
           width: kDeviceWidth > kLargeScreenWidth ? 333.0.ratioW() : null,
           child: Column(children: <Widget>[
+            const GoogleButton(),
             Text(AppLocalizations.of(context)!.loginTitle,
                 style: Theme.of(context).textTheme.headlineLarge),
             Divider(
@@ -74,14 +86,8 @@ class _LoginFormState extends State<LoginForm> {
                 labelColor: Theme.of(context).colorScheme.darkColor1,
                 backgroundColor: Theme.of(context).colorScheme.lightColor3,
                 label: '${AppLocalizations.of(context)!.login}...',
-                onPressed: () async {
-                  final (bool success, String? error) =
-                      await userManager.login(_emailOrUsername, _password);
-                  if (success) {
-                    print('TODO navigate to home screen');
-                  } else {
-                    setState(() => _errorMessage = error);
-                  }
+                onPressed: () {
+                  login();
                 }),
           ]),
         ),

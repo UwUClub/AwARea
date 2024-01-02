@@ -6,6 +6,7 @@ import { ValidationPipe } from '@nestjs/common';
 async function main() {
     const app = await NestFactory.create(AppModule);
     app.useGlobalPipes(new ValidationPipe());
+    app.enableCors();
 
     const config = new DocumentBuilder()
         .setTitle('MakerAPI')

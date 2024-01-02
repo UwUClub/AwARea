@@ -9,6 +9,7 @@ import '../../Utils/Extensions/double_extensions.dart';
 import '../../Utils/constants.dart';
 import '../ReusableWidgets/mk_button.dart';
 import '../ReusableWidgets/mk_input.dart';
+import 'google_button.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
@@ -39,6 +40,7 @@ class SignupFormState extends State<SignupForm> {
         child: SizedBox(
           width: kDeviceWidth > kLargeScreenWidth ? 333.0.ratioW() : null,
           child: Column(children: <Widget>[
+            const GoogleButton(),
             Text(AppLocalizations.of(context)!.signUpTitle,
                 style: Theme.of(context).textTheme.headlineLarge),
             Divider(
@@ -81,7 +83,7 @@ class SignupFormState extends State<SignupForm> {
                   final (bool success, String? error) = await userManager
                       .signUp(_email, _password, _username, _fullName);
                   if (success) {
-                    print('TODO navigate to home screen');
+                    Navigator.of(context).pushNamed('/home');
                   } else {
                     setState(() => _errorMessage = error);
                   }

@@ -32,5 +32,6 @@
     "google": " Google",
     "connectGoogle": "Se connecter à Google pour accèder à ses services",
     "slack": " Slack",
-    "connectSlack": "Se connecter à Slack pour accèder à ses services"
+    "connectSlack": "Se connecter à Slack pour accèder à ses services",
+    "home": "Accueil"
 }
