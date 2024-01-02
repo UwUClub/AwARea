@@ -4,7 +4,6 @@ on:
     push:
         branches:
             - main
-            - AW-35-Tests-unitaires
 
 jobs:
     deploy:
