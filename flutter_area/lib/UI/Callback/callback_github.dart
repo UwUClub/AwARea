@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -19,8 +20,6 @@ class CallbackGithubView extends StatefulWidget {
 
 class CallbackGithubViewState extends State<CallbackGithubView> {
   String? token;
-  static String clientId = 'd373b5fe2e411c74b948';
-  static String clientSecret = '155580817cc512a05837beb6d7bdf6e8d080f265';
 
   @override
   void initState() {
@@ -41,10 +40,11 @@ class CallbackGithubViewState extends State<CallbackGithubView> {
         headers: <String, String>{
           'Content-Type': 'application/json',
           'Accept': 'application/json',
+          'Access-Control-Allow-Origin': '*'
         },
         body: jsonEncode(<String, String>{
-          'client_id': clientId,
-          'client_secret': clientSecret,
+          'client_id': dotenv.env['GITHUB_CLIENT_ID']!,
+          'client_secret': dotenv.env['GITHUB_CLIENT_SECRET']!,
           'code': code,
         }),
       );
@@ -56,7 +56,6 @@ class CallbackGithubViewState extends State<CallbackGithubView> {
         });
         mkPrint(token);
       } else {
-        // Gérer l'erreur
         mkPrint('Échec de la requête : ${response.statusCode}');
       }
     }
@@ -64,7 +63,6 @@ class CallbackGithubViewState extends State<CallbackGithubView> {
 
   @override
   Widget build(BuildContext context) {
-    // Afficher une page de confirmation ou rediriger l'utilisateur
     return Scaffold(
       body: Column(
         children: <Widget>[

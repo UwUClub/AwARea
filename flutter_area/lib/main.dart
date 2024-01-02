@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'Core/Locator/locator.dart';
@@ -10,7 +11,8 @@ import 'UI/MainNavigator/main_navigator_mobile.dart';
 import 'Utils/constants.dart';
 import 'Utils/theme_data.dart';
 
-void main() {
+void main() async {
+  await dotenv.load();
   setupLocator();
   runApp(const MyApp());
 }
