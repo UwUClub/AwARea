@@ -7,8 +7,6 @@ import '../../Core/Manager/theme_manager.dart';
 import '../../Core/Manager/user_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
-import '../Connections/connections_view.dart';
-import '../../Utils/constants.dart';
 import '../../Utils/mk_print.dart';
 
 class HomeView extends StatefulWidget {

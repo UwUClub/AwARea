@@ -27,11 +27,11 @@
     "emailPlaceholder": "Tapez votre adresse e-mail...",
     "connections": "Mes connexions",
     "github": " Github",
-    "connectGithub": "Se connecter à Github pour accèder à ses services",
+    "connectGithub": "Se connecter à Github pour accéder à ses services",
     "connect": "Se connecter",
     "google": " Google",
-    "connectGoogle": "Se connecter à Google pour accèder à ses services",
+    "connectGoogle": "Se connecter à Google pour accéder à ses services",
     "slack": " Slack",
-    "connectSlack": "Se connecter à Slack pour accèder à ses services",
+    "connectSlack": "Se connecter à Slack pour accéder à ses services",
     "home": "Accueil"
 }
