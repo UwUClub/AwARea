@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import '../../Utils/constants.dart';
 import '../../Utils/mk_print.dart';
 
-
 class UserManager {
   String? username;
   String? fullName;
@@ -42,8 +41,7 @@ class UserManager {
   }
 
   Future<(bool, String?)> login(String usernameOrEmail, String password) async {
-    final http.Response res = await http.post(
-        Uri.parse('$kBaseUrl/auth/login'),
+    final http.Response res = await http.post(Uri.parse('$kBaseUrl/auth/login'),
         headers: <String, String>{
           'Content-Type': 'application/json',
           'accept': 'application/json',
@@ -95,13 +93,13 @@ class UserManager {
 
   Future<bool> createDraft(String name, String email) async {
     try {
-      final http.Response res = await http.post(
-          Uri.parse('$kBaseUrl/action-reaction/mvp'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-            'Authorization': 'Bearer $accessToken',
-          },
-          body: jsonEncode(<String, String>{'name': name, 'email': email}));
+      final http.Response res =
+          await http.post(Uri.parse('$kBaseUrl/action-reaction/mvp'),
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Authorization': 'Bearer $accessToken',
+              },
+              body: jsonEncode(<String, String>{'name': name, 'email': email}));
       if (res.statusCode == 201) {
         return true;
       }
