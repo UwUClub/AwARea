@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the base URL of your API
-BASE_URL="http://localhost:8080"
+BASE_URL="http://patatoserv.ddns.net:8085"
 ERROR=0
 
 # Function to perform a test
