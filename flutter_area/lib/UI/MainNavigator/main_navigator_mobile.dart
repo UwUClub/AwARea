@@ -7,6 +7,7 @@ import '../../Core/Manager/user_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
 import '../Home/home_mobile_view.dart';
+import '../NewTask/new_task_mobile_view.dart';
 import '../ReusableWidgets/mk_background.dart';
 
 class MainNavigatorMobile extends StatefulWidget {
@@ -37,90 +38,93 @@ class _MainNavigatorMobileState extends State<MainNavigatorMobile> {
 
   @override
   Widget build(BuildContext context) {
-    return MkBackground(
-        child: Scaffold(
-      backgroundColor: Theme.of(context).brightness == Brightness.light
-          ? Theme.of(context).colorScheme.lightColor1
-          : Theme.of(context).colorScheme.darkColor1,
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
-        },
-        height: 200.0.ratioH(),
+    return PopScope(
+      canPop: false,
+      child: MkBackground(
+          child: Scaffold(
         backgroundColor: Theme.of(context).brightness == Brightness.light
-            ? Theme.of(context).colorScheme.lightColor2
-            : Theme.of(context).colorScheme.darkColor2,
-        indicatorColor: Theme.of(context).brightness == Brightness.light
-            ? Theme.of(context).colorScheme.lightColor4
-            : Theme.of(context).colorScheme.darkColor4,
-        selectedIndex: currentPageIndex,
-        destinations: <Widget>[
-          NavigationDestination(
-            label: '',
-            selectedIcon: Icon(Icons.home,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Theme.of(context).colorScheme.darkColor1
-                    : Theme.of(context).colorScheme.lightColor1),
-            icon: Icon(Icons.home_outlined,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Theme.of(context).colorScheme.lightColor4
-                    : Theme.of(context).colorScheme.darkColor4),
-          ),
-          NavigationDestination(
-            label: '',
-            selectedIcon: Icon(Icons.account_circle,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Theme.of(context).colorScheme.darkColor1
-                    : Theme.of(context).colorScheme.lightColor1),
-            icon: Icon(Icons.account_circle_outlined,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Theme.of(context).colorScheme.lightColor4
-                    : Theme.of(context).colorScheme.darkColor4),
-          ),
-          NavigationDestination(
-            label: '',
-            selectedIcon: Icon(Icons.settings,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Theme.of(context).colorScheme.darkColor1
-                    : Theme.of(context).colorScheme.lightColor1),
-            icon: Icon(Icons.settings_outlined,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Theme.of(context).colorScheme.lightColor4
-                    : Theme.of(context).colorScheme.darkColor4),
-          ),
-          NavigationDestination(
-            label: '',
-            selectedIcon: Icon(Icons.share,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Theme.of(context).colorScheme.darkColor1
-                    : Theme.of(context).colorScheme.lightColor1),
-            icon: Icon(Icons.share_outlined,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Theme.of(context).colorScheme.lightColor4
-                    : Theme.of(context).colorScheme.darkColor4),
-          ),
-          NavigationDestination(
-            label: '',
-            selectedIcon: Icon(Icons.add_circle,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Theme.of(context).colorScheme.darkColor1
-                    : Theme.of(context).colorScheme.lightColor1),
-            icon: Icon(Icons.add_circle_outline,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Theme.of(context).colorScheme.lightColor4
-                    : Theme.of(context).colorScheme.darkColor4),
-          ),
-        ],
-      ),
-      body: <Widget>[
-        const HomeMobileView(),
-        const Center(child: Text('Account')),
-        const Center(child: Text('Settings')),
-        const Center(child: Text('Connections')),
-        const Center(child: Text('Add')),
-      ][currentPageIndex],
-    ));
+            ? Theme.of(context).colorScheme.lightColor1
+            : Theme.of(context).colorScheme.darkColor1,
+        bottomNavigationBar: NavigationBar(
+          onDestinationSelected: (int index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+          height: 200.0.ratioH(),
+          backgroundColor: Theme.of(context).brightness == Brightness.light
+              ? Theme.of(context).colorScheme.lightColor2
+              : Theme.of(context).colorScheme.darkColor2,
+          indicatorColor: Theme.of(context).brightness == Brightness.light
+              ? Theme.of(context).colorScheme.lightColor4
+              : Theme.of(context).colorScheme.darkColor4,
+          selectedIndex: currentPageIndex,
+          destinations: <Widget>[
+            NavigationDestination(
+              label: '',
+              selectedIcon: Icon(Icons.home,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Theme.of(context).colorScheme.darkColor1
+                      : Theme.of(context).colorScheme.lightColor1),
+              icon: Icon(Icons.home_outlined,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Theme.of(context).colorScheme.lightColor4
+                      : Theme.of(context).colorScheme.darkColor4),
+            ),
+            NavigationDestination(
+              label: '',
+              selectedIcon: Icon(Icons.account_circle,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Theme.of(context).colorScheme.darkColor1
+                      : Theme.of(context).colorScheme.lightColor1),
+              icon: Icon(Icons.account_circle_outlined,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Theme.of(context).colorScheme.lightColor4
+                      : Theme.of(context).colorScheme.darkColor4),
+            ),
+            NavigationDestination(
+              label: '',
+              selectedIcon: Icon(Icons.settings,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Theme.of(context).colorScheme.darkColor1
+                      : Theme.of(context).colorScheme.lightColor1),
+              icon: Icon(Icons.settings_outlined,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Theme.of(context).colorScheme.lightColor4
+                      : Theme.of(context).colorScheme.darkColor4),
+            ),
+            NavigationDestination(
+              label: '',
+              selectedIcon: Icon(Icons.share,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Theme.of(context).colorScheme.darkColor1
+                      : Theme.of(context).colorScheme.lightColor1),
+              icon: Icon(Icons.share_outlined,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Theme.of(context).colorScheme.lightColor4
+                      : Theme.of(context).colorScheme.darkColor4),
+            ),
+            NavigationDestination(
+              label: '',
+              selectedIcon: Icon(Icons.add_circle,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Theme.of(context).colorScheme.darkColor1
+                      : Theme.of(context).colorScheme.lightColor1),
+              icon: Icon(Icons.add_circle_outline,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Theme.of(context).colorScheme.lightColor4
+                      : Theme.of(context).colorScheme.darkColor4),
+            ),
+          ],
+        ),
+        body: <Widget>[
+          const HomeMobileView(),
+          const Center(child: Text('Account')),
+          const Center(child: Text('Settings')),
+          const Center(child: Text('Connections')),
+          const NewTaskMobileView()
+        ][currentPageIndex],
+      )),
+    );
   }
 }
