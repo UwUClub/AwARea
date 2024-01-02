@@ -6,9 +6,11 @@ import '../../Core/Manager/theme_manager.dart';
 import '../../Core/Manager/user_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
+import '../Connections/connections_mobile_view.dart';
 import '../Home/home_mobile_view.dart';
 import '../NewTask/new_task_mobile_view.dart';
 import '../ReusableWidgets/mk_background.dart';
+import '../Settings/settings_mobile_view.dart';
 
 class MainNavigatorMobile extends StatefulWidget {
   const MainNavigatorMobile({super.key});
@@ -120,8 +122,8 @@ class _MainNavigatorMobileState extends State<MainNavigatorMobile> {
         body: <Widget>[
           const HomeMobileView(),
           const Center(child: Text('Account')),
-          const Center(child: Text('Settings')),
-          const Center(child: Text('Connections')),
+          const SettingsMobileView(),
+          const ConnectionsMobileView(),
           const NewTaskMobileView()
         ][currentPageIndex],
       )),

@@ -31,5 +31,7 @@
     "connect": "",
     "google": " Google",
     "connectGoogle": "",
+    "slack": " Slack",
+    "connectSlack": "",
     "home": ""
 }
