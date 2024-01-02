@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../Core/Manager/action_manager.dart';
+import '../../../Core/Manager/action_manager.dart';
 
 class TaskCard extends StatefulWidget {
   const TaskCard({super.key, required this.action, required this.delete});

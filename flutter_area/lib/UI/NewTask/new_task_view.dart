@@ -4,9 +4,9 @@ import '../../Core/Manager/action_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
 import '../ReusableWidgets/mk_background.dart';
-import 'action_card.dart';
-import 'action_selection.dart';
-import 'reaction_card.dart';
+import 'Components/action_card.dart';
+import 'Components/action_selection.dart';
+import 'Components/reaction_card.dart';
 
 class NewTaskView extends StatefulWidget {
   const NewTaskView({super.key});

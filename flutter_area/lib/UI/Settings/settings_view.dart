@@ -57,8 +57,8 @@ class _SettingsViewState extends State<SettingsView> {
         child: Padding(
           padding: EdgeInsets.only(
             top: 45.0.ratioH(),
-            left: 137.0.ratioW(),
-            right: 137.0.ratioW(),
+            left: 37.0.ratioW(),
+            right: 37.0.ratioW(),
             bottom: 36.0.ratioH()),
           child: Column(
             children: <Widget>[

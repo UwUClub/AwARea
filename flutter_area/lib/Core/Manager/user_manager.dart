@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:stacked/stacked.dart';
 
+import '../../Utils/constants.dart';
 import '../../Utils/mk_print.dart';
 
 
@@ -16,7 +16,7 @@ class UserManager {
       String email, String password, String username, String fullName) async {
     try {
       final http.Response res = await http.post(
-          Uri.parse('http://localhost:8080/auth/register'),
+          Uri.parse('$kBaseUrl/auth/register'),
           headers: <String, String>{
             'Content-Type': 'application/json',
             'accept': 'application/json',
@@ -43,7 +43,7 @@ class UserManager {
 
   Future<(bool, String?)> login(String usernameOrEmail, String password) async {
     final http.Response res = await http.post(
-        Uri.parse('http://localhost:8080/auth/login'),
+        Uri.parse('$kBaseUrl/auth/login'),
         headers: <String, String>{
           'Content-Type': 'application/json',
           'accept': 'application/json',
@@ -66,7 +66,7 @@ class UserManager {
   Future<bool> loginWithGoogle(
       String accessToken, String completeName, String email) async {
     final http.Response res = await http.post(
-        Uri.parse('http://localhost:8080/auth/google-login'),
+        Uri.parse('$kBaseUrl/auth/google-login'),
         headers: <String, String>{
           'accept': 'application/json',
           'Content-Type': 'application/json; charset=UTF-8',
@@ -96,7 +96,7 @@ class UserManager {
   Future<bool> createDraft(String name, String email) async {
     try {
       final http.Response res = await http.post(
-          Uri.parse('http://localhost:8080/action-reaction/mvp'),
+          Uri.parse('$kBaseUrl/action-reaction/mvp'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             'Authorization': 'Bearer $accessToken',
