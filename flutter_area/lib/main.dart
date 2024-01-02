@@ -1,13 +1,12 @@
-// ignore_for_file: unreachable_from_main
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'Core/Locator/locator.dart';
 import 'Core/Manager/theme_manager.dart';
 import 'UI/Callback/callback_github.dart';
-import 'UI/Home/home_view.dart';
 import 'UI/Login/login_screen.dart';
+import 'UI/MainNavigator/main_navigator.dart';
+import 'UI/MainNavigator/main_navigator_mobile.dart';
 import 'Utils/constants.dart';
 import 'Utils/theme_data.dart';
 
@@ -45,7 +44,8 @@ class MyAppState extends State<MyApp> {
             initialRoute: '/login',
             routes: <String, WidgetBuilder>{
               '/login': (BuildContext context) => const LoginScreen(),
-              '/home': (BuildContext context) => const HomeView(),
+              '/home': (BuildContext context) =>
+                  kIsPc ? const MainNavigator() : const MainNavigatorMobile(),
               '/callback': (BuildContext context) => const CallbackGithubView(),
             });
       },
