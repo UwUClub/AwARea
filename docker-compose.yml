@@ -20,6 +20,8 @@ services:
         depends_on:
             - mongo
         restart: always
+        environment:
+            - MONGO_URL=mongodb://mongo/awarea
 
     frontend:
         build:
