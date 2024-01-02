@@ -34,14 +34,14 @@ class _LoginScreenState extends State<LoginScreen> {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
-                top: 50.0.ratioH(),
+                top: 20.0.ratioH(),
                 left: kDeviceWidth > kLargeScreenWidth
                     ? 237.0.ratioW()
                     : 33.0.ratioW(),
                 right: kDeviceWidth > kLargeScreenWidth
                     ? 237.0.ratioW()
                     : 33.0.ratioW(),
-                bottom: 36.0.ratioH()),
+                bottom: 18.0.ratioH()),
             child: Column(
               children: <Widget>[
                 Text(
@@ -58,8 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: <Widget>[
                       SvgPicture.asset('assets/images/Logo.svg',
                           semanticsLabel: 'Logo',
-                          width: 40.0.ratioW(),
-                          height: 40.0.ratioH()),
+                          width: 32.0.ratioW(),
+                          height: 32.0.ratioH()),
                       SizedBox(width: 9.0.ratioW()),
                       Text(
                         AppLocalizations.of(context)!.subslogan,
@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         textAlign: TextAlign.center,
                       )
                     ]),
-                SizedBox(height: 40.0.ratioH()),
+                SizedBox(height: 20.0.ratioH()),
                 if (kDeviceWidth > kLargeScreenWidth)
                   Flex(direction: Axis.horizontal, children: <Widget>[
                     Flexible(
