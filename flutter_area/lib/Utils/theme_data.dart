@@ -34,6 +34,10 @@ ThemeData themeDataLight(BuildContext context) => ThemeData(
           color: Theme.of(context).colorScheme.darkColor1,
           fontSize: 10,
           fontWeight: FontWeight.w500),
+      headlineSmall: TextStyle(
+          color: Theme.of(context).colorScheme.darkTransColor1,
+          fontSize: 10,
+          fontWeight: FontWeight.w500),
     ));
 
 ThemeData themeDataDark(BuildContext context) => ThemeData(
@@ -66,6 +70,10 @@ ThemeData themeDataDark(BuildContext context) => ThemeData(
           fontWeight: FontWeight.w400),
       headlineMedium: TextStyle(
           color: Theme.of(context).colorScheme.lightColor1,
+          fontSize: 10,
+          fontWeight: FontWeight.w500),
+      headlineSmall: TextStyle(
+          color: Theme.of(context).colorScheme.lightTransColor1,
           fontSize: 10,
           fontWeight: FontWeight.w500),
     ));

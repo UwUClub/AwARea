@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { SignInDto } from './_utils/dto/request/sign-in.dto';
 import { CreateUserDto } from '../users/_utils/dto/request/create-user.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { GoogleLoginDto } from './_utils/dto/request/google-login.dto';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -22,5 +23,10 @@ export class AuthController {
     @Post('register')
     signUp(@Body() signUpDto: CreateUserDto) {
         return this.authService.signUp(signUpDto);
+    }
+
+    @Post('google-login')
+    googleLogin(@Body() googleLoginDto: GoogleLoginDto) {
+        return this.authService.connectWithGoogle(googleLoginDto);
     }
 }
