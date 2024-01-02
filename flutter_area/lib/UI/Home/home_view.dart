@@ -306,9 +306,11 @@ class _HomeViewState extends State<HomeView> {
         body: <Widget>[
           const HomeMobileView(),
           const Center(child: Text('Account')),
-          const Center(child: Text('Settings')),
-          const Center(child: Text('Connections')),
-          const Center(child: Text('Add')),
+          const SettingsView(),
+          const ConnectionsView(),
+          const Center(
+            child: NewTaskView(),
+          ),
         ][currentPageIndex],
       ));
     }

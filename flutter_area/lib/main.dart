@@ -8,7 +8,6 @@ import 'Core/Manager/theme_manager.dart';
 import 'UI/Callback/callback_github.dart';
 import 'UI/Home/home_view.dart';
 import 'UI/Login/login_screen.dart';
-import 'UI/Home/home_view.dart';
 import 'Utils/constants.dart';
 import 'Utils/theme_data.dart';
 
@@ -30,7 +29,7 @@ class MyAppState extends State<MyApp> {
     final ThemeManager themeManager = locator<ThemeManager>();
     kDeviceHeight = MediaQuery.of(context).size.height;
     kDeviceWidth = MediaQuery.of(context).size.width;
-    kIsPc = kDeviceWidth > kLargeScreenWidth;
+    kIsPc = false;
 
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeManager.themeModeNotifier,
