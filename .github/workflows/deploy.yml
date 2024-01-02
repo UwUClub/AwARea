@@ -1,0 +1,24 @@
+name: Deploy on server
+
+on:
+    push:
+        branches:
+            - main
+            - AW-35-Tests-unitaires
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: connect to ssh and restart api
+              uses: appleboy/ssh-action@master
+              with:
+                host: ${{ secrets.HOST }}
+                username: ${{ secrets.USERNAME }}
+                password: ${{ secrets.PASSWORD }}
+                port: ${{ secrets.PORT }}
+                script: ./area.sh
