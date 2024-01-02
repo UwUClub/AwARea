@@ -28,7 +28,7 @@ class MyAppState extends State<MyApp> {
     final ThemeManager themeManager = locator<ThemeManager>();
     kDeviceHeight = MediaQuery.of(context).size.height;
     kDeviceWidth = MediaQuery.of(context).size.width;
-    kIsPc = false;
+    kIsPc = kDeviceWidth > kLargeScreenWidth;
 
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: themeManager.themeModeNotifier,
