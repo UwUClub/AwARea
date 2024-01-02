@@ -3,7 +3,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+<<<<<<< HEAD
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+=======
+>>>>>>> c9d6e94 (Add .env loader)
 
 import 'package:http/http.dart' as http;
 
@@ -20,7 +23,10 @@ class CallbackGithubView extends StatefulWidget {
 
 class CallbackGithubViewState extends State<CallbackGithubView> {
   String? token;
+<<<<<<< HEAD
   bool? isSignedIn;
+=======
+>>>>>>> c9d6e94 (Add .env loader)
 
   @override
   void initState() {
@@ -38,6 +44,7 @@ class CallbackGithubViewState extends State<CallbackGithubView> {
         Uri.parse('https://github.com/login/oauth/access_token'),
         headers: <String, String>{
           'Accept': 'application/json',
+          'Access-Control-Allow-Origin': '*'
         },
         body: <String, String>{
           'client_id': dotenv.env['GITHUB_CLIENT_ID']!,
