@@ -7,7 +7,7 @@ on:
             - AW-35-Tests-unitaires
 
 jobs:
-    build-and-test:
+    deploy:
         runs-on: ubuntu-latest
 
         steps:
