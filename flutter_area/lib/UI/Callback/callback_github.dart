@@ -8,9 +8,6 @@ import 'package:http/http.dart' as http;
 import '../../Utils/Extensions/double_extensions.dart';
 import '../../Utils/mk_print.dart';
 
-const String clientId = 'd373b5fe2e411c74b948';
-const String clientSecret = '155580817cc512a05837beb6d7bdf6e8d080f265';
-
 class CallbackGithubView extends StatefulWidget {
   const CallbackGithubView({super.key});
 
