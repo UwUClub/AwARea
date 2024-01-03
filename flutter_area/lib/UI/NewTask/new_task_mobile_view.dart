@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../Core/Manager/action_manager.dart';
+import '../../Core/Locator/locator.dart';
+import '../../Core/Manager/action_reaction_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
 import '../ReusableWidgets/mk_background.dart';
@@ -16,13 +17,10 @@ class NewTaskMobileView extends StatefulWidget {
 }
 
 class _NewTaskMobileViewState extends State<NewTaskMobileView> {
-  List<MkAction> actions = <MkAction>[];
+  ActionReactionManager actionReactionManager =
+      locator<ActionReactionManager>();
 
-  void addAction(MkAction action) {
-    setState(() {
-      actions.add(action);
-    });
-  }
+  void addAction(ActionType actionType) {}
 
   @override
   Widget build(BuildContext context) {
@@ -40,21 +38,22 @@ class _NewTaskMobileViewState extends State<NewTaskMobileView> {
                   children: <Widget>[
                     ActionSelection(
                       label: 'Météo',
-                      actions: <MkAction>[
-                        MkAction(
-                            service: 'Weather',
-                            name: 'Get meteo',
-                            description: 'toto'),
+                      actionTypes: const <ActionType>[
+                        ActionType.WEATHER_GET_CURRENT,
                       ],
                       addAction: addAction,
                     ),
                     ActionSelection(
                       label: 'Clock',
-                      actions: <MkAction>[
-                        MkAction(
-                            service: 'Clock',
-                            name: 'Every n minutes',
-                            description: 'toto'),
+                      actionTypes: const <ActionType>[
+                        ActionType.CLOCK_GET_REGULAR,
+                      ],
+                      addAction: addAction,
+                    ),
+                    ActionSelection(
+                      label: 'Nasa',
+                      actionTypes: const <ActionType>[
+                        ActionType.NASA_GET_APOD,
                       ],
                       addAction: addAction,
                     ),
@@ -64,24 +63,18 @@ class _NewTaskMobileViewState extends State<NewTaskMobileView> {
               padding: EdgeInsets.symmetric(horizontal: 20.0.ratioW()),
               child: Column(
                 children: <Widget>[
-                  for (final MkAction action in actions)
+                  for (final MkActionReaction actionReaction
+                      in actionReactionManager.actionsReactions)
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           ActionCard(
-                              action: action,
-                              delete: () {
-                                setState(() {
-                                  actions.remove(action);
-                                });
-                              }),
+                              actionReactionName: actionReaction.name,
+                              action: actionReaction.action,
+                              delete: () {}),
                           ReactionCard(
-                            reaction: action.reaction,
-                            setReaction: (MkReaction? reaction) {
-                              setState(() {
-                                action.reaction = reaction;
-                              });
-                            },
+                            reaction: actionReaction.reaction,
+                            setReaction: (ReactionType? reactionType) {},
                           ),
                         ]),
                 ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../Core/Manager/action_manager.dart';
+import '../../../Core/Manager/action_reaction_manager.dart';
 import '../../../Utils/Extensions/color_extensions.dart';
 import '../../../Utils/Extensions/double_extensions.dart';
 import '../../../Utils/constants.dart';
@@ -10,16 +10,16 @@ class ReactionCard extends StatefulWidget {
   const ReactionCard({super.key, this.reaction, required this.setReaction});
 
   final MkReaction? reaction;
-  final void Function(MkReaction?) setReaction;
+  final void Function(ReactionType?) setReaction;
 
   @override
   State<ReactionCard> createState() => _ReactionCardState();
 }
 
 class _ReactionCardState extends State<ReactionCard> {
-  void setReaction(MkReaction? reaction) {
+  void setReaction(ReactionType reactionType) {
     setState(() {
-      widget.setReaction(reaction);
+      widget.setReaction(reactionType);
     });
   }
 
@@ -39,15 +39,8 @@ class _ReactionCardState extends State<ReactionCard> {
       child: widget.reaction == null
           ? ReactionSelection(
               label: 'Google',
-              reactions: <MkReaction>[
-                MkReaction(
-                    service: 'Gmail',
-                    name: 'Send a mail',
-                    description: 'description'),
-                MkReaction(
-                    service: 'Drive',
-                    name: 'Upload a file',
-                    description: 'description'),
+              reactionTypes: const <ReactionType>[
+                ReactionType.CREATE_DRAFT,
               ],
               setReaction: setReaction,
             )
@@ -57,7 +50,7 @@ class _ReactionCardState extends State<ReactionCard> {
                   Row(
                     children: <Widget>[
                       Text(
-                        'Reaction ${widget.reaction!.service}',
+                        'Reaction',
                         style: kIsPc
                             ? Theme.of(context).textTheme.headlineLarge
                             : Theme.of(context)
@@ -78,9 +71,9 @@ class _ReactionCardState extends State<ReactionCard> {
                   Divider(
                     color: Theme.of(context).colorScheme.lightColor4,
                   ),
-                  Text(widget.reaction!.name,
+                  Text(widget.reaction!.type.toString(),
                       style: Theme.of(context).textTheme.headlineMedium),
-                  Text(widget.reaction!.description,
+                  Text('Description',
                       style: Theme.of(context).textTheme.headlineSmall),
                 ]),
     );
