@@ -27,9 +27,15 @@
     "emailPlaceholder": "Tapez votre adresse e-mail...",
     "connections": "Mes connexions",
     "github": " Github",
-    "connectGithub": "Se connecter à Github pour accèder à ses services",
+    "connectGithub": "Se connecter à Github pour accéder à ses services",
     "connect": "Se connecter",
     "google": " Google",
-    "connectGoogle": "Se connecter à Google pour accèder à ses services",
-    "home": "Accueil"
+    "connectGoogle": "Se connecter à Google pour accéder à ses services",
+    "slack": " Slack",
+    "connectSlack": "Se connecter à Slack pour accéder à ses services",
+    "home": "Accueil",
+    "connectionGithub": "Connexion à Github",
+    "inProgress": "En cours",
+    "completed": "Terminé",
+    "failed": "Échoué"
 }

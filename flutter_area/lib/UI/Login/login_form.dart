@@ -46,7 +46,8 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-          vertical: kDeviceWidth > kLargeScreenWidth ? 32.0.ratioH() : 0),
+          vertical:
+              kDeviceWidth > kLargeScreenWidth ? 32.0.ratioH() : 50.0.ratioH()),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0.ratioW()),
@@ -58,10 +59,14 @@ class _LoginFormState extends State<LoginForm> {
         child: Container(
           padding: kDeviceWidth > kLargeScreenWidth
               ? null
-              : EdgeInsets.symmetric(horizontal: 30.0.ratioH()),
+              : EdgeInsets.symmetric(horizontal: 100.0.ratioH()),
           width: kDeviceWidth > kLargeScreenWidth ? 333.0.ratioW() : null,
           child: Column(children: <Widget>[
             const GoogleButton(),
+            if (kDeviceWidth > kLargeScreenWidth)
+              const SizedBox()
+            else
+              SizedBox(height: 20.0.ratioH()),
             Text(AppLocalizations.of(context)!.loginTitle,
                 style: Theme.of(context).textTheme.headlineLarge),
             Divider(
@@ -90,7 +95,9 @@ class _LoginFormState extends State<LoginForm> {
               Text(_errorMessage!,
                   style: Theme.of(context).textTheme.headlineLarge?.merge(
                       TextStyle(
-                          color: Theme.of(context).colorScheme.redColor))),
+                          color: Theme.of(context).colorScheme.redColor,
+                          fontSize:
+                              kDeviceWidth > kLargeScreenWidth ? null : 12))),
             SizedBox(height: 20.0.ratioH()),
             if (loading)
               CircularProgressIndicator(
