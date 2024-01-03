@@ -73,7 +73,7 @@ class UserManager {
     );
     final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
     if (res.statusCode == 200) {
-      storeData(jsonBody, haveToken: true);
+      await storeData(jsonBody, haveToken: true);
       return true;
     }
     return false;

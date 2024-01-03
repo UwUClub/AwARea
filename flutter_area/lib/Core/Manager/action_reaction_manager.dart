@@ -26,28 +26,81 @@ class MkActionReaction {
 enum ActionType {
   NASA_GET_APOD,
   WEATHER_GET_CURRENT,
+  NONE,
 }
 
 class MkAction {
   MkAction({
     required this.type,
   });
+  factory MkAction.fromJson(Map<String, dynamic> json) {
+    return MkAction(
+      type: ActionType.values.firstWhere(
+          (ActionType e) => e.name == json['actionType'] as String,
+          orElse: () => ActionType.NONE),
+    );
+  }
   late ActionType type;
 }
 
 enum ReactionType {
   CREATE_DRAFT,
+  NONE,
 }
 
 class MkReaction {
   MkReaction({
     required this.type,
   });
+  factory MkReaction.fromJson(Map<String, dynamic> json) {
+    return MkReaction(
+      type: ReactionType.values.firstWhere(
+          (ReactionType e) => e.name == json['reactionType'] as String,
+          orElse: () => ReactionType.NONE),
+    );
+  }
   late ReactionType type;
 }
 
 class ActionReactionManager extends ChangeNotifier {
   List<MkActionReaction> actionsReactions = <MkActionReaction>[];
+
+  Future getActionsReactions() async {
+    try {
+      final UserManager userManager = locator<UserManager>();
+      final http.Response res = await http.get(
+          Uri.parse('$kBaseUrl/action-reaction'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${userManager.accessToken}',
+          });
+      if (res.statusCode != 200) {
+        return;
+      }
+      final List<dynamic> jsonBody = jsonDecode(res.body) as List<dynamic>;
+      for (final dynamic actionReaction in jsonBody) {
+        final String id = actionReaction['id'] as String;
+        final String name = actionReaction['name'] as String;
+        final Map<String, dynamic>? actionJson =
+            actionReaction['action'] as Map<String, dynamic>?;
+        if (actionJson == null) {
+          continue;
+        }
+        final Map<String, dynamic>? reaction =
+            actionReaction['reaction'] as Map<String, dynamic>?;
+        final String? schedule = actionReaction['schedule'] as String?;
+        actionsReactions.add(MkActionReaction(
+          id: id,
+          name: name,
+          action: MkAction.fromJson(actionJson),
+          reaction: reaction != null ? MkReaction.fromJson(reaction) : null,
+          schedule: schedule,
+        ));
+      }
+    } catch (e) {
+      mkPrint('Error: $e');
+    }
+  }
 
   Future<bool> addAction(String name, ActionType actionType) async {
     try {

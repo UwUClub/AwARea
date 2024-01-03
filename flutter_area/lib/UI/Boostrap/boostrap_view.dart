@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Core/Locator/locator.dart';
+import '../../Core/Manager/action_reaction_manager.dart';
 import '../../Core/Manager/user_manager.dart';
 
 class BoostrapView extends StatefulWidget {
@@ -15,6 +16,8 @@ class _BoostrapViewState extends State<BoostrapView> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   UserManager userManager = locator<UserManager>();
+  ActionReactionManager actionReactionManager =
+      locator<ActionReactionManager>();
 
   @override
   void initState() {
@@ -23,6 +26,7 @@ class _BoostrapViewState extends State<BoostrapView> {
       final String? accessToken = value.getString('accessToken');
       if (accessToken != null) {
         await userManager.getCurrentUser(accessToken);
+        await actionReactionManager.getActionsReactions();
         userManager.state = AuthStateEnum.authenticated;
       } else {
         userManager.state = AuthStateEnum.unauthenticated;
