@@ -9,7 +9,6 @@ import '../../Utils/Extensions/double_extensions.dart';
 import '../../Utils/constants.dart';
 import '../ReusableWidgets/mk_button.dart';
 import '../ReusableWidgets/mk_input.dart';
-import 'google_button.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
@@ -32,7 +31,9 @@ class SignupFormState extends State<SignupForm> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 32.0.ratioH()),
+      padding: EdgeInsets.symmetric(
+          vertical:
+              kDeviceWidth > kLargeScreenWidth ? 32.0.ratioH() : 50.0.ratioH()),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0.ratioW()),
@@ -41,7 +42,10 @@ class SignupFormState extends State<SignupForm> {
             : Theme.of(context).colorScheme.darkColor2,
       ),
       child: Center(
-        child: SizedBox(
+        child: Container(
+          padding: kDeviceWidth > kLargeScreenWidth
+              ? null
+              : EdgeInsets.symmetric(horizontal: 100.0.ratioH()),
           width: kDeviceWidth > kLargeScreenWidth ? 333.0.ratioW() : null,
           child: Column(children: <Widget>[
             // const GoogleButton(),
@@ -50,35 +54,52 @@ class SignupFormState extends State<SignupForm> {
             Divider(
               color: Theme.of(context).colorScheme.lightColor4,
             ),
-            SizedBox(height: 15.0.ratioH()),
+            SizedBox(
+                height: kDeviceWidth > kLargeScreenWidth
+                    ? 15.0.ratioH()
+                    : 40.0.ratioH()),
             MkInput(
                 label: AppLocalizations.of(context)!.fullName,
                 onChanged: (String text) => setState(() => _fullName = text),
                 placeholder: AppLocalizations.of(context)!.fullNamePlaceholder),
-            SizedBox(height: 10.0.ratioH()),
+            SizedBox(
+                height: kDeviceWidth > kLargeScreenWidth
+                    ? 15.0.ratioH()
+                    : 40.0.ratioH()),
             MkInput(
                 label: AppLocalizations.of(context)!.username,
                 onChanged: (String text) => setState(() => _username = text),
                 placeholder: AppLocalizations.of(context)!.usernamePlaceholder),
-            SizedBox(height: 10.0.ratioH()),
+            SizedBox(
+                height: kDeviceWidth > kLargeScreenWidth
+                    ? 15.0.ratioH()
+                    : 40.0.ratioH()),
             MkInput(
                 label: AppLocalizations.of(context)!.email,
                 onChanged: (String text) => setState(() => _email = text),
                 placeholder: AppLocalizations.of(context)!.emailPlaceholder),
-            SizedBox(height: 10.0.ratioH()),
+            SizedBox(
+                height: kDeviceWidth > kLargeScreenWidth
+                    ? 15.0.ratioH()
+                    : 40.0.ratioH()),
             MkInput(
                 label: AppLocalizations.of(context)!.password,
                 onChanged: (String text) => setState(() => _password = text),
                 placeholder: AppLocalizations.of(context)!.passwordPlaceholder,
                 displayed: false),
-            SizedBox(height: 10.0.ratioH()),
+            SizedBox(
+                height: kDeviceWidth > kLargeScreenWidth
+                    ? 15.0.ratioH()
+                    : 40.0.ratioH()),
             if (_errorMessage == null)
               const SizedBox()
             else
               Text(_errorMessage!,
                   style: Theme.of(context).textTheme.headlineLarge?.merge(
                       TextStyle(
-                          color: Theme.of(context).colorScheme.redColor))),
+                          color: Theme.of(context).colorScheme.redColor,
+                          fontSize:
+                              kDeviceWidth > kLargeScreenWidth ? null : 12))),
             SizedBox(height: 10.0.ratioH()),
             if (loading)
               CircularProgressIndicator(
