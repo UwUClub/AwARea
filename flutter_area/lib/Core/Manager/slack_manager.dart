@@ -8,9 +8,8 @@ import 'user_manager.dart';
 class SlackManager {
   String? botToken;
 
-  UserManager userManager = locator<UserManager>();
-
   Future<bool> updateBotToken(String token) async {
+    final UserManager userManager = locator<UserManager>();
     final http.Response res =
         await http.patch(Uri.parse('$kBaseUrl/slack/update-slack-bot'),
             headers: <String, String>{

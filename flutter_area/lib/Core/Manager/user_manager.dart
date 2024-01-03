@@ -4,8 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/constants.dart';
 import '../../Utils/mk_print.dart';
-import '../Locator/locator.dart';
-import 'slack_manager.dart';
 
 class UserManager {
   String? username;
@@ -14,7 +12,6 @@ class UserManager {
   String? accessToken;
   String? githubToken;
 
-  final SlackManager _slackManager = locator<SlackManager>();
   AuthStateEnum state = AuthStateEnum.splash;
 
   Future<(bool, String?)> signUp(
