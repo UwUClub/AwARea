@@ -13,6 +13,8 @@ class UserManager {
   String? accessToken;
   String? githubToken;
 
+  final SlackManager _slackManager = locator<SlackManager>();
+
   Future<(bool, String?)> signUp(
       String email, String password, String username, String fullName) async {
     try {
@@ -70,7 +72,7 @@ class UserManager {
     fullName = user['fullName'] as String;
     email = user['email'] as String;
     accessToken = body['accessToken'] as String;
-    locator<SlackManager>().slackBotToken = user['slackBotToken'] as String?;
+    _slackManager.botToken = user['slackBotToken'] as String?;
   }
 
   String? _parseErrorMessage(dynamic msg) {

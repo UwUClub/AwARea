@@ -92,7 +92,6 @@ class _ConnectionsViewState extends State<ConnectionsView> {
                   slackBotTokenInput = value;
                 });
               },
-              initialValue: slackManager.slackBotToken,
             ),
             SizedBox(height: 10.0.ratioH()),
             Row(
@@ -100,7 +99,7 @@ class _ConnectionsViewState extends State<ConnectionsView> {
                 MkButton(
                   label: AppLocalizations.of(context)!.validate,
                   onPressed: () {
-                    SlackManager().registerSlackBotToken(slackBotTokenInput);
+                    SlackManager().updateBotToken(slackBotTokenInput);
                   },
                 )
               ],
