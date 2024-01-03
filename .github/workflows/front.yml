@@ -5,6 +5,7 @@ on:
         branches:
             - main
             - dev
+            - AW-Fix-Android-Connection
         paths:
             - "flutter_area/**"
         tags:
