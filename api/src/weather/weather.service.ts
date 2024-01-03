@@ -2,7 +2,12 @@ import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom } from 'rxjs';
 import { EnvironmentVariables } from 'src/_utils/config';
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+    ActionDocument,
+    ActionDocumentType,
+} from '../actions/schemas/actions.schema';
+import { WeatherActionDocument } from '../actions/schemas/weather-action.schema';
 
 @Injectable()
 export class WeatherService {
@@ -18,8 +23,12 @@ export class WeatherService {
         this.apiKey = configService.get('WEATHER_KEY');
     }
 
-    async getWeather(city: string): Promise<any> {
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.apiKey}&units=metric&lang=fr`;
+    async getWeather(action: ActionDocumentType): Promise<any> {
+        if (action.actionType !== 'WEATHER_GET_CURRENT')
+            throw new InternalServerErrorException(
+                'Action is not a weather action',
+            );
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${action.city}&appid=${this.apiKey}&units=metric&lang=fr`;
 
         try {
             return await firstValueFrom(this.httpService.get(url))

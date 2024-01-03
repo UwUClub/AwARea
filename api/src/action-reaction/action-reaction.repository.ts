@@ -59,4 +59,7 @@ export class ActionReactionRepository {
 
     getActionReactionById = (id: Types.ObjectId, userId: Types.ObjectId) =>
         this.actionReactionModel.findOne({ _id: id, user: userId }).exec();
+
+    getActionReactionByIdNotConnected = (id: string) =>
+        this.actionReactionModel.findOne({ _id: id }).exec();
 }

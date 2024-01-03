@@ -16,7 +16,10 @@ export class ActionsRepository {
         private weatherModel: Model<WeatherAction>,
     ) {}
 
-    createNasaAction = () => this.nasaModel.create();
+    createNasaAction = () =>
+        this.nasaModel.create({
+            actionType: ActionTypeEnum.NASA_GET_APOD,
+        });
 
     createWeatherAction = (city: string) =>
         this.weatherModel.create({ city: city });
