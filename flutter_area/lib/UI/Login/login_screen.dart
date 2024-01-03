@@ -60,21 +60,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: <Widget>[
                       SvgPicture.asset('assets/images/Logo.svg',
                           semanticsLabel: 'Logo',
-                          width: kDeviceWidth > kLargeScreenWidth
-                              ? 32.0.ratioW()
-                              : 60.0.ratioW(),
-                          height: kDeviceWidth > kLargeScreenWidth
-                              ? 32.0.ratioW()
-                              : 60.0.ratioW()),
+                          width: 32.0.ratioW(),
+                          height: 32.0.ratioW()),
                       SizedBox(width: 10.0.ratioW()),
-                      Text(
-                        AppLocalizations.of(context)!.subslogan,
-                        style: Theme.of(context).textTheme.headlineLarge?.merge(
-                            TextStyle(
-                                fontSize: kDeviceWidth > kLargeScreenWidth
-                                    ? 26
-                                    : 18)),
-                        textAlign: TextAlign.center,
+                      Flexible(
+                        child: Text(
+                          AppLocalizations.of(context)!.subslogan,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              ?.merge(TextStyle(
+                                  fontSize: kDeviceWidth > kLargeScreenWidth
+                                      ? 26
+                                      : 18)),
+                          textAlign: TextAlign.center,
+                        ),
                       )
                     ]),
                 SizedBox(height: 20.0.ratioH()),

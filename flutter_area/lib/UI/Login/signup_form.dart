@@ -50,7 +50,10 @@ class SignupFormState extends State<SignupForm> {
           child: Column(children: <Widget>[
             // const GoogleButton(),
             Text(AppLocalizations.of(context)!.signUpTitle,
-                style: Theme.of(context).textTheme.headlineLarge),
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineLarge
+                    ?.copyWith(fontSize: kIsPc ? 26 : 20)),
             Divider(
               color: Theme.of(context).colorScheme.lightColor4,
             ),
