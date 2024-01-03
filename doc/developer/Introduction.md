@@ -108,23 +108,11 @@ Each work repository has its own linter and formatter configuration files.
 
 - docker compose up
 
-## API Documentation
-
-### API Endpoints
-
-- Once the backend is running, the API documentation can be accessed at `http://localhost:8000/api`.
-- A release version of the API documentation can be found [here](http://patatoserv.ddns.net:8085/api).
-
-### Authentication
-
-- Most routes require authentication.
-- Use the `/auth/login` or `/auth/register` route to get an access token.
-- Use the access token in the `Authorization` header of your requests.
-
 ## Additional Resources
 
-- [readme](#../README.md)
-- [Technologies](#Technologies.md)
+- [readme](../../README.md)
+- [Technologies](./Technologies.md)
+- [API Documentation](./API.md)
 
 ### Communication Channels
 
