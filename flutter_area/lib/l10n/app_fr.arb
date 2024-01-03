@@ -40,5 +40,6 @@
     "completed": "Terminé",
     "failed": "Échoué",
     "myProfile": "Mon profil",
-    "logout": "Se déconnecter"
+    "logout": "Se déconnecter",
+    "promptActionName": "Nom de l'action:"
 }

@@ -71,17 +71,8 @@ class _NewTaskViewState extends State<NewTaskView> {
                           actionTypes: const <ActionType>[
                             ActionType.WEATHER_GET_CURRENT,
                           ],
-                          addAction: (ActionType type) {
-                            manager.addAction('test', type);
-                          },
-                        ),
-                        ActionSelection(
-                          label: 'Clock',
-                          actionTypes: const <ActionType>[
-                            ActionType.CLOCK_GET_REGULAR,
-                          ],
-                          addAction: (ActionType type) {
-                            manager.addAction('test', type);
+                          addAction: (String name, ActionType type) {
+                            manager.addAction(name, type);
                           },
                         ),
                         ActionSelection(
@@ -89,8 +80,8 @@ class _NewTaskViewState extends State<NewTaskView> {
                           actionTypes: const <ActionType>[
                             ActionType.NASA_GET_APOD,
                           ],
-                          addAction: (ActionType type) {
-                            manager.addAction('test', type);
+                          addAction: (String name, ActionType type) {
+                            manager.addAction(name, type);
                           },
                         ),
                       ],

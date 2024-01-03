@@ -40,5 +40,6 @@
     "completed": "Completed",
     "failed": "Failed",
     "myProfile": "My profile",
-    "logout": "Log out"
+    "logout": "Log out",
+    "promptActionName": "Action name:"
 }
