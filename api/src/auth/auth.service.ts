@@ -15,8 +15,6 @@ import { GoogleApiService } from '../google-api/google-api.service';
 
 @Injectable()
 export class AuthService {
-    private oAuth2Client: OAuth2Client;
-
     constructor(
         private readonly usersService: UsersService,
         private readonly usersRepository: UsersRepository,

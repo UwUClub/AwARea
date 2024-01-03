@@ -9,6 +9,7 @@ import '../../Utils/Extensions/double_extensions.dart';
 import '../ReusableWidgets/mk_background.dart';
 import '../ReusableWidgets/mk_button.dart';
 import '../ReusableWidgets/mk_input.dart';
+import 'connection_github.dart';
 
 class ConnectionsMobileView extends StatefulWidget {
   const ConnectionsMobileView({super.key});
@@ -59,7 +60,9 @@ class _ConnectionsMobileStateView extends State<ConnectionsMobileView> {
               ),
               MkButton(
                 label: AppLocalizations.of(context)!.connect,
-                onPressed: () {},
+                onPressed: () async {
+                  await signInWithGitHub();
+                },
               ),
               const Divider(
                 endIndent: 0,

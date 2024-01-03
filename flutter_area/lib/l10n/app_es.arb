@@ -34,5 +34,11 @@
     "slack": " Slack",
     "connectSlack": "",
     "validate": "",
-    "home": ""
+    "home": "",
+    "connectionGithub": "",
+    "inProgress": "",
+    "completed": "",
+    "failed": "",
+    "myProfile": "",
+    "logout": ""
 }

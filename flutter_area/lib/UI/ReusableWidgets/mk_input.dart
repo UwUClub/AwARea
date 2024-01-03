@@ -4,16 +4,17 @@ import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
 
 class MkInput extends StatefulWidget {
-  const MkInput({
-    super.key,
-    this.label,
-    this.placeholder,
-    this.onChanged,
-  });
+  const MkInput(
+      {super.key,
+      this.label,
+      this.placeholder,
+      this.onChanged,
+      this.displayed = true});
 
   final String? label;
   final String? placeholder;
   final void Function(String)? onChanged;
+  final bool displayed;
 
   @override
   State<MkInput> createState() => _MkInputState();
@@ -33,6 +34,7 @@ class _MkInputState extends State<MkInput> {
         TextFormField(
           style: Theme.of(context).textTheme.displayMedium,
           onChanged: widget.onChanged,
+          obscureText: !widget.displayed,
           decoration: InputDecoration(
               hintText: widget.placeholder,
               hintStyle: Theme.of(context).textTheme.displayMedium,

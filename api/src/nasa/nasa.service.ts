@@ -6,6 +6,7 @@ import { ConfigService } from '@nestjs/config';
 import { EnvironmentVariables } from '../_utils/config';
 import { Injectable } from '@nestjs/common';
 import { NasaMapper } from './nasa.mapper';
+import { ActionDocument } from '../actions/schemas/actions.schema';
 
 @Injectable()
 export class NasaService {
@@ -28,7 +29,7 @@ export class NasaService {
         return this.httpService.get(url);
     }
 
-    async fetchPhotoOfTheDay() {
+    async fetchPhotoOfTheDay(action: ActionDocument) {
         try {
             if (this.latestPhoto) {
                 const today = new Date();

@@ -34,5 +34,11 @@
     "slack": " Slack",
     "connectSlack": "Entrez le token de votre bot Slack pour accéder à ses services (écoute d'événements, envoi de messages...)",
     "validate": "Valider",
-    "home": "Accueil"
+    "home": "Accueil",
+    "connectionGithub": "Connexion à Github",
+    "inProgress": "En cours",
+    "completed": "Terminé",
+    "failed": "Échoué",
+    "myProfile": "Mon profil",
+    "logout": "Se déconnecter"
 }

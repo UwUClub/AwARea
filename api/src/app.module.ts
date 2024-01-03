@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { TasksService } from './task.service';
 import { UsersModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
@@ -38,6 +37,5 @@ import { SlackModule } from './slack/slack.module';
         GoogleApiModule,
         SlackModule,
     ],
-    providers: [TasksService],
 })
 export class AppModule { }
