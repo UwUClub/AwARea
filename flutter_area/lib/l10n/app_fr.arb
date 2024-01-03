@@ -37,5 +37,7 @@
     "connectionGithub": "Connexion à Github",
     "inProgress": "En cours",
     "completed": "Terminé",
-    "failed": "Échoué"
+    "failed": "Échoué",
+    "myProfile": "Mon profil",
+    "logout": "Se déconnecter"
 }

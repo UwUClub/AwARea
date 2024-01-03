@@ -37,5 +37,7 @@
     "connectionGithub": "Connected to Github",
     "inProgress": "In progress",
     "completed": "Completed",
-    "failed": "Failed"
+    "failed": "Failed",
+    "myProfile": "My profile",
+    "logout": "Log out"
 }

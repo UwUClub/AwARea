@@ -11,6 +11,7 @@ import '../../Utils/Extensions/double_extensions.dart';
 import '../Connections/connections_view.dart';
 import '../Home/home_view.dart';
 import '../NewTask/new_task_view.dart';
+import '../Profile/profile_view.dart';
 import '../ReusableWidgets/mk_background.dart';
 import '../Settings/settings_view.dart';
 
@@ -49,7 +50,7 @@ class _MainNavigatorState extends State<MainNavigator> {
             SideMenu(
               controller: sideMenu,
               style: SideMenuStyle(
-                displayMode: SideMenuDisplayMode.open,
+                displayMode: SideMenuDisplayMode.compact,
                 compactSideMenuWidth: 60,
                 hoverColor: Theme.of(context).brightness == Brightness.light
                     ? Theme.of(context).colorScheme.lightColor3
@@ -151,14 +152,12 @@ class _MainNavigatorState extends State<MainNavigator> {
             Expanded(
               child: PageView(
                 controller: pageController,
-                children: <Widget>[
-                  const HomeView(),
+                children: const <Widget>[
+                  HomeView(),
+                  ProfileView(),
+                  SettingsView(),
+                  ConnectionsView(),
                   Center(
-                    child: Text(AppLocalizations.of(context)!.profile),
-                  ),
-                  const SettingsView(),
-                  const ConnectionsView(),
-                  const Center(
                     child: NewTaskView(),
                   ),
                 ],

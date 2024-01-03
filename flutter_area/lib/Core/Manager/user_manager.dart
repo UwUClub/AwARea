@@ -100,6 +100,17 @@ class UserManager {
     return false;
   }
 
+  Future<void> logout() async {
+    final Future<SharedPreferences> prefsF = SharedPreferences.getInstance();
+    final SharedPreferences prefs = await prefsF;
+    prefs.remove('accessToken');
+    username = null;
+    fullName = null;
+    email = null;
+    accessToken = null;
+    state = AuthStateEnum.splash;
+  }
+
   Future<void> _storeData(dynamic jsonBody, {bool haveToken = false}) async {
     final Future<SharedPreferences> prefsF = SharedPreferences.getInstance();
     try {
