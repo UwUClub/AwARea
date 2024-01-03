@@ -108,7 +108,6 @@ class _ConnectionsMobileStateView extends State<ConnectionsMobileView> {
                     slackBotTokenInput = value;
                   });
                 },
-                initialValue: slackManager.botToken,
               ),
               MkButton(
                 label: AppLocalizations.of(context)!.validate,
