@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { TasksService } from './task.service';
 import { UsersModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
@@ -36,6 +35,5 @@ import { GoogleApiModule } from './google-api/google-api.module';
         ReactionsModule,
         GoogleApiModule,
     ],
-    providers: [TasksService],
 })
 export class AppModule {}
