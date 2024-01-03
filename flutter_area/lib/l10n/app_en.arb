@@ -32,6 +32,7 @@
     "google": " Google",
     "connectGoogle": "Log to Google to access its services",
     "slack": " Slack",
-    "connectSlack": "Log to Slack to access its services",
+    "connectSlack": "Enter the token of your Slack bot to access services (listen events, send messages...) ",
+    "validate": "Confirm",
     "home": "Home"
 }

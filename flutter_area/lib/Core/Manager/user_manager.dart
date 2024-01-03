@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 
 import '../../Utils/constants.dart';
 import '../../Utils/mk_print.dart';
+import '../Locator/locator.dart';
+import 'slack_manager.dart';
 
 class UserManager {
   String? username;
@@ -29,7 +31,7 @@ class UserManager {
           }));
       final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
       if (res.statusCode == 201) {
-        _storeData(jsonBody);
+        storeData(jsonBody);
         return (true, null);
       }
       // ignore: avoid_dynamic_calls
@@ -54,59 +56,21 @@ class UserManager {
     mkPrint(res.body);
     final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
     if (res.statusCode == 201) {
-      _storeData(jsonBody);
+      storeData(jsonBody);
       return (true, null);
     }
     // ignore: avoid_dynamic_calls
     return (false, _parseErrorMessage(jsonBody['message']));
   }
 
-  Future<bool> loginWithGoogle(
-      String accessToken, String completeName, String email) async {
-    final http.Response res = await http.post(
-        Uri.parse('$kBaseUrl/auth/google-login'),
-        headers: <String, String>{
-          'accept': 'application/json',
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(<String, String>{
-          'accessToken': accessToken,
-          'completeName': completeName,
-          'email': email
-        }));
-    final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
-    if (res.statusCode == 201) {
-      _storeData(jsonBody);
-      return true;
-    }
-    return false;
-  }
-
-  void _storeData(dynamic jsonBody) {
+  void storeData(dynamic jsonBody) {
     final Map<String, dynamic> body = jsonBody as Map<String, dynamic>;
     final Map<String, dynamic> user = body['user'] as Map<String, dynamic>;
     username = user['username'] as String?;
     fullName = user['fullName'] as String;
     email = user['email'] as String;
     accessToken = body['accessToken'] as String;
-  }
-
-  Future<bool> createDraft(String name, String email) async {
-    try {
-      final http.Response res =
-          await http.post(Uri.parse('$kBaseUrl/action-reaction/mvp'),
-              headers: <String, String>{
-                'Content-Type': 'application/json; charset=UTF-8',
-                'Authorization': 'Bearer $accessToken',
-              },
-              body: jsonEncode(<String, String>{'name': name, 'email': email}));
-      if (res.statusCode == 201) {
-        return true;
-      }
-    } catch (e) {
-      mkPrint('Error: $e');
-    }
-    return false;
+    locator<SlackManager>().slackBotToken = user['slackBotToken'] as String?;
   }
 
   String? _parseErrorMessage(dynamic msg) {

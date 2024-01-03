@@ -33,5 +33,6 @@
     "connectGoogle": "",
     "slack": " Slack",
     "connectSlack": "",
+    "validate": "",
     "home": ""
 }
