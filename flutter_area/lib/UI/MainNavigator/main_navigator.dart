@@ -11,6 +11,7 @@ import '../../Utils/Extensions/double_extensions.dart';
 import '../Connections/connections_view.dart';
 import '../Home/home_view.dart';
 import '../NewTask/new_task_view.dart';
+import '../Profile/profile_view.dart';
 import '../ReusableWidgets/mk_background.dart';
 import '../Settings/settings_view.dart';
 
@@ -39,130 +40,132 @@ class _MainNavigatorState extends State<MainNavigator> {
 
   @override
   Widget build(BuildContext context) {
-    return MkBackground(
-        child: Scaffold(
+    return Scaffold(
       backgroundColor: Theme.of(context).brightness == Brightness.light
           ? Theme.of(context).colorScheme.lightColor1
           : Theme.of(context).colorScheme.darkColor1,
-      body: Row(
-        children: <Widget>[
-          SideMenu(
-            controller: sideMenu,
-            style: SideMenuStyle(
-              displayMode: SideMenuDisplayMode.open,
-              compactSideMenuWidth: 60,
-              hoverColor: Theme.of(context).brightness == Brightness.light
-                  ? Theme.of(context).colorScheme.lightColor3
-                  : Theme.of(context).colorScheme.darkColor3,
-              selectedHoverColor:
-                  Theme.of(context).brightness == Brightness.light
-                      ? Theme.of(context).colorScheme.lightColor3
-                      : Theme.of(context).colorScheme.darkColor3,
-              selectedColor: Theme.of(context).brightness == Brightness.light
-                  ? Theme.of(context).colorScheme.lightColor4
-                  : Theme.of(context).colorScheme.darkColor4,
-              selectedTitleTextStyle: Theme.of(context).brightness ==
-                      Brightness.light
-                  ? TextStyle(color: Theme.of(context).colorScheme.darkColor2)
-                  : TextStyle(color: Theme.of(context).colorScheme.lightColor2),
-              unselectedTitleTextStyle: Theme.of(context).brightness ==
-                      Brightness.light
-                  ? TextStyle(color: Theme.of(context).colorScheme.darkColor2)
-                  : TextStyle(color: Theme.of(context).colorScheme.lightColor2),
-              selectedIconColor:
-                  Theme.of(context).brightness == Brightness.light
-                      ? Theme.of(context).colorScheme.darkColor2
-                      : Theme.of(context).colorScheme.lightColor2,
-              unselectedIconColor:
-                  Theme.of(context).brightness == Brightness.light
-                      ? Theme.of(context).colorScheme.darkColor2
-                      : Theme.of(context).colorScheme.lightColor2,
-              backgroundColor: Theme.of(context).brightness == Brightness.light
-                  ? Theme.of(context).colorScheme.lightColor2
-                  : Theme.of(context).colorScheme.darkColor2,
-              toggleColor: Theme.of(context).brightness == Brightness.light
-                  ? Theme.of(context).colorScheme.darkColor2
-                  : Theme.of(context).colorScheme.lightColor2,
-              itemInnerSpacing: 13.0,
-            ),
-            showToggle: true,
-            title: Row(
-              children: <Widget>[
-                Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: SvgPicture.asset(
-                      'assets/images/Logo.svg',
-                      semanticsLabel: 'Logo',
-                      width: 18.0.ratioW(),
-                      height: 18.0.ratioH(),
-                    )),
-              ],
-            ),
-            items: <SideMenuItem>[
-              SideMenuItem(
-                title: AppLocalizations.of(context)!.home,
-                onTap: (int index, _) {
-                  sideMenu.changePage(index);
-                },
-                icon: const Icon(Icons.home),
+      body: MkBackground(
+        child: Row(
+          children: <Widget>[
+            SideMenu(
+              controller: sideMenu,
+              style: SideMenuStyle(
+                displayMode: SideMenuDisplayMode.compact,
+                compactSideMenuWidth: 60,
+                hoverColor: Theme.of(context).brightness == Brightness.light
+                    ? Theme.of(context).colorScheme.lightColor3
+                    : Theme.of(context).colorScheme.darkColor3,
+                selectedHoverColor:
+                    Theme.of(context).brightness == Brightness.light
+                        ? Theme.of(context).colorScheme.lightColor3
+                        : Theme.of(context).colorScheme.darkColor3,
+                selectedColor: Theme.of(context).brightness == Brightness.light
+                    ? Theme.of(context).colorScheme.lightColor4
+                    : Theme.of(context).colorScheme.darkColor4,
+                selectedTitleTextStyle: Theme.of(context).brightness ==
+                        Brightness.light
+                    ? TextStyle(color: Theme.of(context).colorScheme.darkColor2)
+                    : TextStyle(
+                        color: Theme.of(context).colorScheme.lightColor2),
+                unselectedTitleTextStyle: Theme.of(context).brightness ==
+                        Brightness.light
+                    ? TextStyle(color: Theme.of(context).colorScheme.darkColor2)
+                    : TextStyle(
+                        color: Theme.of(context).colorScheme.lightColor2),
+                selectedIconColor:
+                    Theme.of(context).brightness == Brightness.light
+                        ? Theme.of(context).colorScheme.darkColor2
+                        : Theme.of(context).colorScheme.lightColor2,
+                unselectedIconColor:
+                    Theme.of(context).brightness == Brightness.light
+                        ? Theme.of(context).colorScheme.darkColor2
+                        : Theme.of(context).colorScheme.lightColor2,
+                backgroundColor:
+                    Theme.of(context).brightness == Brightness.light
+                        ? Theme.of(context).colorScheme.lightColor2
+                        : Theme.of(context).colorScheme.darkColor2,
+                toggleColor: Theme.of(context).brightness == Brightness.light
+                    ? Theme.of(context).colorScheme.darkColor2
+                    : Theme.of(context).colorScheme.lightColor2,
+                itemInnerSpacing: 13.0,
               ),
-              SideMenuItem(
-                title: AppLocalizations.of(context)!.profile,
-                onTap: (int index, _) {
-                  sideMenu.changePage(index);
-                },
-                icon: const Icon(Icons.person),
+              showToggle: true,
+              title: Row(
+                children: <Widget>[
+                  Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: SvgPicture.asset(
+                        'assets/images/Logo.svg',
+                        semanticsLabel: 'Logo',
+                        width: 18.0.ratioW(),
+                        height: 18.0.ratioH(),
+                      )),
+                ],
               ),
-              SideMenuItem(
-                title: AppLocalizations.of(context)!.settings,
-                onTap: (int index, _) {
-                  sideMenu.changePage(index);
-                },
-                icon: const Icon(Icons.settings),
-              ),
-              SideMenuItem(
-                title: AppLocalizations.of(context)!.connection,
-                onTap: (int index, _) {
-                  sideMenu.changePage(index);
-                },
-                icon: const Icon(Icons.share),
-              ),
-              SideMenuItem(
-                title: AppLocalizations.of(context)!.newTask,
-                onTap: (int index, _) {
-                  sideMenu.changePage(index);
-                },
-                icon: const Icon(Icons.add_circle),
-              ),
-              SideMenuItem(
-                builder:
-                    (BuildContext context, SideMenuDisplayMode displayMode) {
-                  return const Divider(
-                    endIndent: 8,
-                    indent: 8,
-                  );
-                },
-              ),
-            ],
-          ),
-          Expanded(
-            child: PageView(
-              controller: pageController,
-              children: <Widget>[
-                const HomeView(),
-                Center(
-                  child: Text(AppLocalizations.of(context)!.profile),
+              items: <SideMenuItem>[
+                SideMenuItem(
+                  title: AppLocalizations.of(context)!.home,
+                  onTap: (int index, _) {
+                    sideMenu.changePage(index);
+                  },
+                  icon: const Icon(Icons.home),
                 ),
-                const SettingsView(),
-                const ConnectionsView(),
-                const Center(
-                  child: NewTaskView(),
+                SideMenuItem(
+                  title: AppLocalizations.of(context)!.profile,
+                  onTap: (int index, _) {
+                    sideMenu.changePage(index);
+                  },
+                  icon: const Icon(Icons.person),
+                ),
+                SideMenuItem(
+                  title: AppLocalizations.of(context)!.settings,
+                  onTap: (int index, _) {
+                    sideMenu.changePage(index);
+                  },
+                  icon: const Icon(Icons.settings),
+                ),
+                SideMenuItem(
+                  title: AppLocalizations.of(context)!.connection,
+                  onTap: (int index, _) {
+                    sideMenu.changePage(index);
+                  },
+                  icon: const Icon(Icons.share),
+                ),
+                SideMenuItem(
+                  title: AppLocalizations.of(context)!.newTask,
+                  onTap: (int index, _) {
+                    sideMenu.changePage(index);
+                  },
+                  icon: const Icon(Icons.add_circle),
+                ),
+                SideMenuItem(
+                  builder:
+                      (BuildContext context, SideMenuDisplayMode displayMode) {
+                    return const Divider(
+                      endIndent: 8,
+                      indent: 8,
+                    );
+                  },
                 ),
               ],
             ),
-          ),
-        ],
+            Expanded(
+              child: PageView(
+                controller: pageController,
+                children: const <Widget>[
+                  HomeView(),
+                  ProfileView(),
+                  SettingsView(),
+                  ConnectionsView(),
+                  Center(
+                    child: NewTaskView(),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
