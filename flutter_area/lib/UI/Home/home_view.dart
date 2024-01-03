@@ -32,8 +32,8 @@ class _HomeViewState extends State<HomeView> {
         children: <Widget>[
           SvgPicture.asset('assets/images/Logo.svg',
               semanticsLabel: 'Logo',
-              width: 50.0.ratioW(),
-              height: 50.0.ratioH()),
+              width: 45.0.ratioW(),
+              height: 45.0.ratioH()),
           Text('Bienvenue,\n${userManager.fullName}.',
               style: Theme.of(context)
                   .textTheme

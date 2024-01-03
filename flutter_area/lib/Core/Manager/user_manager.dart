@@ -9,7 +9,6 @@ class UserManager {
   String? fullName;
   String? email;
   String? accessToken;
-  String? githubToken;
 
   Future<(bool, String?)> signUp(
       String email, String password, String username, String fullName) async {

@@ -49,7 +49,7 @@ class _MainNavigatorState extends State<MainNavigator> {
           SideMenu(
             controller: sideMenu,
             style: SideMenuStyle(
-              displayMode: SideMenuDisplayMode.open,
+              displayMode: SideMenuDisplayMode.compact,
               compactSideMenuWidth: 60,
               hoverColor: Theme.of(context).brightness == Brightness.light
                   ? Theme.of(context).colorScheme.lightColor3
