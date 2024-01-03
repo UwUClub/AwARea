@@ -33,5 +33,9 @@
     "connectGoogle": "",
     "slack": " Slack",
     "connectSlack": "",
-    "home": ""
+    "home": "",
+    "connectionGithub": "",
+    "inProgress": "",
+    "completed": "",
+    "failed": ""
 }

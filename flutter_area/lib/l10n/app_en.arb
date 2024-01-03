@@ -33,5 +33,9 @@
     "connectGoogle": "Log to Google to access its services",
     "slack": " Slack",
     "connectSlack": "Log to Slack to access its services",
-    "home": "Home"
+    "home": "Home",
+    "connectionGithub": "Connected to Github",
+    "inProgress": "In progress",
+    "completed": "Completed",
+    "failed": "Failed"
 }
