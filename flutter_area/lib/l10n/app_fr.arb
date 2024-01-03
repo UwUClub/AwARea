@@ -32,7 +32,7 @@
     "google": " Google",
     "connectGoogle": "Se connecter à Google pour accéder à ses services",
     "slack": " Slack",
-    "connectSlack": "Entrez le token de votre bot Slack pour accéder à ses services (écoute d'événements, envoi de messages...)",
+    "connectSlack": "Mettez à jour le token de votre app Slack pour accéder à ses services (écoute d'événements, envoi de messages...)",
     "validate": "Valider",
     "home": "Accueil",
     "connectionGithub": "Connexion à Github",
