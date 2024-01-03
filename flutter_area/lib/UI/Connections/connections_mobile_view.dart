@@ -3,10 +3,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../Core/Locator/locator.dart';
+import '../../Core/Manager/slack_manager.dart';
 import '../../Core/Manager/theme_manager.dart';
 import '../../Utils/Extensions/double_extensions.dart';
 import '../ReusableWidgets/mk_background.dart';
 import '../ReusableWidgets/mk_button.dart';
+import '../ReusableWidgets/mk_input.dart';
 
 class ConnectionsMobileView extends StatefulWidget {
   const ConnectionsMobileView({super.key});
@@ -17,6 +19,9 @@ class ConnectionsMobileView extends StatefulWidget {
 
 class _ConnectionsMobileStateView extends State<ConnectionsMobileView> {
   ThemeManager themeManager = locator<ThemeManager>();
+  SlackManager slackManager = locator<SlackManager>();
+
+  String slackBotTokenInput = '';
 
   @override
   Widget build(BuildContext context) {
@@ -96,9 +101,20 @@ class _ConnectionsMobileStateView extends State<ConnectionsMobileView> {
                   ),
                 ],
               ),
+              MkInput(
+                placeholder: 'xxxx-...',
+                onChanged: (String value) {
+                  setState(() {
+                    slackBotTokenInput = value;
+                  });
+                },
+                initialValue: slackManager.slackBotToken,
+              ),
               MkButton(
-                label: AppLocalizations.of(context)!.connect,
-                onPressed: () {},
+                label: AppLocalizations.of(context)!.validate,
+                onPressed: () {
+                  SlackManager().registerSlackBotToken(slackBotTokenInput);
+                },
               ),
             ],
           ),
