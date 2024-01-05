@@ -41,5 +41,6 @@
     "failed": "",
     "myProfile": "",
     "logout": "",
-    "promptActionName": ""
+    "promptActionName": "",
+    "createReaction": ""
 }

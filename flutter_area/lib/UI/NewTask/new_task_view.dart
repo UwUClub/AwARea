@@ -48,8 +48,18 @@ class _NewTaskViewState extends State<NewTaskView> {
                               ),
                               ReactionCard(
                                 reaction: actionReaction.reaction,
-                                setReaction: (ReactionType? reactionType) {
-                                  // manager.setReaction ...
+                                setReaction: (ReactionType? reactionType,
+                                    Map<String, String>? data) {
+                                  if (reactionType == null || data == null) {
+                                    manager.removeReactionLocally(
+                                        actionReaction.id);
+                                    return;
+                                  }
+                                  manager.setReaction(
+                                    actionReaction.id,
+                                    reactionType,
+                                    data,
+                                  );
                                 },
                               ),
                             ]),

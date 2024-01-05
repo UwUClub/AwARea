@@ -75,8 +75,8 @@ class _NewTaskMobileViewState extends State<NewTaskMobileView> {
                                       delete: () {}),
                                   ReactionCard(
                                     reaction: actionReaction.reaction,
-                                    setReaction:
-                                        (ReactionType? reactionType) {},
+                                    setReaction: (ReactionType? reactionType,
+                                        Map<String, String>? data) {},
                                   ),
                                 ]),
                         ],

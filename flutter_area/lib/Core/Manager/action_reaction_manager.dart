@@ -147,4 +147,36 @@ class ActionReactionManager extends ChangeNotifier {
       return false;
     }
   }
+
+  Future<bool> setReaction(String actionReactionId, ReactionType type,
+      Map<String, String> body) async {
+    try {
+      final UserManager userManager = locator<UserManager>();
+      final http.Response res = await http.post(
+          Uri.parse('$kBaseUrl/action-reaction/$actionReactionId/reaction'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${userManager.accessToken}',
+          },
+          body: jsonEncode(body));
+      if (res.statusCode != 201) {
+        return false;
+      }
+      final int index = actionsReactions.indexWhere(
+          (MkActionReaction element) => element.id == actionReactionId);
+      actionsReactions[index].reaction = MkReaction(type: type);
+      notifyListeners();
+      return true;
+    } catch (e) {
+      mkPrint('Error: $e');
+      return false;
+    }
+  }
+
+  void removeReactionLocally(String actionReactionId) {
+    final int index = actionsReactions.indexWhere(
+        (MkActionReaction element) => element.id == actionReactionId);
+    actionsReactions[index].reaction = null;
+    notifyListeners();
+  }
 }

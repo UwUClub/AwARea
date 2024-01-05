@@ -41,5 +41,6 @@
     "failed": "Échoué",
     "myProfile": "Mon profil",
     "logout": "Se déconnecter",
-    "promptActionName": "Nom de l'action:"
+    "promptActionName": "Nom de l'action:",
+    "createReaction": "Créer la réaction"
 }

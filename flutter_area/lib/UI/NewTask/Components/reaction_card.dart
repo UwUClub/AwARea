@@ -4,24 +4,21 @@ import '../../../Core/Manager/action_reaction_manager.dart';
 import '../../../Utils/Extensions/color_extensions.dart';
 import '../../../Utils/Extensions/double_extensions.dart';
 import '../../../Utils/constants.dart';
+import 'reaction_form.dart';
 import 'reaction_selection.dart';
 
 class ReactionCard extends StatefulWidget {
   const ReactionCard({super.key, this.reaction, required this.setReaction});
 
   final MkReaction? reaction;
-  final void Function(ReactionType?) setReaction;
+  final void Function(ReactionType?, Map<String, String>?) setReaction;
 
   @override
   State<ReactionCard> createState() => _ReactionCardState();
 }
 
 class _ReactionCardState extends State<ReactionCard> {
-  void setReaction(ReactionType reactionType) {
-    setState(() {
-      widget.setReaction(reactionType);
-    });
-  }
+  ReactionType? creatingReaction;
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +34,21 @@ class _ReactionCardState extends State<ReactionCard> {
       width: kIsPc ? 312.0.ratioW() : 165.0.ratioW(),
       height: kIsPc ? 138.0.ratioH() : 400.0.ratioH(),
       child: widget.reaction == null
-          ? ReactionSelection(
-              label: 'Google',
-              reactionTypes: const <ReactionType>[
-                ReactionType.CREATE_DRAFT,
-              ],
-              setReaction: setReaction,
-            )
+          ? (creatingReaction == null
+              ? ReactionSelection(
+                  label: 'Google',
+                  reactionTypes: const <ReactionType>[
+                    ReactionType.CREATE_DRAFT,
+                  ],
+                  setReaction: (ReactionType type) {
+                    setState(() {
+                      creatingReaction = type;
+                    });
+                  })
+              : ReactionForm(
+                  reactionType: creatingReaction!,
+                  onSubmit: (Map<String, String> data) =>
+                      <void>{widget.setReaction(creatingReaction, data)}))
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -63,7 +68,7 @@ class _ReactionCardState extends State<ReactionCard> {
                       IconButton(
                         icon: const Icon(Icons.edit),
                         onPressed: () {
-                          widget.setReaction(null);
+                          widget.setReaction(null, null);
                         },
                       ),
                     ],

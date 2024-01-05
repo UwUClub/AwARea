@@ -41,5 +41,6 @@
     "failed": "Failed",
     "myProfile": "My profile",
     "logout": "Log out",
-    "promptActionName": "Action name:"
+    "promptActionName": "Action name:",
+    "createReaction": "Create reaction"
 }
