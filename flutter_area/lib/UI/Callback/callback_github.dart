@@ -7,8 +7,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:http/http.dart' as http;
 
+import '../../Core/Locator/locator.dart';
+import '../../Core/Manager/user_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
+import '../../Utils/constants.dart';
 import '../../Utils/mk_print.dart';
 
 class CallbackGithubView extends StatefulWidget {
@@ -21,6 +24,7 @@ class CallbackGithubView extends StatefulWidget {
 class CallbackGithubViewState extends State<CallbackGithubView> {
   String? token;
   bool? isSignedIn;
+  UserManager userManager = locator<UserManager>();
 
   @override
   void initState() {
@@ -34,7 +38,7 @@ class CallbackGithubViewState extends State<CallbackGithubView> {
     final String? code = uri.queryParameters['code'];
 
     if (code != null) {
-      final http.Response response = await http.post(
+      http.Response response = await http.post(
         Uri.parse('https://github.com/login/oauth/access_token'),
         headers: <String, String>{
           'Accept': 'application/json',
@@ -53,7 +57,20 @@ class CallbackGithubViewState extends State<CallbackGithubView> {
           isSignedIn = true;
         });
         mkPrint(token);
-        
+        // response = await http.post(
+        //     Uri.parse(
+        //       '$kBaseUrl/github-token',
+        //     ),
+        //     headers: <String, String>{
+        //       'Content-Type': 'application/json',
+        //       'Authorization': 'Bearer ${userManager.accessToken}',
+        //     },
+        //     body: jsonEncode(<String, String>{'githubToken': token!}));
+        // if (response.statusCode == 200) {
+        //   mkPrint('Github token saved');
+        // } else {
+        //   mkPrint('Échec de la requête : ${response.statusCode}');
+        // }
       } else {
         mkPrint('Échec de la requête : ${response.statusCode}');
         setState(() => isSignedIn = false);
