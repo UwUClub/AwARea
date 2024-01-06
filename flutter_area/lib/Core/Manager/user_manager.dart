@@ -32,11 +32,11 @@ class UserManager {
           }));
       final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
       if (res.statusCode == 201) {
-        _storeData(jsonBody);
+        storeData(jsonBody);
         return (true, null);
       }
       // ignore: avoid_dynamic_calls
-      return (false, _parseErrorMessage(jsonBody['message']));
+      return (false, parseErrorMessage(jsonBody['message']));
     } catch (e) {
       mkPrint('Error: $e');
       return (false, e.toString());
@@ -56,32 +56,11 @@ class UserManager {
         }));
     final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
     if (res.statusCode == 201) {
-      _storeData(jsonBody);
+      storeData(jsonBody);
       return (true, null);
     }
     // ignore: avoid_dynamic_calls
-    return (false, _parseErrorMessage(jsonBody['message']));
-  }
-
-  Future<bool> loginWithGoogle(
-      String accessToken, String completeName, String email) async {
-    final http.Response res = await http.post(
-        Uri.parse('$kBaseUrl/auth/google-login'),
-        headers: <String, String>{
-          'accept': 'application/json',
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(<String, String>{
-          'accessToken': accessToken,
-          'completeName': completeName,
-          'email': email
-        }));
-    final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
-    if (res.statusCode == 201) {
-      _storeData(jsonBody);
-      return true;
-    }
-    return false;
+    return (false, parseErrorMessage(jsonBody['message']));
   }
 
   Future<bool> getCurrentUser(String accessToken) async {
@@ -94,7 +73,7 @@ class UserManager {
     );
     final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
     if (res.statusCode == 200) {
-      _storeData(jsonBody, haveToken: true);
+      await storeData(jsonBody, haveToken: true);
       return true;
     }
     return false;
@@ -111,7 +90,7 @@ class UserManager {
     state = AuthStateEnum.splash;
   }
 
-  Future<void> _storeData(dynamic jsonBody, {bool haveToken = false}) async {
+  Future<void> storeData(dynamic jsonBody, {bool haveToken = false}) async {
     final Future<SharedPreferences> prefsF = SharedPreferences.getInstance();
     try {
       final SharedPreferences prefs = await prefsF;
@@ -152,7 +131,7 @@ class UserManager {
     return false;
   }
 
-  String? _parseErrorMessage(dynamic msg) {
+  String? parseErrorMessage(dynamic msg) {
     if (msg is String) {
       return msg;
     }

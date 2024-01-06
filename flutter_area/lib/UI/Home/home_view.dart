@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../Core/Locator/locator.dart';
+import '../../Core/Manager/google_manager.dart';
 import '../../Core/Manager/theme_manager.dart';
 import '../../Core/Manager/user_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
@@ -19,6 +20,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   ThemeManager themeManager = locator<ThemeManager>();
   UserManager userManager = locator<UserManager>();
+  GoogleManager googleManager = locator<GoogleManager>();
 
   TextEditingController nameController = TextEditingController(text: '');
   TextEditingController emailController = TextEditingController(text: '');
@@ -74,7 +76,7 @@ class _HomeViewState extends State<HomeView> {
                                 emailController.text.isEmpty) {
                               return;
                             }
-                            mkPrint(await userManager.createDraft(
+                            mkPrint(await googleManager.createDraft(
                                 nameController.text, emailController.text));
                           },
                           child: Text('Send an email',

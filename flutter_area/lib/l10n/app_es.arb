@@ -33,11 +33,14 @@
     "connectGoogle": "",
     "slack": " Slack",
     "connectSlack": "",
+    "validate": "",
     "home": "",
     "connectionGithub": "",
     "inProgress": "",
     "completed": "",
     "failed": "",
     "myProfile": "",
-    "logout": ""
+    "logout": "",
+    "promptActionName": "",
+    "createReaction": ""
 }

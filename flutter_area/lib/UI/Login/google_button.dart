@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../Core/Locator/locator.dart';
+import '../../Core/Manager/google_manager.dart';
 import '../../Core/Manager/user_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
@@ -13,7 +14,7 @@ class GoogleButton extends StatelessWidget {
   });
 
   Future<void> loginWithGoogle(BuildContext context) async {
-    final UserManager userManager = locator<UserManager>();
+    final GoogleManager googleManager = locator<GoogleManager>();
 
     const List<String> scopes = <String>[
       'email',
@@ -31,7 +32,7 @@ class GoogleButton extends StatelessWidget {
       if (token.accessToken == null || res.displayName == null) {
         return;
       }
-      final bool success = await userManager.loginWithGoogle(
+      final bool success = await googleManager.loginWithGoogle(
           token.accessToken!, res.displayName!, res.email);
       if (success) {
         Navigator.of(context).pushNamed('/home');

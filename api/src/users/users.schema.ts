@@ -27,7 +27,7 @@ export class User {
     googleRefreshToken: string | null;
 
     @Prop({ default: null })
-    slackToken: string | null;
+    slackBotToken: string | null;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

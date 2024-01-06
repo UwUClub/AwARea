@@ -32,12 +32,15 @@
     "google": " Google",
     "connectGoogle": "Log to Google to access its services",
     "slack": " Slack",
-    "connectSlack": "Log to Slack to access its services",
+    "connectSlack": "Update the token of your Slack app to access its services (listen events, send messages...) ",
+    "validate": "Confirm",
     "home": "Home",
     "connectionGithub": "Connected to Github",
     "inProgress": "In progress",
     "completed": "Completed",
     "failed": "Failed",
     "myProfile": "My profile",
-    "logout": "Log out"
+    "logout": "Log out",
+    "promptActionName": "Action name:",
+    "createReaction": "Create reaction"
 }
