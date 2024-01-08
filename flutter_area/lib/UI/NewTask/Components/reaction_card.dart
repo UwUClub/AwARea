@@ -8,10 +8,11 @@ import 'reaction_form.dart';
 import 'reaction_selection.dart';
 
 class ReactionCard extends StatefulWidget {
-  const ReactionCard({super.key, this.reaction, required this.setReaction});
+  const ReactionCard(
+      {super.key, required this.actionReaction, required this.manager});
 
-  final MkReaction? reaction;
-  final void Function(ReactionType?, Map<String, String>?) setReaction;
+  final MkActionReaction actionReaction;
+  final ActionReactionManager manager;
 
   @override
   State<ReactionCard> createState() => _ReactionCardState();
@@ -19,6 +20,14 @@ class ReactionCard extends StatefulWidget {
 
 class _ReactionCardState extends State<ReactionCard> {
   ReactionType? creatingReaction;
+
+  void setReaction(ReactionType type, Map<String, String> data) {
+    widget.manager.setReaction(
+      widget.actionReaction.id,
+      type,
+      data,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,7 @@ class _ReactionCardState extends State<ReactionCard> {
               : Theme.of(context).colorScheme.darkColor2),
       width: kIsPc ? 312.0.ratioW() : 165.0.ratioW(),
       height: kIsPc ? 138.0.ratioH() : 400.0.ratioH(),
-      child: widget.reaction == null
+      child: widget.actionReaction.reaction == null
           ? (creatingReaction == null
               ? ReactionSelection(
                   label: 'Google',
@@ -48,7 +57,7 @@ class _ReactionCardState extends State<ReactionCard> {
               : ReactionForm(
                   reactionType: creatingReaction!,
                   onSubmit: (Map<String, String> data) =>
-                      <void>{widget.setReaction(creatingReaction, data)}))
+                      <void>{setReaction(creatingReaction!, data)}))
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -68,7 +77,8 @@ class _ReactionCardState extends State<ReactionCard> {
                       IconButton(
                         icon: const Icon(Icons.edit),
                         onPressed: () {
-                          widget.setReaction(null, null);
+                          widget.manager
+                              .removeReactionLocally(widget.actionReaction.id);
                         },
                       ),
                     ],
@@ -76,7 +86,7 @@ class _ReactionCardState extends State<ReactionCard> {
                   Divider(
                     color: Theme.of(context).colorScheme.lightColor4,
                   ),
-                  Text(widget.reaction!.type.toString(),
+                  Text(widget.actionReaction.reaction!.type.toString(),
                       style: Theme.of(context).textTheme.headlineMedium),
                   Text('Description',
                       style: Theme.of(context).textTheme.headlineSmall),

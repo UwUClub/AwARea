@@ -26,6 +26,15 @@ class MkActionReaction {
 enum ActionType {
   NASA_GET_APOD,
   WEATHER_GET_CURRENT,
+  PULL_REQUEST_CREATED,
+  ISSUE_OPENED,
+  BRANCH_MERGED,
+  PULL_REQUEST_REVIEW_REQUESTED,
+  PULL_REQUEST_REVIEW_REQUEST_REMOVED,
+  BRANCH_CREATED,
+  BRANCH_DELETED,
+  STAR_ADDED,
+  STAR_REMOVED,
   NONE,
 }
 
@@ -102,7 +111,17 @@ class ActionReactionManager extends ChangeNotifier {
     }
   }
 
-  Future<bool> addAction(String name, ActionType actionType) async {
+  void addLocalActionForm(String name, ActionType type) {
+    actionsReactions.add(MkActionReaction(
+      id: 'local',
+      name: name,
+      action: MkAction(type: type),
+    ));
+    notifyListeners();
+  }
+
+  Future<bool> addAction(ActionType actionType, String name,
+      Map<String, String> body, int localIndex) async {
     try {
       final UserManager userManager = locator<UserManager>();
 
@@ -120,26 +139,21 @@ class ActionReactionManager extends ChangeNotifier {
 
       // Create Action
       final String id = jsonDecode(res.body)['id'] as String;
-      final http.Response res2 = await http.post(
-          Uri.parse('$kBaseUrl/action-reaction/$id/action'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-            'Authorization': 'Bearer ${userManager.accessToken}',
-          },
-          body: jsonEncode(<String, String>{
-            'actionType': actionType.name,
-            'location': 'Paris'
-          }));
+      final http.Response res2 =
+          await http.post(Uri.parse('$kBaseUrl/action-reaction/$id/action'),
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Authorization': 'Bearer ${userManager.accessToken}',
+              },
+              body: jsonEncode(body));
       if (res2.statusCode != 201) {
         return false;
       }
 
       // Update local list
-      actionsReactions.add(MkActionReaction(
-        id: id,
-        name: name,
-        action: MkAction(type: actionType),
-      ));
+      actionsReactions[localIndex].id = id;
+      actionsReactions[localIndex].name = name;
+      actionsReactions[localIndex].action = MkAction(type: actionType);
       notifyListeners();
       return true;
     } catch (e) {

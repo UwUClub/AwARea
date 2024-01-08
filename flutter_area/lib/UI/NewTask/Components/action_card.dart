@@ -3,17 +3,14 @@ import '../../../Core/Manager/action_reaction_manager.dart';
 import '../../../Utils/Extensions/color_extensions.dart';
 import '../../../Utils/Extensions/double_extensions.dart';
 import '../../../Utils/constants.dart';
+import 'action_form.dart';
 
 class ActionCard extends StatefulWidget {
   const ActionCard(
-      {super.key,
-      required this.actionReactionName,
-      required this.action,
-      required this.delete});
+      {super.key, required this.actionReaction, required this.manager});
 
-  final String actionReactionName;
-  final MkAction action;
-  final void Function() delete;
+  final MkActionReaction actionReaction;
+  final ActionReactionManager manager;
 
   @override
   State<ActionCard> createState() => _ActionCardState();
@@ -38,7 +35,7 @@ class _ActionCardState extends State<ActionCard> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Text('Action ${widget.actionReactionName}',
+                Text('Action ${widget.actionReaction.name}',
                     style: kIsPc
                         ? Theme.of(context).textTheme.headlineLarge
                         : Theme.of(context)
@@ -49,7 +46,7 @@ class _ActionCardState extends State<ActionCard> {
                 IconButton(
                   icon: const Icon(Icons.delete),
                   onPressed: () {
-                    widget.delete();
+                    // manager.deleteAction...
                   },
                 ),
               ],
@@ -57,10 +54,25 @@ class _ActionCardState extends State<ActionCard> {
             Divider(
               color: Theme.of(context).colorScheme.lightColor4,
             ),
-            Text(widget.action.type.toString(),
-                style: Theme.of(context).textTheme.headlineMedium),
-            Text('Description',
-                style: Theme.of(context).textTheme.headlineSmall),
+            if (widget.actionReaction.id == 'local')
+              ActionForm(
+                actionReaction: widget.actionReaction,
+                onSubmit: (Map<String, String> data) => <Future<bool>>{
+                  widget.manager.addAction(
+                      widget.actionReaction.action.type,
+                      widget.actionReaction.name,
+                      data,
+                      widget.manager.actionsReactions
+                          .indexOf(widget.actionReaction))
+                },
+              )
+            else
+              Column(children: <Widget>[
+                Text(widget.actionReaction.action.type.toString(),
+                    style: Theme.of(context).textTheme.headlineMedium),
+                Text('Description',
+                    style: Theme.of(context).textTheme.headlineSmall),
+              ]),
           ]),
     );
   }

@@ -11,11 +11,11 @@ class ActionSelection extends StatelessWidget {
       {super.key,
       required this.label,
       required this.actionTypes,
-      required this.addAction});
+      required this.manager});
 
   final String label;
   final List<ActionType>? actionTypes;
-  final void Function(String, ActionType) addAction;
+  final ActionReactionManager manager;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class ActionSelection extends StatelessWidget {
                 final String? name =
                     await prompt(context, title: const Text('Action name:'));
                 if (name != null) {
-                  addAction(name, actionType);
+                  manager.addLocalActionForm(name, actionType);
                 }
               },
             ),

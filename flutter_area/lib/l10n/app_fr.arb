@@ -42,6 +42,7 @@
     "myProfile": "Mon profil",
     "logout": "Se déconnecter",
     "promptActionName": "Nom de l'action:",
+    "createAction": "Créer l'action",
     "createReaction": "Créer la réaction",
     "downloadAPK": "Télécharger l'APK Android"
 }
