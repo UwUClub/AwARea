@@ -3,9 +3,9 @@ import { SlackController } from './slack.controller';
 import { UsersModule } from 'src/users/users.module';
 
 @Module({
-    imports: [UsersModule],
-    controllers: [SlackController],
-    providers: [],
-    exports: [],
+  imports: [UsersModule],
+  controllers: [SlackController],
+  providers: [],
+  exports: [],
 })
-export class SlackModule { }
+export class SlackModule {}

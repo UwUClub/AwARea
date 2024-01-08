@@ -8,12 +8,9 @@ import { UsersMapper } from './users.mapper';
 import { GithubApiModule } from '../github-api/github-api.module';
 
 @Module({
-    imports: [
-        MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
-        GithubApiModule,
-    ],
-    controllers: [UsersController],
-    providers: [UsersService, UsersRepository, UsersMapper],
-    exports: [UsersService, UsersRepository, UsersMapper],
+  imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]), GithubApiModule],
+  controllers: [UsersController],
+  providers: [UsersService, UsersRepository, UsersMapper],
+  exports: [UsersService, UsersRepository, UsersMapper],
 })
 export class UsersModule {}

@@ -1,12 +1,4 @@
-import {
-    Body,
-    Controller,
-    Get,
-    NotImplementedException,
-    Param,
-    Patch,
-    Post,
-} from '@nestjs/common';
+import { Body, Controller, Get, NotImplementedException, Param, Patch, Post } from '@nestjs/common';
 import { ActionReactionService } from './action-reaction.service';
 import { Protect } from '../auth/_utils/decorators/protect.decorator';
 import { ConnectedUser } from '../auth/_utils/decorators/connected-user.decorator';
@@ -24,74 +16,58 @@ import { CreateReactionDto } from '../reactions/_utils/dto/request/create-reacti
 @ApiTags('Action Reaction')
 @Controller('action-reaction')
 export class ActionReactionController {
-    constructor(
-        private readonly actionReactionService: ActionReactionService,
-    ) {}
+  constructor(private readonly actionReactionService: ActionReactionService) {}
 
-    @Protect()
-    @Get()
-    getActionReactions(@ConnectedUser() user: UserDocument) {
-        return this.actionReactionService.getActionReactions(user);
-    }
+  @Protect()
+  @Get()
+  getActionReactions(@ConnectedUser() user: UserDocument) {
+    return this.actionReactionService.getActionReactions(user);
+  }
 
-    @Protect()
-    @Post()
-    createActionReaction(
-        @ConnectedUser() user: UserDocument,
-        @Body() body: CreateActionReactionDto,
-    ) {
-        return this.actionReactionService.createActionReaction(user, body);
-    }
+  @Protect()
+  @Post()
+  createActionReaction(@ConnectedUser() user: UserDocument, @Body() body: CreateActionReactionDto) {
+    return this.actionReactionService.createActionReaction(user, body);
+  }
 
-    @Protect()
-    @Get(':action_reaction_id')
-    @ApiParam({ name: 'action_reaction_id', type: String })
-    getActionReaction(
-        @Param('action_reaction_id') id: string,
-        @ConnectedUser() user: UserDocument,
-    ) {
-        return this.actionReactionService.getActionReactionById(id, user);
-    }
+  @Protect()
+  @Get(':action_reaction_id')
+  @ApiParam({ name: 'action_reaction_id', type: String })
+  getActionReaction(@Param('action_reaction_id') id: string, @ConnectedUser() user: UserDocument) {
+    return this.actionReactionService.getActionReactionById(id, user);
+  }
 
-    @Protect()
-    @Post(':action_reaction_id/action')
-    @ApiParam({ name: 'action_reaction_id', type: String })
-    createAction(
-        @Param('action_reaction_id', GetActionReaction)
-        actionReaction: ActionReactionDocument,
-        @ConnectedUser() user: UserDocument,
-        @Body() body: CreateActionDto,
-    ) {
-        return this.actionReactionService.createAction(
-            user,
-            body,
-            actionReaction,
-        );
-    }
+  @Protect()
+  @Post(':action_reaction_id/action')
+  @ApiParam({ name: 'action_reaction_id', type: String })
+  createAction(
+    @Param('action_reaction_id', GetActionReaction)
+    actionReaction: ActionReactionDocument,
+    @ConnectedUser() user: UserDocument,
+    @Body() body: CreateActionDto,
+  ) {
+    return this.actionReactionService.createAction(user, body, actionReaction);
+  }
 
-    @Protect()
-    @Post(':action_reaction_id/reaction')
-    @ApiParam({ name: 'action_reaction_id', type: String })
-    createReaction(
-        @Param('action_reaction_id', GetActionReaction)
-        actionReaction: ActionReactionDocument,
-        @ConnectedUser() user: UserDocument,
-        @Body() body: CreateReactionDto,
-    ) {
-        return this.actionReactionService.createReaction(
-            user,
-            body,
-            actionReaction,
-        );
-    }
+  @Protect()
+  @Post(':action_reaction_id/reaction')
+  @ApiParam({ name: 'action_reaction_id', type: String })
+  createReaction(
+    @Param('action_reaction_id', GetActionReaction)
+    actionReaction: ActionReactionDocument,
+    @ConnectedUser() user: UserDocument,
+    @Body() body: CreateReactionDto,
+  ) {
+    return this.actionReactionService.createReaction(user, body, actionReaction);
+  }
 
-    @Protect()
-    @Patch(':action_reaction_id')
-    updateActionReaction(
-        @Param('action_reaction_id') id: string,
-        @Body() body: UpdateActionReactionDto,
-        @ConnectedUser() user: UserDocument,
-    ) {
-        return this.actionReactionService.updateActionReaction(user, id, body);
-    }
+  @Protect()
+  @Patch(':action_reaction_id')
+  updateActionReaction(
+    @Param('action_reaction_id') id: string,
+    @Body() body: UpdateActionReactionDto,
+    @ConnectedUser() user: UserDocument,
+  ) {
+    return this.actionReactionService.updateActionReaction(user, id, body);
+  }
 }

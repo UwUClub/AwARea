@@ -10,8 +10,8 @@ export type ActionDocumentType = NasaApodActionDocument | WeatherActionDocument;
 
 @Schema({ discriminatorKey: 'actionType' })
 export class Action {
-    @Prop({ required: true, enum: ActionTypeEnum, type: String })
-    actionType: ActionTypeEnum;
+  @Prop({ required: true, enum: ActionTypeEnum, type: String })
+  actionType: ActionTypeEnum;
 }
 
 export const ActionSchema = SchemaFactory.createForClass(Action);

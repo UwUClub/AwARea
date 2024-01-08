@@ -16,28 +16,26 @@ import { SlackModule } from './slack/slack.module';
 import { GithubApiModule } from './github-api/github-api.module';
 
 @Module({
-    imports: [
-        ScheduleModule.forRoot(),
-        MongooseModule.forRootAsync({
-            useFactory: async (
-                configService: ConfigService<EnvironmentVariables, true>,
-            ) => ({
-                uri: configService.get('MONGO_URI'),
-            }),
-            inject: [ConfigService],
-        }),
-        UsersModule,
-        AuthModule,
-        ConfigModule.forRoot({ validate: validateEnv, isGlobal: true }),
-        WeatherModule,
-        NasaModule,
-        AboutModule,
-        ActionReactionModule,
-        ActionsModule,
-        ReactionsModule,
-        GoogleApiModule,
-        SlackModule,
-        GithubApiModule,
-    ],
+  imports: [
+    ScheduleModule.forRoot(),
+    MongooseModule.forRootAsync({
+      useFactory: async (configService: ConfigService<EnvironmentVariables, true>) => ({
+        uri: configService.get('MONGO_URI'),
+      }),
+      inject: [ConfigService],
+    }),
+    UsersModule,
+    AuthModule,
+    ConfigModule.forRoot({ validate: validateEnv, isGlobal: true }),
+    WeatherModule,
+    NasaModule,
+    AboutModule,
+    ActionReactionModule,
+    ActionsModule,
+    ReactionsModule,
+    GoogleApiModule,
+    SlackModule,
+    GithubApiModule,
+  ],
 })
-export class AppModule { }
+export class AppModule {}

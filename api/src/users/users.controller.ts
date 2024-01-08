@@ -10,27 +10,21 @@ import { AddGithubTokenDto } from './_utils/dto/request/add-github-token.dto';
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
-    constructor(
-        private readonly usersMapper: UsersMapper,
-        private readonly usersService: UsersService,
-    ) {}
+  constructor(
+    private readonly usersMapper: UsersMapper,
+    private readonly usersService: UsersService,
+  ) {}
 
-    @Protect()
-    @Get('me')
-    getMe(@ConnectedUser() user: UserDocument) {
-        return this.usersMapper.toGetUserDto(user);
-    }
+  @Protect()
+  @Get('me')
+  getMe(@ConnectedUser() user: UserDocument) {
+    return this.usersMapper.toGetUserDto(user);
+  }
 
-    @Protect()
-    @Post('github-token')
-    async updateGithubToken(
-        @ConnectedUser() user: UserDocument,
-        @Body() body: AddGithubTokenDto,
-    ) {
-        const updatedUser = await this.usersService.updateGithubToken(
-            user,
-            body.githubToken,
-        );
-        return this.usersMapper.toGetUserDto(updatedUser);
-    }
+  @Protect()
+  @Post('github-token')
+  async updateGithubToken(@ConnectedUser() user: UserDocument, @Body() body: AddGithubTokenDto) {
+    const updatedUser = await this.usersService.updateGithubToken(user, body.githubToken);
+    return this.usersMapper.toGetUserDto(updatedUser);
+  }
 }
