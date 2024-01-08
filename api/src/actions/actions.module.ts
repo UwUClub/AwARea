@@ -9,6 +9,7 @@ import { WeatherActionSchema } from './schemas/weather-action.schema';
 import { ActionsRepository } from './actions.repository';
 import { WeatherModule } from '../weather/weather.module';
 import { NasaModule } from '../nasa/nasa.module';
+import { GithubApiSchema } from './schemas/github-api.schema';
 
 @Module({
     imports: [
@@ -16,16 +17,24 @@ import { NasaModule } from '../nasa/nasa.module';
             {
                 name: Action.name,
                 schema: ActionSchema,
-                discriminators: [
-                    {
-                        name: ActionTypeEnum.NASA_GET_APOD,
-                        schema: NasaApodActionSchema,
-                    },
-                    {
-                        name: ActionTypeEnum.WEATHER_GET_CURRENT,
-                        schema: WeatherActionSchema,
-                    },
-                ],
+                discriminators: Object.entries({
+                    [ActionTypeEnum.NASA_GET_APOD]: NasaApodActionSchema,
+                    [ActionTypeEnum.WEATHER_GET_CURRENT]: WeatherActionSchema,
+                    [ActionTypeEnum.BRANCH_CREATED]: GithubApiSchema,
+                    [ActionTypeEnum.BRANCH_DELETED]: GithubApiSchema,
+                    [ActionTypeEnum.BRANCH_MERGED]: GithubApiSchema,
+                    [ActionTypeEnum.ISSUE_OPENED]: GithubApiSchema,
+                    [ActionTypeEnum.PULL_REQUEST_CREATED]: GithubApiSchema,
+                    [ActionTypeEnum.PULL_REQUEST_REVIEW_REQUEST_REMOVED]:
+                        GithubApiSchema,
+                    [ActionTypeEnum.PULL_REQUEST_REVIEW_REQUESTED]:
+                        GithubApiSchema,
+                    [ActionTypeEnum.STAR_ADDED]: GithubApiSchema,
+                    [ActionTypeEnum.STAR_REMOVED]: GithubApiSchema,
+                }).map(([name, schema]) => ({
+                    name,
+                    schema,
+                })),
             },
         ]),
         WeatherModule,
