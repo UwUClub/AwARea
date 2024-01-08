@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../Core/Manager/action_manager.dart';
 import '../../../Utils/Extensions/color_extensions.dart';
-import '../../../Utils/Extensions/double_extensions.dart';
 
 import '../../ReusableWidgets/mk_button.dart';
 
