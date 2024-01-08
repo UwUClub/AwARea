@@ -3,11 +3,15 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsOptional, IsString } from 'class-validator';
 
 export class CreateActionDto {
-    @ApiProperty({ enum: ActionTypeEnum })
-    @IsEnum(ActionTypeEnum)
-    actionType: ActionTypeEnum;
+  @ApiProperty({ enum: ActionTypeEnum })
+  @IsEnum(ActionTypeEnum)
+  actionType: ActionTypeEnum;
 
-    @IsString()
-    @IsOptional()
-    location?: string;
+  @IsString()
+  @IsOptional()
+  location?: string;
+
+  @IsString()
+  @IsOptional()
+  githubRepoName?: string;
 }

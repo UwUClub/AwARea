@@ -30,6 +30,9 @@ export class EnvironmentVariables {
 
     @IsString()
     GOOGLE_CALLBACK_URL: string = 'c4b';
+
+    @IsString()
+    GITHUB_CALLBACK_URL: string = 'c4b';
 }
 
 export function validateEnv(config: Record<string, unknown>) {

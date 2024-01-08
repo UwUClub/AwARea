@@ -29,6 +29,9 @@ export class ActionReaction {
 
     @Prop({ default: null })
     actionReactionSchedule: string | null;
+
+    @Prop({ default: false })
+    isActive: boolean;
 }
 
 export const ActionReactionSchema =

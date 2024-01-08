@@ -8,43 +8,36 @@ import { GoogleUserCreationInterface } from './_utils/google-user-creation.inter
 
 @Injectable()
 export class UsersRepository {
-    constructor(
-        @InjectModel(User.name) private userModel: Model<UserDocument>,
-    ) {}
+  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-    create = (userDto: CreateUserDto) =>
-        this.userModel.create({
-            username: userDto.username,
-            fullName: userDto.fullName,
-            email: userDto.email,
-            password: hashSync(userDto.password, 10),
-        });
+  create = (userDto: CreateUserDto) =>
+    this.userModel.create({
+      username: userDto.username,
+      fullName: userDto.fullName,
+      email: userDto.email,
+      password: hashSync(userDto.password, 10),
+    });
 
-    createOAuthUser = (userInfo: GoogleUserCreationInterface) =>
-        this.userModel.create({
-            fullName: userInfo.fullName,
-            email: userInfo.email,
-            password: null,
-            username: null,
-            googleId: userInfo.googleId,
-            googleAccessToken: userInfo.googleAccessToken,
-        });
+  createOAuthUser = (userInfo: GoogleUserCreationInterface) =>
+    this.userModel.create({
+      fullName: userInfo.fullName,
+      email: userInfo.email,
+      password: null,
+      username: null,
+      googleId: userInfo.googleId,
+      googleAccessToken: userInfo.googleAccessToken,
+    });
 
-    findOneByGoogleId = (googleId: string) =>
-        this.userModel.findOne({ googleId: googleId }).exec();
+  findOneByGoogleId = (googleId: string) => this.userModel.findOne({ googleId: googleId }).exec();
 
-    findOneByEmail = (email: string) =>
-        this.userModel.findOne({ email: email }).exec();
+  findOneByGithubId = (githubId: string) => this.userModel.find({ githubId: githubId }).exec();
 
-    findOneByUsername = (username: string) =>
-        this.userModel.findOne({ username: username }).exec();
+  findOneByEmail = (email: string) => this.userModel.findOne({ email: email }).exec();
 
-    findById = (id: string) =>
-        this.userModel
-            .findById(id)
-            .orFail(new NotFoundException('User not found'))
-            .exec();
+  findOneByUsername = (username: string) => this.userModel.findOne({ username: username }).exec();
 
-    updateOneById = (id: Types.ObjectId, update: Partial<UserDocument>) =>
-        this.userModel.findByIdAndUpdate(id, update, { new: true }).exec();
+  findById = (id: string) => this.userModel.findById(id).orFail(new NotFoundException('User not found')).exec();
+
+  updateOneById = (id: Types.ObjectId, update: Partial<UserDocument>) =>
+    this.userModel.findByIdAndUpdate(id, update, { new: true }).exec();
 }

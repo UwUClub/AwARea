@@ -13,6 +13,7 @@ import { ActionsModule } from './actions/actions.module';
 import { ReactionsModule } from './reactions/reactions.module';
 import { GoogleApiModule } from './google-api/google-api.module';
 import { SlackModule } from './slack/slack.module';
+import { GithubApiModule } from './github-api/github-api.module';
 
 @Module({
     imports: [
@@ -36,6 +37,7 @@ import { SlackModule } from './slack/slack.module';
         ReactionsModule,
         GoogleApiModule,
         SlackModule,
+        GithubApiModule,
     ],
 })
 export class AppModule { }

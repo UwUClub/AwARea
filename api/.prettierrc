@@ -1,6 +1,7 @@
 {
     "singleQuote": true,
     "trailingComma": "all",
-    "tabWidth": 4,
-    "max_line_length": 120
+    "tabWidth": 2,
+    "max_line_length": 120,
+    "printWidth": 120
 }

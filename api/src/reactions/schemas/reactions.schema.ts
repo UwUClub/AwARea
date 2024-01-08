@@ -9,8 +9,8 @@ export type ReactionDocumentType = CreateDraftDocument;
 
 @Schema({ discriminatorKey: 'reactionType' })
 export class Reaction {
-    @Prop({ required: true, enum: ReactionTypeEnum, type: String })
-    reactionType: ReactionTypeEnum;
+  @Prop({ required: true, enum: ReactionTypeEnum, type: String })
+  reactionType: ReactionTypeEnum;
 }
 
 export const ReactionSchema = SchemaFactory.createForClass(Reaction);
