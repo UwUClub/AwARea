@@ -8,6 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 
 import '../../Core/Locator/locator.dart';
+import '../../Core/Manager/github_manager.dart';
 import '../../Core/Manager/user_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
@@ -24,7 +25,7 @@ class CallbackGithubView extends StatefulWidget {
 class CallbackGithubViewState extends State<CallbackGithubView> {
   String? token;
   bool? isSignedIn;
-  UserManager userManager = locator<UserManager>();
+  GithubManager githubManager = locator<GithubManager>();
 
   @override
   void initState() {
