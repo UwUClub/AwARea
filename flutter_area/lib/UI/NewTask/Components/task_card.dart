@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../Core/Manager/action_manager.dart';
+import '../../../Core/Manager/action_reaction_manager.dart';
 
 class TaskCard extends StatefulWidget {
   const TaskCard({super.key, required this.action, required this.delete});
@@ -17,7 +17,7 @@ class _TaskCardState extends State<TaskCard> {
     return Column(children: <Widget>[
       Row(
         children: <Widget>[
-          Text(widget.action.name),
+          Text(widget.action.type.toString()),
           IconButton(
             icon: const Icon(Icons.delete),
             onPressed: () {
@@ -26,7 +26,7 @@ class _TaskCardState extends State<TaskCard> {
           ),
         ],
       ),
-      Text(widget.action.description),
+      const Text('Description'),
     ]);
   }
 }

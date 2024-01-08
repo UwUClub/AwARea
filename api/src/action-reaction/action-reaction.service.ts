@@ -17,6 +17,10 @@ import { ReactionRepository } from '../reactions/reaction.repository';
 import { ActionReactionDocument } from './action-reaction.schema';
 import { WeatherService } from '../weather/weather.service';
 import { GoogleApiService } from '../google-api/google-api.service';
+import { CreateActionDto } from '../actions/_utils/dto/request/create-action.dto';
+import { ActionsService } from '../actions/actions.service';
+import { ReactionsService } from '../reactions/reactions.service';
+import { CreateReactionDto } from '../reactions/_utils/dto/request/create-reaction.dto';
 
 @Injectable()
 export class ActionReactionService {
@@ -24,9 +28,9 @@ export class ActionReactionService {
         private readonly actionReactionRepository: ActionReactionRepository,
         private readonly actionReactionMapper: ActionReactionMapper,
         private readonly actionRepository: ActionsRepository,
+        private readonly actionService: ActionsService,
         private readonly reactionRepository: ReactionRepository,
-        private readonly weatherService: WeatherService,
-        private readonly googleService: GoogleApiService,
+        private readonly reactionService: ReactionsService,
         private schedulerRegistry: SchedulerRegistry,
     ) {}
 
@@ -71,7 +75,48 @@ export class ActionReactionService {
         return this.actionReactionMapper.toGetActionReactionDto(actionReaction);
     }
 
-    async createMvpActionReaction(
+    async createAction(
+        user: UserDocument,
+        queryDto: CreateActionDto,
+        actionReaction: ActionReactionDocument,
+    ) {
+        if (actionReaction.user._id.toString() !== user._id.toString())
+            throw new BadRequestException(
+                'You are not the owner of this action reaction',
+            );
+        const action = await this.actionService.createAction(user, queryDto);
+        actionReaction =
+            await this.actionReactionRepository.updateActionReaction(
+                actionReaction._id,
+                action,
+                null,
+            );
+        return this.actionReactionMapper.toGetActionReactionDto(actionReaction);
+    }
+
+    async createReaction(
+        user: UserDocument,
+        queryDto: CreateReactionDto,
+        actionReaction: ActionReactionDocument,
+    ) {
+        if (actionReaction.user._id.toString() !== user._id.toString())
+            throw new BadRequestException(
+                'You are not the owner of this action reaction',
+            );
+        const reaction = await this.reactionService.createReaction(
+            user,
+            queryDto,
+        );
+        actionReaction =
+            await this.actionReactionRepository.updateActionReaction(
+                actionReaction._id,
+                null,
+                reaction,
+            );
+        return this.actionReactionMapper.toGetActionReactionDto(actionReaction);
+    }
+
+    /* async createMvpActionReaction(
         user: UserDocument,
         queryDto: CreateActionReactionDto,
     ) {
@@ -103,21 +148,7 @@ export class ActionReactionService {
         newJob.start();
         console.log('newJob', newJob);
         return this.actionReactionMapper.toGetActionReactionDto(actionReaction);
-    }
-
-    private async applyActionReactionWeatherDraft(
-        actionReaction: ActionReactionDocument,
-    ) {
-        if (actionReaction.user instanceof Types.ObjectId)
-            throw new InternalServerErrorException('USER_IS_NOT_POPULATED');
-        const weather = await this.weatherService.getWeather('Toulouse');
-
-        console.log('weather', weather);
-        return this.googleService.createDraft(
-            actionReaction.user,
-            "it's " + weather.weather[0].main,
-        );
-    }
+    } */
 
     async updateActionReaction(
         user: UserDocument,
@@ -139,7 +170,10 @@ export class ActionReactionService {
             : null;
 
         const reaction = queryDto.reactionId
-            ? await this.reactionRepository.getReactionById(queryDto.reactionId)
+            ? await this.reactionRepository.getReactionById(
+                  queryDto.reactionId,
+                  user,
+              )
             : null;
 
         actionReaction =

@@ -25,14 +25,20 @@ class _LoginFormState extends State<LoginForm> {
   String _emailOrUsername = '';
   String _password = '';
   String? _errorMessage;
+  bool loading = false;
 
   Future<void> login() async {
+    setState(() => loading = true);
     final (bool success, String? error) =
         await userManager.login(_emailOrUsername, _password);
     if (success) {
       Navigator.of(context).pushNamed('/home');
+      setState(() => loading = false);
     } else {
-      setState(() => _errorMessage = error);
+      setState(() {
+        _errorMessage = error;
+        loading = false;
+      });
     }
   }
 
@@ -40,19 +46,27 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-          vertical: kDeviceWidth > kLargeScreenWidth ? 108.0.ratioH() : 0),
+          vertical:
+              kDeviceWidth > kLargeScreenWidth ? 32.0.ratioH() : 50.0.ratioH()),
       width: MediaQuery.of(context).size.width,
-      color: Theme.of(context).brightness == Brightness.light
-          ? Theme.of(context).colorScheme.lightColor2
-          : Theme.of(context).colorScheme.darkColor2,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16.0.ratioW()),
+        color: Theme.of(context).brightness == Brightness.light
+            ? Theme.of(context).colorScheme.lightColor2
+            : Theme.of(context).colorScheme.darkColor2,
+      ),
       child: Center(
         child: Container(
           padding: kDeviceWidth > kLargeScreenWidth
               ? null
-              : EdgeInsets.symmetric(horizontal: 30.0.ratioH()),
+              : EdgeInsets.symmetric(horizontal: 100.0.ratioH()),
           width: kDeviceWidth > kLargeScreenWidth ? 333.0.ratioW() : null,
           child: Column(children: <Widget>[
             const GoogleButton(),
+            if (kDeviceWidth > kLargeScreenWidth)
+              const SizedBox()
+            else
+              SizedBox(height: 20.0.ratioH()),
             Text(AppLocalizations.of(context)!.loginTitle,
                 style: Theme.of(context).textTheme.headlineLarge),
             Divider(
@@ -72,7 +86,8 @@ class _LoginFormState extends State<LoginForm> {
             MkInput(
                 label: AppLocalizations.of(context)!.password,
                 onChanged: (String text) => setState(() => _password = text),
-                placeholder: AppLocalizations.of(context)!.passwordPlaceholder),
+                placeholder: AppLocalizations.of(context)!.passwordPlaceholder,
+                displayed: false),
             SizedBox(height: 28.0.ratioH()),
             if (_errorMessage == null)
               const SizedBox()
@@ -80,15 +95,21 @@ class _LoginFormState extends State<LoginForm> {
               Text(_errorMessage!,
                   style: Theme.of(context).textTheme.headlineLarge?.merge(
                       TextStyle(
-                          color: Theme.of(context).colorScheme.redColor))),
+                          color: Theme.of(context).colorScheme.redColor,
+                          fontSize:
+                              kDeviceWidth > kLargeScreenWidth ? null : 12))),
             SizedBox(height: 20.0.ratioH()),
-            MkButton(
-                labelColor: Theme.of(context).colorScheme.darkColor1,
-                backgroundColor: Theme.of(context).colorScheme.lightColor3,
-                label: '${AppLocalizations.of(context)!.login}...',
-                onPressed: () {
-                  login();
-                }),
+            if (loading)
+              CircularProgressIndicator(
+                  color: Theme.of(context).colorScheme.redColor)
+            else
+              MkButton(
+                  labelColor: Theme.of(context).colorScheme.darkColor1,
+                  backgroundColor: Theme.of(context).colorScheme.lightColor3,
+                  label: '${AppLocalizations.of(context)!.login}...',
+                  onPressed: () {
+                    login();
+                  }),
           ]),
         ),
       ),

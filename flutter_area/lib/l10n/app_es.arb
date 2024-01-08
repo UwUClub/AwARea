@@ -31,5 +31,17 @@
     "connect": "",
     "google": " Google",
     "connectGoogle": "",
-    "home": ""
+    "slack": " Slack",
+    "connectSlack": "",
+    "validate": "",
+    "home": "",
+    "connectionGithub": "",
+    "inProgress": "",
+    "completed": "",
+    "failed": "",
+    "myProfile": "",
+    "logout": "",
+    "promptActionName": "",
+    "createReaction": "",
+    "downloadAPK": ""
 }

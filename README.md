@@ -69,10 +69,10 @@ And add `'--disable-web-security'` under `'--disable-extensions'` in `{your_flut
 ## Credits
 
 -   Valentin Gegoux
--   Baptiste Laran
 -   Quentin Challon
 -   Luca Deltort
 -   Maxence Labourel
+-   Baptiste Laran
 
 ## License
 

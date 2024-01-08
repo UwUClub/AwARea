@@ -36,6 +36,10 @@ jobs:
 
             - name: Build APK
               run: |
+                  touch .env
+                  echo GITHUB_CLIENT_ID='${{ secrets.GTHUB_CLIENT_ID }}' >> .env
+                  echo GITHUB_CLIENT_SECRET='${{ secrets.GTHUB_CLIENT_SECRET }}' >> .env
+                  cat .env
                   flutter build apk --release
                   mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/maker.apk
                   keytool -printcert -jarfile build/app/outputs/flutter-apk/maker.apk > build/app/outputs/flutter-apk/sha_key_google.txt
@@ -52,7 +56,6 @@ jobs:
               with:
                   name: sha_key.txt
                   path: ./flutter_area/build/app/outputs/flutter-apk/sha_key_google.txt
-
 
             - name: Publish Tagged Release
               uses: softprops/action-gh-release@v1

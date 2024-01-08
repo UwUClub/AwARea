@@ -5,11 +5,16 @@ import '../../Utils/Extensions/double_extensions.dart';
 
 class MkInput extends StatefulWidget {
   const MkInput(
-      {super.key, required this.label, this.placeholder, this.onChanged});
+      {super.key,
+      this.label,
+      this.placeholder,
+      this.onChanged,
+      this.displayed = true});
 
-  final String label;
+  final String? label;
   final String? placeholder;
   final void Function(String)? onChanged;
+  final bool displayed;
 
   @override
   State<MkInput> createState() => _MkInputState();
@@ -21,13 +26,15 @@ class _MkInputState extends State<MkInput> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(widget.label,
-            style: Theme.of(context).textTheme.labelMedium,
-            textAlign: TextAlign.left),
-        SizedBox(height: 6.0.ratioH()),
-        TextField(
+        if (widget.label != null)
+          Text(widget.label!,
+              style: Theme.of(context).textTheme.labelMedium,
+              textAlign: TextAlign.left),
+        if (widget.label != null) SizedBox(height: 6.0.ratioH()),
+        TextFormField(
           style: Theme.of(context).textTheme.displayMedium,
           onChanged: widget.onChanged,
+          obscureText: !widget.displayed,
           decoration: InputDecoration(
               hintText: widget.placeholder,
               hintStyle: Theme.of(context).textTheme.displayMedium,

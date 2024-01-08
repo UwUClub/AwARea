@@ -5,6 +5,7 @@ import { EnvironmentVariables } from '../_utils/config';
 import { google } from 'googleapis';
 import { GoogleLoginDto } from '../auth/_utils/dto/request/google-login.dto';
 import { UserDocument } from '../users/users.schema';
+import { ReactionDocumentType } from '../reactions/schemas/reactions.schema';
 
 @Injectable()
 export class GoogleApiService {
@@ -26,17 +27,18 @@ export class GoogleApiService {
         this.oAuth2Client.setCredentials({ access_token: accessToken });
     }
 
-    private getGoogleProfile(accessToken: string) {
+    private async getGoogleProfile(accessToken: string) {
         this.setAccessToken(accessToken);
-        return google
-            .oauth2({
-                auth: this.oAuth2Client,
-                version: 'v2',
-            })
-            .userinfo.get()
-            .catch(() => {
-                throw new UnauthorizedException('Bad access token');
-            });
+        try {
+            return await google
+                .oauth2({
+                    auth: this.oAuth2Client,
+                    version: 'v2',
+                })
+                .userinfo.get();
+        } catch {
+            throw new UnauthorizedException('Bad access token');
+        }
     }
 
     private createMailFromInfo(to: string, subject: string, body: string) {
@@ -49,7 +51,9 @@ export class GoogleApiService {
         return Buffer.from(message).toString('base64');
     }
 
-    async createDraft(user: UserDocument, body: string) {
+    async createDraft(user: UserDocument, reaction: ReactionDocumentType) {
+        if (reaction.reactionType !== 'CREATE_DRAFT')
+            throw new UnauthorizedException('Bad reaction type');
         if (!user.googleAccessToken)
             throw new UnauthorizedException('Not connected with google');
         this.setAccessToken(user.googleAccessToken);
@@ -61,9 +65,9 @@ export class GoogleApiService {
                     id: '',
                     message: {
                         raw: this.createMailFromInfo(
-                            'challon.quentin64@gmail.com',
-                            'Weather at: ' + new Date().toLocaleString('fr-FR'),
-                            body,
+                            reaction.email,
+                            reaction.subject,
+                            reaction.body,
                         ),
                     },
                 },
