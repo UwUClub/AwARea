@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { TasksService } from './task.service';
 import { UsersModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
@@ -13,6 +12,7 @@ import { ActionReactionModule } from './action-reaction/action-reaction.module';
 import { ActionsModule } from './actions/actions.module';
 import { ReactionsModule } from './reactions/reactions.module';
 import { GoogleApiModule } from './google-api/google-api.module';
+import { SlackModule } from './slack/slack.module';
 
 @Module({
     imports: [
@@ -35,7 +35,7 @@ import { GoogleApiModule } from './google-api/google-api.module';
         ActionsModule,
         ReactionsModule,
         GoogleApiModule,
+        SlackModule,
     ],
-    providers: [TasksService],
 })
-export class AppModule {}
+export class AppModule { }

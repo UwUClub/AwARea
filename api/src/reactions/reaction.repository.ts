@@ -4,6 +4,7 @@ import { ReactionTypeEnum } from './_utils/enum/reaction-type.enum';
 import { Model } from 'mongoose';
 import { CreateDraft } from './schemas/create-draft.schema';
 import { Reaction } from './schemas/reactions.schema';
+import { UserDocument } from 'src/users/users.schema';
 
 @Injectable()
 export class ReactionRepository {
@@ -13,15 +14,16 @@ export class ReactionRepository {
         private createDraftModel: Model<CreateDraft>,
     ) {}
 
-    createDraft = (email: string) =>
+    createDraft = (email: string, body: string, subject: string) =>
         this.createDraftModel.create({
             email: email,
-            reactionType: ReactionTypeEnum.CREATE_DRAFT,
+            body: body,
+            subject: subject,
         });
 
-    getReactionById = (id: string) =>
+    getReactionById = (id: string, user: UserDocument) =>
         this.reactionModel
-            .findById(id)
+            .findOne({ _id: id })
             .orFail(new NotFoundException('Reaction not found'))
             .exec();
 }

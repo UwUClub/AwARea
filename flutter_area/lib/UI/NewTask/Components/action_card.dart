@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import '../../../Core/Manager/action_manager.dart';
+import '../../../Core/Manager/action_reaction_manager.dart';
 import '../../../Utils/Extensions/color_extensions.dart';
 import '../../../Utils/Extensions/double_extensions.dart';
 import '../../../Utils/constants.dart';
 
 class ActionCard extends StatefulWidget {
-  const ActionCard({super.key, required this.action, required this.delete});
+  const ActionCard(
+      {super.key,
+      required this.actionReactionName,
+      required this.action,
+      required this.delete});
 
+  final String actionReactionName;
   final MkAction action;
   final void Function() delete;
 
@@ -33,7 +38,7 @@ class _ActionCardState extends State<ActionCard> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Text('Action ${widget.action.service}',
+                Text('Action ${widget.actionReactionName}',
                     style: kIsPc
                         ? Theme.of(context).textTheme.headlineLarge
                         : Theme.of(context)
@@ -52,9 +57,9 @@ class _ActionCardState extends State<ActionCard> {
             Divider(
               color: Theme.of(context).colorScheme.lightColor4,
             ),
-            Text(widget.action.name,
+            Text(widget.action.type.toString(),
                 style: Theme.of(context).textTheme.headlineMedium),
-            Text(widget.action.description,
+            Text('Description',
                 style: Theme.of(context).textTheme.headlineSmall),
           ]),
     );

@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
 
-import '../../../Core/Manager/action_manager.dart';
+import '../../../Core/Manager/action_reaction_manager.dart';
 import '../../../Utils/Extensions/color_extensions.dart';
 import '../../../Utils/Extensions/double_extensions.dart';
 import '../../../Utils/constants.dart';
+import 'reaction_form.dart';
 import 'reaction_selection.dart';
 
 class ReactionCard extends StatefulWidget {
   const ReactionCard({super.key, this.reaction, required this.setReaction});
 
   final MkReaction? reaction;
-  final void Function(MkReaction?) setReaction;
+  final void Function(ReactionType?, Map<String, String>?) setReaction;
 
   @override
   State<ReactionCard> createState() => _ReactionCardState();
 }
 
 class _ReactionCardState extends State<ReactionCard> {
-  void setReaction(MkReaction? reaction) {
-    setState(() {
-      widget.setReaction(reaction);
-    });
-  }
+  ReactionType? creatingReaction;
 
   @override
   Widget build(BuildContext context) {
@@ -37,27 +34,28 @@ class _ReactionCardState extends State<ReactionCard> {
       width: kIsPc ? 312.0.ratioW() : 165.0.ratioW(),
       height: kIsPc ? 138.0.ratioH() : 400.0.ratioH(),
       child: widget.reaction == null
-          ? ReactionSelection(
-              label: 'Google',
-              reactions: <MkReaction>[
-                MkReaction(
-                    service: 'Gmail',
-                    name: 'Send a mail',
-                    description: 'description'),
-                MkReaction(
-                    service: 'Drive',
-                    name: 'Upload a file',
-                    description: 'description'),
-              ],
-              setReaction: setReaction,
-            )
+          ? (creatingReaction == null
+              ? ReactionSelection(
+                  label: 'Google',
+                  reactionTypes: const <ReactionType>[
+                    ReactionType.CREATE_DRAFT,
+                  ],
+                  setReaction: (ReactionType type) {
+                    setState(() {
+                      creatingReaction = type;
+                    });
+                  })
+              : ReactionForm(
+                  reactionType: creatingReaction!,
+                  onSubmit: (Map<String, String> data) =>
+                      <void>{widget.setReaction(creatingReaction, data)}))
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                   Row(
                     children: <Widget>[
                       Text(
-                        'Reaction ${widget.reaction!.service}',
+                        'Reaction',
                         style: kIsPc
                             ? Theme.of(context).textTheme.headlineLarge
                             : Theme.of(context)
@@ -70,7 +68,7 @@ class _ReactionCardState extends State<ReactionCard> {
                       IconButton(
                         icon: const Icon(Icons.edit),
                         onPressed: () {
-                          widget.setReaction(null);
+                          widget.setReaction(null, null);
                         },
                       ),
                     ],
@@ -78,9 +76,9 @@ class _ReactionCardState extends State<ReactionCard> {
                   Divider(
                     color: Theme.of(context).colorScheme.lightColor4,
                   ),
-                  Text(widget.reaction!.name,
+                  Text(widget.reaction!.type.toString(),
                       style: Theme.of(context).textTheme.headlineMedium),
-                  Text(widget.reaction!.description,
+                  Text('Description',
                       style: Theme.of(context).textTheme.headlineSmall),
                 ]),
     );

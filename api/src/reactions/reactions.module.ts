@@ -6,6 +6,7 @@ import { Reaction, ReactionSchema } from './schemas/reactions.schema';
 import { ReactionTypeEnum } from './_utils/enum/reaction-type.enum';
 import { CreateDraftSchema } from './schemas/create-draft.schema';
 import { ReactionRepository } from './reaction.repository';
+import { GoogleApiModule } from '../google-api/google-api.module';
 
 @Module({
     imports: [
@@ -21,9 +22,10 @@ import { ReactionRepository } from './reaction.repository';
                 ],
             },
         ]),
+        GoogleApiModule,
     ],
     controllers: [ReactionsController],
     providers: [ReactionsService, ReactionRepository],
-    exports: [ReactionRepository],
+    exports: [ReactionRepository, ReactionsService],
 })
 export class ReactionsModule {}

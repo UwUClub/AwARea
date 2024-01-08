@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../Core/Manager/action_manager.dart';
+import '../../../Core/Manager/action_reaction_manager.dart';
 import '../../../Utils/Extensions/color_extensions.dart';
 import '../../../Utils/Extensions/double_extensions.dart';
 
@@ -10,12 +10,12 @@ class ReactionSelection extends StatelessWidget {
   const ReactionSelection(
       {super.key,
       required this.label,
-      this.reactions,
+      this.reactionTypes,
       required this.setReaction});
 
   final String label;
-  final List<MkReaction>? reactions;
-  final void Function(MkReaction) setReaction;
+  final List<ReactionType>? reactionTypes;
+  final void Function(ReactionType) setReaction;
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +25,11 @@ class ReactionSelection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(label, style: Theme.of(context).textTheme.headlineMedium),
-              for (final MkReaction reaction in reactions!)
+              for (final ReactionType reactionType in reactionTypes!)
                 Row(
                   children: <Widget>[
                     MkButton(
-                      label: reaction.name,
+                      label: reactionType.toString(),
                       backgroundColor:
                           Theme.of(context).brightness == Brightness.light
                               ? Theme.of(context).colorScheme.lightColor3
@@ -39,7 +39,7 @@ class ReactionSelection extends StatelessWidget {
                               ? Theme.of(context).colorScheme.darkTransColor2
                               : Theme.of(context).colorScheme.lightTransColor2,
                       onPressed: () {
-                        setReaction(reaction);
+                        setReaction(reactionType);
                       },
                     ),
                   ],

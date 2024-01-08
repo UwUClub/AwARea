@@ -12,6 +12,12 @@ export class CreateDraft extends OmitType(Reaction, ['reactionType'] as const) {
 
     @Prop({ required: true })
     email: string;
+
+    @Prop({ required: true })
+    subject: string;
+
+    @Prop({ required: true })
+    body: string;
 }
 
 export const CreateDraftSchema = SchemaFactory.createForClass(CreateDraft);

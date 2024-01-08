@@ -4,10 +4,10 @@ import { ApiTags } from '@nestjs/swagger';
 import { Get } from '@nestjs/common';
 import { Request } from 'express';
 
-@ApiTags('about')
+@ApiTags('About')
 @Controller('about.json')
 export class AboutController {
-  constructor(private readonly aboutService: AboutService) {}
+  constructor(private readonly aboutService: AboutService) { }
 
   @Get()
   async getAbout(@Req() request: Request) {

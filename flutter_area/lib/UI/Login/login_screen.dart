@@ -34,14 +34,16 @@ class _LoginScreenState extends State<LoginScreen> {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
-                top: 50.0.ratioH(),
+                top: kDeviceWidth > kLargeScreenWidth
+                    ? 20.0.ratioH()
+                    : 150.0.ratioH(),
                 left: kDeviceWidth > kLargeScreenWidth
                     ? 237.0.ratioW()
-                    : 33.0.ratioW(),
+                    : 40.0.ratioW(),
                 right: kDeviceWidth > kLargeScreenWidth
                     ? 237.0.ratioW()
-                    : 33.0.ratioW(),
-                bottom: 36.0.ratioH()),
+                    : 40.0.ratioW(),
+                bottom: 18.0.ratioH()),
             child: Column(
               children: <Widget>[
                 Text(
@@ -58,20 +60,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: <Widget>[
                       SvgPicture.asset('assets/images/Logo.svg',
                           semanticsLabel: 'Logo',
-                          width: 40.0.ratioW(),
-                          height: 40.0.ratioH()),
-                      SizedBox(width: 9.0.ratioW()),
-                      Text(
-                        AppLocalizations.of(context)!.subslogan,
-                        style: Theme.of(context).textTheme.headlineLarge?.merge(
-                            TextStyle(
-                                fontSize: kDeviceWidth > kLargeScreenWidth
-                                    ? 26
-                                    : 13)),
-                        textAlign: TextAlign.center,
+                          width: 32.0.ratioW(),
+                          height: 32.0.ratioW()),
+                      SizedBox(width: 10.0.ratioW()),
+                      Flexible(
+                        child: Text(
+                          AppLocalizations.of(context)!.subslogan,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              ?.merge(TextStyle(
+                                  fontSize: kDeviceWidth > kLargeScreenWidth
+                                      ? 26
+                                      : 18)),
+                          textAlign: TextAlign.center,
+                        ),
                       )
                     ]),
-                SizedBox(height: 40.0.ratioH()),
+                SizedBox(height: 20.0.ratioH()),
                 if (kDeviceWidth > kLargeScreenWidth)
                   Flex(direction: Axis.horizontal, children: <Widget>[
                     Flexible(
@@ -110,29 +116,35 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SignupForm(),
                 if (kDeviceWidth <= kLargeScreenWidth)
                   if (_currentForm == FormType.login)
-                    GestureDetector(
-                        onTap: () =>
-                            setState(() => _currentForm = FormType.signUp),
-                        child: Text(
-                          AppLocalizations.of(context)!.signup,
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge
-                              ?.merge(const TextStyle(
-                                decoration: TextDecoration.underline,
-                              )),
-                        ))
-                  else
-                    GestureDetector(
-                        onTap: () =>
-                            setState(() => _currentForm = FormType.login),
-                        child: Text(AppLocalizations.of(context)!.login,
+                    Padding(
+                      padding: EdgeInsets.only(top: 40.0.ratioH()),
+                      child: GestureDetector(
+                          onTap: () =>
+                              setState(() => _currentForm = FormType.signUp),
+                          child: Text(
+                            AppLocalizations.of(context)!.signup,
                             style: Theme.of(context)
                                 .textTheme
                                 .labelLarge
                                 ?.merge(const TextStyle(
                                   decoration: TextDecoration.underline,
-                                )))),
+                                )),
+                          )),
+                    )
+                  else
+                    Padding(
+                      padding: EdgeInsets.only(top: 40.0.ratioH()),
+                      child: GestureDetector(
+                          onTap: () =>
+                              setState(() => _currentForm = FormType.login),
+                          child: Text(AppLocalizations.of(context)!.login,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelLarge
+                                  ?.merge(const TextStyle(
+                                    decoration: TextDecoration.underline,
+                                  )))),
+                    ),
               ],
             ),
           ),
