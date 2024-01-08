@@ -25,6 +25,7 @@ class CallbackGithubView extends StatefulWidget {
 class CallbackGithubViewState extends State<CallbackGithubView> {
   String? token;
   bool? isSignedIn;
+  UserManager userManager = locator<UserManager>();
   GithubManager githubManager = locator<GithubManager>();
 
   @override
@@ -58,20 +59,20 @@ class CallbackGithubViewState extends State<CallbackGithubView> {
           isSignedIn = true;
         });
         mkPrint(token);
-        // response = await http.post(
-        //     Uri.parse(
-        //       '$kBaseUrl/github-token',
-        //     ),
-        //     headers: <String, String>{
-        //       'Content-Type': 'application/json',
-        //       'Authorization': 'Bearer ${userManager.accessToken}',
-        //     },
-        //     body: jsonEncode(<String, String>{'githubToken': token!}));
-        // if (response.statusCode == 200) {
-        //   mkPrint('Github token saved');
-        // } else {
-        //   mkPrint('Échec de la requête : ${response.statusCode}');
-        // }
+        response = await http.post(
+            Uri.parse(
+              '$kBaseUrl/github-token',
+            ),
+            headers: <String, String>{
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ${userManager.accessToken}',
+            },
+            body: jsonEncode(<String, String>{'githubToken': token!}));
+        if (response.statusCode == 200) {
+          mkPrint('Github token saved');
+        } else {
+          mkPrint('Échec de la requête : ${response.statusCode}');
+        }
       } else {
         mkPrint('Échec de la requête : ${response.statusCode}');
         setState(() => isSignedIn = false);
