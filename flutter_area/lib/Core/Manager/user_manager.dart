@@ -63,17 +63,21 @@ class UserManager {
   }
 
   Future<bool> getCurrentUser(String accessToken) async {
-    final http.Response res = await http.get(
-      Uri.parse('$kBaseUrl/users/me'),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $accessToken',
-      },
-    );
-    final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
-    if (res.statusCode == 200) {
-      await storeData(jsonBody, haveToken: true);
-      return true;
+    try {
+      final http.Response res = await http.get(
+        Uri.parse('$kBaseUrl/users/me'),
+        headers: <String, String>{
+          'Authorization': 'Bearer $accessToken',
+        },
+      );
+      mkPrint(res.body);
+      final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
+      if (res.statusCode == 200) {
+        await storeData(jsonBody, haveToken: true);
+        return true;
+      }
+    } catch (e) {
+      mkPrint('Error: $e');
     }
     return false;
   }

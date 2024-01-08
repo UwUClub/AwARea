@@ -61,10 +61,11 @@ class CallbackGithubViewState extends State<CallbackGithubView> {
         mkPrint(token);
         response = await http.post(
             Uri.parse(
-              '$kBaseUrl/github-token',
+              '$kBaseUrl/users/github-token',
             ),
             headers: <String, String>{
               'Content-Type': 'application/json',
+              'accept': 'application/json',
               'Authorization': 'Bearer ${userManager.accessToken}',
             },
             body: jsonEncode(<String, String>{'githubToken': token!}));
