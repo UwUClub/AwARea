@@ -69,7 +69,7 @@ class CallbackGithubViewState extends State<CallbackGithubView> {
               'Authorization': 'Bearer ${userManager.accessToken}',
             },
             body: jsonEncode(<String, String>{'githubToken': token!}));
-        if (response.statusCode == 200) {
+        if (response.statusCode == 201) {
           mkPrint('Github token saved');
         } else {
           mkPrint('Échec de la requête : ${response.statusCode}');

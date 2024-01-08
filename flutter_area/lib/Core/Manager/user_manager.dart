@@ -67,12 +67,13 @@ class UserManager {
       final http.Response res = await http.get(
         Uri.parse('$kBaseUrl/users/me'),
         headers: <String, String>{
+          'accept': 'application/json',
           'Authorization': 'Bearer $accessToken',
         },
       );
-      mkPrint(res.body);
-      final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
+      mkPrint(res.statusCode);
       if (res.statusCode == 200) {
+        final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
         await storeData(jsonBody, haveToken: true);
         return true;
       }
