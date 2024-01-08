@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../Core/Locator/locator.dart';
 import '../../Core/Manager/google_manager.dart';
@@ -42,51 +43,19 @@ class _HomeViewState extends State<HomeView> {
                   .titleLarge
                   ?.copyWith(fontSize: 24),
               textAlign: TextAlign.center),
-          Padding(
-            padding: EdgeInsets.symmetric(
-                vertical: 100.0.ratioW(), horizontal: 100.0.ratioH()),
-            child: Column(
-              children: <Widget>[
-                Center(
-                  child: Text(AppLocalizations.of(context)!.home),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Theme.of(context).brightness == Brightness.light
-                          ? Theme.of(context).colorScheme.lightColor2
-                          : Theme.of(context).colorScheme.darkColor2),
-                  padding: EdgeInsets.symmetric(
-                      vertical: 50.0.ratioW(), horizontal: 50.0.ratioH()),
-                  child: Column(
-                    children: <Widget>[
-                      TextField(
-                          controller: nameController,
-                          decoration:
-                              const InputDecoration(hintText: 'Enter a name')),
-                      SizedBox(height: 50.0.ratioH()),
-                      TextField(
-                          controller: emailController,
-                          decoration: const InputDecoration(
-                              hintText: 'Enter an email')),
-                      SizedBox(height: 50.0.ratioH()),
-                      ElevatedButton(
-                          onPressed: () async {
-                            if (nameController.text.isEmpty ||
-                                emailController.text.isEmpty) {
-                              return;
-                            }
-                            mkPrint(await googleManager.createDraft(
-                                nameController.text, emailController.text));
-                          },
-                          child: Text('Send an email',
-                              style: Theme.of(context).textTheme.bodyLarge)),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
+          SizedBox(height: 50.0.ratioH()),
+          TextButton(
+              style: TextButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.redColor),
+              onPressed: () async {
+                final Uri url = Uri.parse(
+                    'https://github.com/UwUClub/AwARea/releases/latest/download/maker.apk');
+                if (!await launchUrl(url)) {
+                  throw Exception('Could not launch $url');
+                }
+              },
+              child: Text(AppLocalizations.of(context)!.downloadAPK,
+                  style: Theme.of(context).textTheme.bodyLarge)),
         ],
       ),
     ));
