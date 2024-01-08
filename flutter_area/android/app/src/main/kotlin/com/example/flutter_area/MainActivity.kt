@@ -1,4 +1,4 @@
-package com.example.flutter_area
+package com.uwuclub.maker
 
 import io.flutter.embedding.android.FlutterActivity
 

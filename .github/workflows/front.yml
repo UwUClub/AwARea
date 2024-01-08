@@ -41,6 +41,7 @@ jobs:
                   cat .env
                   flutter build apk --release
                   mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/maker.apk
+                  keytool -printcert -jarfile build/app/outputs/flutter-apk/maker.apk > build/app/outputs/flutter-apk/sha_key_google.txt
               working-directory: ./flutter_area
 
             - name: Upload APK
@@ -48,6 +49,12 @@ jobs:
               with:
                   name: maker.apk
                   path: ./flutter_area/build/app/outputs/flutter-apk/maker.apk
+
+            - name: Upload key
+              uses: actions/upload-artifact@v3.1.3
+              with:
+                  name: sha_key.txt
+                  path: ./flutter_area/build/app/outputs/flutter-apk/sha_key_google.txt
 
             - name: Publish Tagged Release
               uses: softprops/action-gh-release@v1

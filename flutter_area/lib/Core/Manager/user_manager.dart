@@ -10,7 +10,6 @@ class UserManager {
   String? fullName;
   String? email;
   String? accessToken;
-  String? githubToken;
 
   AuthStateEnum state = AuthStateEnum.splash;
 
