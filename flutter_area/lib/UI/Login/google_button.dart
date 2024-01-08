@@ -4,9 +4,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../Core/Locator/locator.dart';
 import '../../Core/Manager/google_manager.dart';
-import '../../Core/Manager/user_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
+import '../../Utils/mk_print.dart';
 
 class GoogleButton extends StatelessWidget {
   const GoogleButton({
@@ -35,10 +35,11 @@ class GoogleButton extends StatelessWidget {
       final bool success = await googleManager.loginWithGoogle(
           token.accessToken!, res.displayName!, res.email);
       if (success) {
+        // ignore: use_build_context_synchronously
         Navigator.of(context).pushNamed('/home');
       }
     } catch (error) {
-      print(error);
+      mkPrint(error);
     }
   }
 

@@ -3,13 +3,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../Core/Locator/locator.dart';
+import '../../Core/Manager/github_manager.dart';
 import '../../Core/Manager/slack_manager.dart';
 import '../../Core/Manager/theme_manager.dart';
 import '../../Utils/Extensions/double_extensions.dart';
 import '../ReusableWidgets/mk_background.dart';
 import '../ReusableWidgets/mk_button.dart';
 import '../ReusableWidgets/mk_input.dart';
-import 'connection_github.dart';
 
 class ConnectionsView extends StatefulWidget {
   const ConnectionsView({super.key});
@@ -21,6 +21,7 @@ class ConnectionsView extends StatefulWidget {
 class _ConnectionsViewState extends State<ConnectionsView> {
   ThemeManager themeManager = locator<ThemeManager>();
   SlackManager slackManager = locator<SlackManager>();
+  GithubManager githubManager = locator<GithubManager>();
 
   String slackBotTokenInput = '';
 
@@ -54,9 +55,13 @@ class _ConnectionsViewState extends State<ConnectionsView> {
                 Text(AppLocalizations.of(context)!.connectGithub,
                     style: Theme.of(context).textTheme.labelMedium),
                 MkButton(
-                  label: AppLocalizations.of(context)!.connect,
+                  label: githubManager.isSignedIn
+                      ? AppLocalizations.of(context)!.logout
+                      : AppLocalizations.of(context)!.connect,
                   onPressed: () async {
-                    await signInWithGitHub();
+                    githubManager.isSignedIn
+                        ? await githubManager.signOutWithGitHub()
+                        : await githubManager.signInWithGitHub();
                   },
                 ),
               ],

@@ -25,9 +25,12 @@ class _BoostrapViewState extends State<BoostrapView> {
     _prefs.then((SharedPreferences value) async {
       final String? accessToken = value.getString('accessToken');
       if (accessToken != null) {
-        await userManager.getCurrentUser(accessToken);
-        await actionReactionManager.getActionsReactions();
-        userManager.state = AuthStateEnum.authenticated;
+        if (await userManager.getCurrentUser(accessToken)) {
+          await actionReactionManager.getActionsReactions();
+          userManager.state = AuthStateEnum.authenticated;
+        } else {
+          userManager.state = AuthStateEnum.unauthenticated;
+        }
       } else {
         userManager.state = AuthStateEnum.unauthenticated;
       }
