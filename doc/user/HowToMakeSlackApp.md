@@ -31,5 +31,7 @@
 [![My Skills](https://cdn.discordapp.com/attachments/684788230515851297/1193857130625781801/create9.png?ex=65ae3d18&is=659bc818&hm=5f8c3b54a1ff08cd8022a2fc606455e7417fd9ee48cfdfdd53f57891d40c1643&)](https://api.slack.com/apps)
 9. Click on "Allow"
 [![My Skills](https://cdn.discordapp.com/attachments/684788230515851297/1193857131024228493/create10.png?ex=65ae3d18&is=659bc818&hm=2f33c703750f2795986326ec666376a3a4613f8f994262114713cb8a70495973&)](https://api.slack.com/apps)
-10. Copy the token from "OAuth Access Token" and paste it into the `slack_token` field in the Maker front connection form.
+10. Copy the token from "OAuth Access Token"
 [![My Skills](https://cdn.discordapp.com/attachments/684788230515851297/1193857137785450558/create11.png?ex=65ae3d1a&is=659bc81a&hm=0dd426b1a38d278ce611c8718f9b846d4db95014e395d5cba093807dcebbfeb6&)](https://api.slack.com/apps)
+11. Paste the token into the `slack_token` field in the Maker connection form.
+[![My Skills](https://cdn.discordapp.com/attachments/514127963604647947/1193905402383966379/Capture_decran_2024-01-08_a_14.10.27.png?ex=65ae6a0d&is=659bf50d&hm=f3e39622c06f341217f41cc8aa4c58c78ccd41a66caa32b71625700dce1d8c67&)](https://api.slack.com/apps)
