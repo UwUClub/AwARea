@@ -7,21 +7,18 @@ import { EnvironmentVariables } from '../../_utils/config';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-    constructor(
-        private readonly usersRepository: UsersRepository,
-        private readonly configService: ConfigService<
-            EnvironmentVariables,
-            true
-        >,
-    ) {
-        super({
-            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            ignoreExpiration: false,
-            secretOrKey: configService.get('JWT_SECRET'),
-        });
-    }
+  constructor(
+    private readonly usersRepository: UsersRepository,
+    private readonly configService: ConfigService<EnvironmentVariables, true>,
+  ) {
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ignoreExpiration: false,
+      secretOrKey: configService.get('JWT_SECRET'),
+    });
+  }
 
-    async validate(payload: any) {
-        return this.usersRepository.findById(payload.sub);
-    }
+  async validate(payload: any) {
+    return this.usersRepository.findById(payload.sub);
+  }
 }

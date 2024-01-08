@@ -3,19 +3,19 @@ import { IsSecurePassword } from '../../../../_utils/decorators/is-secure-passwo
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
-    @IsString()
-    @IsNotEmpty()
-    username: string;
+  @IsString()
+  @IsNotEmpty()
+  username: string;
 
-    @IsString()
-    @IsNotEmpty()
-    fullName: string;
+  @IsString()
+  @IsNotEmpty()
+  fullName: string;
 
-    @ApiProperty({ example: 'email@person.com' })
-    @IsEmail()
-    @IsNotEmpty()
-    email: string;
+  @ApiProperty({ example: 'email@person.com' })
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
 
-    @IsSecurePassword()
-    password: string;
+  @IsSecurePassword()
+  password: string;
 }

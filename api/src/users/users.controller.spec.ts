@@ -6,29 +6,29 @@ import { Model } from 'mongoose';
 import { UsersMapper } from './users.mapper';
 
 describe('UsersController', () => {
-    let controller: UsersController;
-    let service: UsersService;
+  let controller: UsersController;
+  let service: UsersService;
 
-    beforeEach(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            controllers: [UsersController],
-            providers: [
-                UsersService,
-                UsersMapper,
-                UsersRepository,
-                {
-                    provide: 'UserModel',
-                    useValue: Model,
-                },
-            ],
-        }).compile();
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [UsersController],
+      providers: [
+        UsersService,
+        UsersMapper,
+        UsersRepository,
+        {
+          provide: 'UserModel',
+          useValue: Model,
+        },
+      ],
+    }).compile();
 
-        controller = module.get<UsersController>(UsersController);
-        service = module.get<UsersService>(UsersService);
-    });
+    controller = module.get<UsersController>(UsersController);
+    service = module.get<UsersService>(UsersService);
+  });
 
-    it('should be defined', () => {
-        expect(controller).toBeDefined();
-        expect(service).toBeDefined();
-    });
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+    expect(service).toBeDefined();
+  });
 });

@@ -8,8 +8,7 @@ export type NasaApodActionDocument = HydratedDocument<NasaApodAction>;
 
 @Schema()
 export class NasaApodAction extends OmitType(Action, ['actionType'] as const) {
-    actionType: ActionTypeEnum.NASA_GET_APOD;
+  actionType: ActionTypeEnum.NASA_GET_APOD;
 }
 
-export const NasaApodActionSchema =
-    SchemaFactory.createForClass(NasaApodAction);
+export const NasaApodActionSchema = SchemaFactory.createForClass(NasaApodAction);

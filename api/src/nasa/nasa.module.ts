@@ -6,12 +6,8 @@ import { ActionReactionModule } from '../action-reaction/action-reaction.module'
 import { ReactionsModule } from '../reactions/reactions.module';
 
 @Module({
-    imports: [
-        HttpModule,
-        forwardRef(() => ActionReactionModule),
-        ReactionsModule,
-    ],
-    providers: [NasaService, NasaMapper],
-    exports: [NasaService],
+  imports: [HttpModule, forwardRef(() => ActionReactionModule), ReactionsModule],
+  providers: [NasaService, NasaMapper],
+  exports: [NasaService],
 })
 export class NasaModule {}

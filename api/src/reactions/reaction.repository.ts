@@ -8,22 +8,19 @@ import { UserDocument } from 'src/users/users.schema';
 
 @Injectable()
 export class ReactionRepository {
-    constructor(
-        @InjectModel(Reaction.name) private reactionModel: Model<Reaction>,
-        @InjectModel(ReactionTypeEnum.CREATE_DRAFT)
-        private createDraftModel: Model<CreateDraft>,
-    ) {}
+  constructor(
+    @InjectModel(Reaction.name) private reactionModel: Model<Reaction>,
+    @InjectModel(ReactionTypeEnum.CREATE_DRAFT)
+    private createDraftModel: Model<CreateDraft>,
+  ) {}
 
-    createDraft = (email: string, body: string, subject: string) =>
-        this.createDraftModel.create({
-            email: email,
-            body: body,
-            subject: subject,
-        });
+  createDraft = (email: string, body: string, subject: string) =>
+    this.createDraftModel.create({
+      email: email,
+      body: body,
+      subject: subject,
+    });
 
-    getReactionById = (id: string, user: UserDocument) =>
-        this.reactionModel
-            .findOne({ _id: id })
-            .orFail(new NotFoundException('Reaction not found'))
-            .exec();
+  getReactionById = (id: string, user: UserDocument) =>
+    this.reactionModel.findOne({ _id: id }).orFail(new NotFoundException('Reaction not found')).exec();
 }

@@ -9,23 +9,23 @@ import { ReactionRepository } from './reaction.repository';
 import { GoogleApiModule } from '../google-api/google-api.module';
 
 @Module({
-    imports: [
-        MongooseModule.forFeature([
-            {
-                name: Reaction.name,
-                schema: ReactionSchema,
-                discriminators: [
-                    {
-                        name: ReactionTypeEnum.CREATE_DRAFT,
-                        schema: CreateDraftSchema,
-                    },
-                ],
-            },
-        ]),
-        GoogleApiModule,
-    ],
-    controllers: [ReactionsController],
-    providers: [ReactionsService, ReactionRepository],
-    exports: [ReactionRepository, ReactionsService],
+  imports: [
+    MongooseModule.forFeature([
+      {
+        name: Reaction.name,
+        schema: ReactionSchema,
+        discriminators: [
+          {
+            name: ReactionTypeEnum.CREATE_DRAFT,
+            schema: CreateDraftSchema,
+          },
+        ],
+      },
+    ]),
+    GoogleApiModule,
+  ],
+  controllers: [ReactionsController],
+  providers: [ReactionsService, ReactionRepository],
+  exports: [ReactionRepository, ReactionsService],
 })
 export class ReactionsModule {}
