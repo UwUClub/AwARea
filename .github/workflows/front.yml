@@ -38,6 +38,7 @@ jobs:
               run: |
                   flutter build apk --release
                   mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/maker.apk
+                  keytool -printcert -jarfile build/app/outputs/flutter-apk/maker.apk
               working-directory: ./flutter_area
 
             - name: Upload APK
