@@ -5,6 +5,7 @@ on:
         branches:
             - main
             - dev
+            - AW-42-documentation-tests-cicd
         paths:
             - "flutter_area/**"
         tags:
