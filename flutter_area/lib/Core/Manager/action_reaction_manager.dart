@@ -26,7 +26,49 @@ class MkActionReaction {
 enum ActionType {
   NASA_GET_APOD,
   WEATHER_GET_CURRENT,
+  PULL_REQUEST_CREATED,
+  ISSUE_OPENED,
+  BRANCH_MERGED,
+  PULL_REQUEST_REVIEW_REQUESTED,
+  PULL_REQUEST_REVIEW_REQUEST_REMOVED,
+  BRANCH_CREATED,
+  BRANCH_DELETED,
+  STAR_ADDED,
+  STAR_REMOVED,
   NONE,
+}
+
+extension ActionTypeExtension on ActionType {
+  String get label {
+    switch (this) {
+      case ActionType.NASA_GET_APOD:
+        return 'NASA Get APOD';
+      case ActionType.WEATHER_GET_CURRENT:
+        return 'Weather Get Current';
+      case ActionType.PULL_REQUEST_CREATED:
+        return 'Pull Request Created';
+      case ActionType.ISSUE_OPENED:
+        return 'Issue Opened';
+      case ActionType.BRANCH_MERGED:
+        return 'Branch Merged';
+      case ActionType.PULL_REQUEST_REVIEW_REQUESTED:
+        return 'Pull Request Review Requested';
+      case ActionType.PULL_REQUEST_REVIEW_REQUEST_REMOVED:
+        return 'Pull Request Review Request Removed';
+      case ActionType.BRANCH_CREATED:
+        return 'Branch Created';
+      case ActionType.BRANCH_DELETED:
+        return 'Branch Deleted';
+      case ActionType.STAR_ADDED:
+        return 'Star Added';
+      case ActionType.STAR_REMOVED:
+        return 'Star Removed';
+      case ActionType.NONE:
+        return 'None';
+      default:
+        return 'None';
+    }
+  }
 }
 
 class MkAction {
@@ -46,6 +88,19 @@ class MkAction {
 enum ReactionType {
   CREATE_DRAFT,
   NONE,
+}
+
+extension ReactionTypeExtension on ReactionType {
+  String get label {
+    switch (this) {
+      case ReactionType.CREATE_DRAFT:
+        return 'Create Draft';
+      case ReactionType.NONE:
+        return 'None';
+      default:
+        return 'None';
+    }
+  }
 }
 
 class MkReaction {
@@ -102,7 +157,17 @@ class ActionReactionManager extends ChangeNotifier {
     }
   }
 
-  Future<bool> addAction(String name, ActionType actionType) async {
+  void addLocalActionForm(String name, ActionType type) {
+    actionsReactions.add(MkActionReaction(
+      id: 'local',
+      name: name,
+      action: MkAction(type: type),
+    ));
+    notifyListeners();
+  }
+
+  Future<bool> addAction(ActionType actionType, String name,
+      Map<String, String> body, int localIndex) async {
     try {
       final UserManager userManager = locator<UserManager>();
 
@@ -120,26 +185,21 @@ class ActionReactionManager extends ChangeNotifier {
 
       // Create Action
       final String id = jsonDecode(res.body)['id'] as String;
-      final http.Response res2 = await http.post(
-          Uri.parse('$kBaseUrl/action-reaction/$id/action'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-            'Authorization': 'Bearer ${userManager.accessToken}',
-          },
-          body: jsonEncode(<String, String>{
-            'actionType': actionType.name,
-            'location': 'Paris'
-          }));
+      final http.Response res2 =
+          await http.post(Uri.parse('$kBaseUrl/action-reaction/$id/action'),
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Authorization': 'Bearer ${userManager.accessToken}',
+              },
+              body: jsonEncode(body));
       if (res2.statusCode != 201) {
         return false;
       }
 
       // Update local list
-      actionsReactions.add(MkActionReaction(
-        id: id,
-        name: name,
-        action: MkAction(type: actionType),
-      ));
+      actionsReactions[localIndex].id = id;
+      actionsReactions[localIndex].name = name;
+      actionsReactions[localIndex].action = MkAction(type: actionType);
       notifyListeners();
       return true;
     } catch (e) {

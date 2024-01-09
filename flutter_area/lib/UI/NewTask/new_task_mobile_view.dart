@@ -44,18 +44,14 @@ class _NewTaskMobileViewState extends State<NewTaskMobileView> {
                               actionTypes: const <ActionType>[
                                 ActionType.WEATHER_GET_CURRENT,
                               ],
-                              addAction: (String name, ActionType type) {
-                                manager.addAction(name, type);
-                              },
+                              manager: manager,
                             ),
                             ActionSelection(
                               label: 'Nasa',
                               actionTypes: const <ActionType>[
                                 ActionType.NASA_GET_APOD,
                               ],
-                              addAction: (String name, ActionType type) {
-                                manager.addAction(name, type);
-                              },
+                              manager: manager,
                             ),
                           ],
                         )),
@@ -70,13 +66,12 @@ class _NewTaskMobileViewState extends State<NewTaskMobileView> {
                                     MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   ActionCard(
-                                      actionReactionName: actionReaction.name,
-                                      action: actionReaction.action,
-                                      delete: () {}),
+                                    actionReaction: actionReaction,
+                                    manager: manager,
+                                  ),
                                   ReactionCard(
-                                    reaction: actionReaction.reaction,
-                                    setReaction: (ReactionType? reactionType,
-                                        Map<String, String>? data) {},
+                                    actionReaction: actionReaction,
+                                    manager: manager,
                                   ),
                                 ]),
                         ],

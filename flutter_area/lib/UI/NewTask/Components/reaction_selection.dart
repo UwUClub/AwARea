@@ -29,7 +29,7 @@ class ReactionSelection extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     MkButton(
-                      label: reactionType.toString(),
+                      label: reactionType.label,
                       backgroundColor:
                           Theme.of(context).brightness == Brightness.light
                               ? Theme.of(context).colorScheme.lightColor3
