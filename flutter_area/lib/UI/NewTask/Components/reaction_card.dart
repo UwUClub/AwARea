@@ -86,10 +86,8 @@ class _ReactionCardState extends State<ReactionCard> {
                   Divider(
                     color: Theme.of(context).colorScheme.lightColor4,
                   ),
-                  Text(widget.actionReaction.reaction!.type.toString(),
+                  Text(widget.actionReaction.reaction!.type.label,
                       style: Theme.of(context).textTheme.headlineMedium),
-                  Text('Description',
-                      style: Theme.of(context).textTheme.headlineSmall),
                 ]),
     );
   }

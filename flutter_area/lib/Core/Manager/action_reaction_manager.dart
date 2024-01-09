@@ -38,6 +38,39 @@ enum ActionType {
   NONE,
 }
 
+extension ActionTypeExtension on ActionType {
+  String get label {
+    switch (this) {
+      case ActionType.NASA_GET_APOD:
+        return 'NASA Get APOD';
+      case ActionType.WEATHER_GET_CURRENT:
+        return 'Weather Get Current';
+      case ActionType.PULL_REQUEST_CREATED:
+        return 'Pull Request Created';
+      case ActionType.ISSUE_OPENED:
+        return 'Issue Opened';
+      case ActionType.BRANCH_MERGED:
+        return 'Branch Merged';
+      case ActionType.PULL_REQUEST_REVIEW_REQUESTED:
+        return 'Pull Request Review Requested';
+      case ActionType.PULL_REQUEST_REVIEW_REQUEST_REMOVED:
+        return 'Pull Request Review Request Removed';
+      case ActionType.BRANCH_CREATED:
+        return 'Branch Created';
+      case ActionType.BRANCH_DELETED:
+        return 'Branch Deleted';
+      case ActionType.STAR_ADDED:
+        return 'Star Added';
+      case ActionType.STAR_REMOVED:
+        return 'Star Removed';
+      case ActionType.NONE:
+        return 'None';
+      default:
+        return 'None';
+    }
+  }
+}
+
 class MkAction {
   MkAction({
     required this.type,
@@ -55,6 +88,19 @@ class MkAction {
 enum ReactionType {
   CREATE_DRAFT,
   NONE,
+}
+
+extension ReactionTypeExtension on ReactionType {
+  String get label {
+    switch (this) {
+      case ReactionType.CREATE_DRAFT:
+        return 'Create Draft';
+      case ReactionType.NONE:
+        return 'None';
+      default:
+        return 'None';
+    }
+  }
 }
 
 class MkReaction {

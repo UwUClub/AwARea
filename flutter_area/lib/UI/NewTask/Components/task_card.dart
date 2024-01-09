@@ -17,7 +17,7 @@ class _TaskCardState extends State<TaskCard> {
     return Column(children: <Widget>[
       Row(
         children: <Widget>[
-          Text(widget.action.type.toString()),
+          Text(widget.action.type.label),
           IconButton(
             icon: const Icon(Icons.delete),
             onPressed: () {
@@ -26,7 +26,6 @@ class _TaskCardState extends State<TaskCard> {
           ),
         ],
       ),
-      const Text('Description'),
     ]);
   }
 }

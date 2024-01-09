@@ -26,7 +26,7 @@ class ActionSelection extends StatelessWidget {
         Row(
           children: <Widget>[
             MkButton(
-              label: actionType.toString(),
+              label: actionType.label,
               backgroundColor: Theme.of(context).brightness == Brightness.light
                   ? Theme.of(context).colorScheme.lightColor3
                   : Theme.of(context).colorScheme.darkColor3,

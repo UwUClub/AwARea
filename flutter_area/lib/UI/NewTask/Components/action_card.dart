@@ -68,10 +68,8 @@ class _ActionCardState extends State<ActionCard> {
               )
             else
               Column(children: <Widget>[
-                Text(widget.actionReaction.action.type.toString(),
+                Text(widget.actionReaction.action.type.label,
                     style: Theme.of(context).textTheme.headlineMedium),
-                Text('Description',
-                    style: Theme.of(context).textTheme.headlineSmall),
               ]),
           ]),
     );
