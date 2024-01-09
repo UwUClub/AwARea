@@ -40,27 +40,12 @@ class _NewTaskViewState extends State<NewTaskView> {
                               in manager.actionsReactions)
                             Row(children: <Widget>[
                               ActionCard(
-                                actionReactionName: actionReaction.name,
-                                action: actionReaction.action,
-                                delete: () {
-                                  // manager.deleteAction ...
-                                },
+                                actionReaction: actionReaction,
+                                manager: manager,
                               ),
                               ReactionCard(
-                                reaction: actionReaction.reaction,
-                                setReaction: (ReactionType? reactionType,
-                                    Map<String, String>? data) {
-                                  if (reactionType == null || data == null) {
-                                    manager.removeReactionLocally(
-                                        actionReaction.id);
-                                    return;
-                                  }
-                                  manager.setReaction(
-                                    actionReaction.id,
-                                    reactionType,
-                                    data,
-                                  );
-                                },
+                                actionReaction: actionReaction,
+                                manager: manager,
                               ),
                             ]),
                         ],
@@ -81,18 +66,29 @@ class _NewTaskViewState extends State<NewTaskView> {
                           actionTypes: const <ActionType>[
                             ActionType.WEATHER_GET_CURRENT,
                           ],
-                          addAction: (String name, ActionType type) {
-                            manager.addAction(name, type);
-                          },
+                          manager: manager,
                         ),
                         ActionSelection(
                           label: 'Nasa',
                           actionTypes: const <ActionType>[
                             ActionType.NASA_GET_APOD,
                           ],
-                          addAction: (String name, ActionType type) {
-                            manager.addAction(name, type);
-                          },
+                          manager: manager,
+                        ),
+                        ActionSelection(
+                          label: 'Github',
+                          actionTypes: const <ActionType>[
+                            ActionType.PULL_REQUEST_CREATED,
+                            ActionType.ISSUE_OPENED,
+                            ActionType.BRANCH_MERGED,
+                            ActionType.PULL_REQUEST_REVIEW_REQUESTED,
+                            ActionType.PULL_REQUEST_REVIEW_REQUEST_REMOVED,
+                            ActionType.BRANCH_CREATED,
+                            ActionType.BRANCH_DELETED,
+                            ActionType.STAR_ADDED,
+                            ActionType.STAR_REMOVED
+                          ],
+                          manager: manager,
                         ),
                       ],
                     ))

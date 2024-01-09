@@ -42,6 +42,7 @@
     "myProfile": "My profile",
     "logout": "Log out",
     "promptActionName": "Action name:",
+    "createAction": "Create action",
     "createReaction": "Create reaction",
     "downloadAPK": "Download Android APK"
 }
