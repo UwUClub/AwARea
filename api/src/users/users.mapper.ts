@@ -9,5 +9,7 @@ export class UsersMapper {
         username: user.username,
         fullName: user.fullName ?? undefined,
         email: user.email,
+        isLoggedInGoogle: user.googleAccessToken != null,
+        isLoggedInGithub: user.githubAccessToken != null,
     });
 }

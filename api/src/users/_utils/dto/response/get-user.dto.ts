@@ -3,4 +3,6 @@ export class GetUserDto {
     username: string;
     fullName?: string;
     email: string;
+    isLoggedInGoogle: boolean;
+    isLoggedInGithub: boolean;
 }

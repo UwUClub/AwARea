@@ -26,7 +26,6 @@ class _ConnectionsViewState extends State<ConnectionsView> {
   UserManager userManager = locator<UserManager>();
 
   String slackBotTokenInput = '';
-  bool isGithubLogged = false;
 
   @override
   Widget build(BuildContext context) {
@@ -57,23 +56,16 @@ class _ConnectionsViewState extends State<ConnectionsView> {
               children: <Widget>[
                 Text(AppLocalizations.of(context)!.connectGithub,
                     style: Theme.of(context).textTheme.labelMedium),
-                if (isGithubLogged)
+                if (userManager.isGithubLogged!)
                   MkButton(
                     label: AppLocalizations.of(context)!.logout,
-                    onPressed: () {
-                      setState(() {
-                        isGithubLogged = false;
-                      });
-                    },
+                    onPressed: () {},
                   )
                 else
                   MkButton(
                     label: AppLocalizations.of(context)!.connect,
                     onPressed: () async {
                       await signInWithGitHub();
-                      setState(() {
-                        isGithubLogged = true;
-                      });
                     },
                   ),
               ],
@@ -88,17 +80,15 @@ class _ConnectionsViewState extends State<ConnectionsView> {
               children: <Widget>[
                 Text(AppLocalizations.of(context)!.connectGoogle,
                     style: Theme.of(context).textTheme.labelMedium),
-                if (userManager.isGoogleLogged)
+                if (userManager.isGoogleLogged!)
                   MkButton(
                     label: AppLocalizations.of(context)!.logout,
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                   )
                 else
                   MkButton(
                     label: AppLocalizations.of(context)!.connect,
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                   ),
               ],
             ),

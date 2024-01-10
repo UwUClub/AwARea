@@ -23,7 +23,7 @@ class GoogleManager {
     final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
     if (res.statusCode == 201) {
       final UserManager userManager = locator<UserManager>();
-      userManager.storeData(jsonBody, isGoogle: true);
+      userManager.storeData(jsonBody);
       return true;
     }
     return false;
