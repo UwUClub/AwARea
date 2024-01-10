@@ -3,28 +3,42 @@ import { IsEnum, IsOptional, IsString } from 'class-validator';
 import { ReactionTypeEnum } from '../../enum/reaction-type.enum';
 
 export class CreateReactionDto {
-    @ApiProperty({ enum: ReactionTypeEnum })
-    @IsEnum(ReactionTypeEnum)
-    reactionType: ReactionTypeEnum;
+  @ApiProperty({ enum: ReactionTypeEnum })
+  @IsEnum(ReactionTypeEnum)
+  reactionType: ReactionTypeEnum;
 
-    /*
-     * For Gmail draft
-     */
-    @IsOptional()
-    @IsString()
-    destinationEmail?: string;
+  /*
+   * For Gmail draft
+   */
+  @IsOptional()
+  @IsString()
+  destinationEmail?: string;
 
-    /*
-     * For Gmail draft
-     */
-    @IsOptional()
-    @IsString()
-    subject?: string;
+  /*
+   * For Gmail draft
+   */
+  @IsOptional()
+  @IsString()
+  subject?: string;
 
-    /*
-     * For Gmail draft
-     */
-    @IsOptional()
-    @IsString()
-    body?: string;
+  /*
+   * For Gmail draft
+   */
+  @IsOptional()
+  @IsString()
+  body?: string;
+
+  /*
+   * For Slack channel creation and message
+   */
+  @IsOptional()
+  @IsString()
+  channelName?: string;
+
+  /*
+   * For Slack message
+   */
+  @IsOptional()
+  @IsString()
+  message?: string;
 }

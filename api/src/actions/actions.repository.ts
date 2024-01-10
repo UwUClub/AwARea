@@ -6,6 +6,7 @@ import { NasaApodAction } from './schemas/nasa-apod-action.schema';
 import { WeatherAction } from './schemas/weather-action.schema';
 import { Action } from './schemas/actions.schema';
 import { GithubApi } from './schemas/github-api.schema';
+import { TimerAction } from './schemas/timer.schema';
 
 @Injectable()
 export class ActionsRepository {
@@ -44,6 +45,8 @@ export class ActionsRepository {
     private githubStarAddedModel: Model<GithubApi>,
     @InjectModel(ActionTypeEnum.STAR_REMOVED)
     private githubStarRemovedModel: Model<GithubApi>,
+    @InjectModel(ActionTypeEnum.TIMER)
+    private timerModel: Model<TimerAction>,
   ) {
     this.githubModel = {
       [ActionTypeEnum.BRANCH_CREATED]: this.githubBranchCreationModel,
@@ -64,6 +67,8 @@ export class ActionsRepository {
     });
 
   createWeatherAction = (city: string) => this.weatherModel.create({ city: city });
+
+  createTimerAction = (date: Date) => this.timerModel.create({ date: date });
 
   createGithubAction = (repoName: string, actionType: ActionTypeEnum) =>
     this.githubModel[actionType].create({

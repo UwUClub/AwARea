@@ -57,7 +57,7 @@ export class NasaService {
     });
     for (const action of actions) {
       const user = action.user;
-      await this.reactionService.executeReaction(user, action.reaction, photo).catch((err) => console.log(err));
+      await this.reactionService.executeReaction(user[0], action.reaction, photo).catch((err) => console.log(err));
     }
   }
 }

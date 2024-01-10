@@ -4,33 +4,47 @@ import { UserDocument } from '../users/users.schema';
 import { GoogleApiService } from '../google-api/google-api.service';
 import { CreateReactionDto } from './_utils/dto/request/create-reaction.dto';
 import { ReactionRepository } from './reaction.repository';
-import * as constants from 'constants';
 import { mergeObjects } from './_utils/functions/use-variable-in-reaction.function';
+import { SlackService } from '../slack/slack.service';
 
 @Injectable()
 export class ReactionsService {
   private readonly reactions: {
     CREATE_DRAFT: (user: UserDocument, reaction: ReactionDocumentType) => Promise<any>;
+    CREATE_SLACK_CHANNEL: (user: UserDocument, reaction: ReactionDocumentType) => Promise<any>;
+    SEND_SLACK_MESSAGE: (user: UserDocument, reaction: ReactionDocumentType) => Promise<any>;
   };
 
-  private readonly bodyNeeded: { CREATE_DRAFT: string[] };
+  private readonly bodyNeeded: { CREATE_DRAFT: string[]; CREATE_SLACK_CHANNEL: string[]; SEND_SLACK_MESSAGE: string[] };
 
   constructor(
     private readonly googleApiService: GoogleApiService,
     private readonly reactionsRepository: ReactionRepository,
+    private readonly slackService: SlackService,
   ) {
     this.reactions = {
       CREATE_DRAFT: async (user: UserDocument, reaction: ReactionDocumentType) => {
         return await this.googleApiService.createDraft(user, reaction);
       },
+      CREATE_SLACK_CHANNEL: async (user: UserDocument, reaction: ReactionDocumentType) => {
+        console.log('create slack channel');
+        return await this.slackService.createChannel(user, reaction);
+      },
+      SEND_SLACK_MESSAGE: async (user: UserDocument, reaction: ReactionDocumentType) => {
+        console.log('send slack message');
+        return await this.slackService.sendMessage(user, reaction);
+      },
     };
     this.bodyNeeded = {
       CREATE_DRAFT: ['destinationEmail', 'subject', 'body'],
+      CREATE_SLACK_CHANNEL: ['channelName'],
+      SEND_SLACK_MESSAGE: ['channelName', 'message'],
     };
   }
 
   async executeReaction(user: UserDocument, reaction: ReactionDocumentType, actionVar: any) {
     if (!reaction) return;
+    console.log("c'est passe");
     return this.reactions[reaction.reactionType](user, mergeObjects(actionVar, reaction));
   }
 
@@ -43,6 +57,10 @@ export class ReactionsService {
     switch (data.reactionType) {
       case 'CREATE_DRAFT':
         return this.reactionsRepository.createDraft(data.destinationEmail, data.body, data.subject);
+      case 'SEND_SLACK_MESSAGE':
+        return this.reactionsRepository.sendSlackMessage(data.channelName, data.message);
+      case 'CREATE_SLACK_CHANNEL':
+        return this.reactionsRepository.createSlackChannel(data.channelName);
       default:
         throw new BadRequestException('Y a pas ca ici');
     }

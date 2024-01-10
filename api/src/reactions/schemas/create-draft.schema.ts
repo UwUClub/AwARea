@@ -8,16 +8,16 @@ export type CreateDraftDocument = HydratedDocument<CreateDraft>;
 
 @Schema()
 export class CreateDraft extends OmitType(Reaction, ['reactionType'] as const) {
-    reactionType: ReactionTypeEnum.CREATE_DRAFT;
+  reactionType: ReactionTypeEnum.CREATE_DRAFT;
 
-    @Prop({ required: true })
-    email: string;
+  @Prop({ required: true })
+  email: string;
 
-    @Prop({ required: true })
-    subject: string;
+  @Prop({ required: true })
+  subject: string;
 
-    @Prop({ required: true })
-    body: string;
+  @Prop({ required: true })
+  body: string;
 }
 
 export const CreateDraftSchema = SchemaFactory.createForClass(CreateDraft);
