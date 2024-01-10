@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -120,7 +122,7 @@ class MkReaction {
 class ActionReactionManager extends ChangeNotifier {
   List<MkActionReaction> actionsReactions = <MkActionReaction>[];
 
-  Future getActionsReactions() async {
+  Future<void> getActionsReactions() async {
     try {
       final UserManager userManager = locator<UserManager>();
       final http.Response res = await http.get(
