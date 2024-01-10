@@ -27,4 +27,18 @@ export class CreateReactionDto {
   @IsOptional()
   @IsString()
   body?: string;
+
+  /*
+   * For Slack channel creation and message
+   */
+  @IsOptional()
+  @IsString()
+  channelName?: string;
+
+  /*
+   * For Slack message
+   */
+  @IsOptional()
+  @IsString()
+  message?: string;
 }

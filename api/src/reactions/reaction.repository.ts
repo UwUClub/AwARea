@@ -5,6 +5,8 @@ import { Model } from 'mongoose';
 import { CreateDraft } from './schemas/create-draft.schema';
 import { Reaction } from './schemas/reactions.schema';
 import { UserDocument } from 'src/users/users.schema';
+import { SendSlackMessage } from './schemas/send-slack-message.schema';
+import { CreateSlackChannel } from './schemas/create-slack-channel.schema';
 
 @Injectable()
 export class ReactionRepository {
@@ -12,6 +14,10 @@ export class ReactionRepository {
     @InjectModel(Reaction.name) private reactionModel: Model<Reaction>,
     @InjectModel(ReactionTypeEnum.CREATE_DRAFT)
     private createDraftModel: Model<CreateDraft>,
+    @InjectModel(ReactionTypeEnum.SEND_SLACK_MESSAGE)
+    private sendSlackMessageModel: Model<SendSlackMessage>,
+    @InjectModel(ReactionTypeEnum.CREATE_SLACK_CHANNEL)
+    private createSlackChannelModel: Model<CreateSlackChannel>,
   ) {}
 
   createDraft = (email: string, body: string, subject: string) =>
@@ -19,6 +25,17 @@ export class ReactionRepository {
       email: email,
       body: body,
       subject: subject,
+    });
+
+  createSlackChannel = (channelName: string) =>
+    this.createSlackChannelModel.create({
+      channelName: channelName,
+    });
+
+  sendSlackMessage = (channelName: string, message: string) =>
+    this.sendSlackMessageModel.create({
+      channelName: channelName,
+      message: message,
     });
 
   getReactionById = (id: string, user: UserDocument) =>

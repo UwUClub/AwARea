@@ -10,6 +10,8 @@ import { ActionsRepository } from './actions.repository';
 import { WeatherModule } from '../weather/weather.module';
 import { NasaModule } from '../nasa/nasa.module';
 import { GithubApiSchema } from './schemas/github-api.schema';
+import { TimerModule } from '../timer/timer.module';
+import { TimerActionSchema } from './schemas/timer.schema';
 
 @Module({
   imports: [
@@ -18,6 +20,7 @@ import { GithubApiSchema } from './schemas/github-api.schema';
         name: Action.name,
         schema: ActionSchema,
         discriminators: Object.entries({
+          [ActionTypeEnum.TIMER]: TimerActionSchema,
           [ActionTypeEnum.NASA_GET_APOD]: NasaApodActionSchema,
           [ActionTypeEnum.WEATHER_GET_CURRENT]: WeatherActionSchema,
           [ActionTypeEnum.BRANCH_CREATED]: GithubApiSchema,
@@ -37,6 +40,7 @@ import { GithubApiSchema } from './schemas/github-api.schema';
     ]),
     WeatherModule,
     NasaModule,
+    TimerModule,
   ],
   controllers: [ActionsController],
   providers: [ActionsService, ActionsRepository],
