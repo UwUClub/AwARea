@@ -47,7 +47,7 @@ export class WeatherService {
     for (const actionReaction of actionsReactions) {
       const weather = createInterface(await this.getWeather(actionReaction.action));
       await this.reactionService
-        .executeReaction(actionReaction.user, actionReaction.reaction, weather)
+        .executeReaction(actionReaction.user[0], actionReaction.reaction, weather)
         .catch((err) => console.log(err));
     }
   }

@@ -6,7 +6,7 @@ import { GetUserDto } from './_utils/dto/response/get-user.dto';
 export class UsersMapper {
     toGetUserDto = (user: UserDocument): GetUserDto => ({
         id: user._id.toString(),
-        username: user.username,
+        username: user.username ?? '',
         fullName: user.fullName ?? undefined,
         email: user.email,
         isLoggedInGoogle: user.googleAccessToken != null,

@@ -10,6 +10,7 @@ import { ReactionsModule } from '../reactions/reactions.module';
 import { WeatherModule } from '../weather/weather.module';
 import { GoogleApiModule } from '../google-api/google-api.module';
 import { GithubApiModule } from '../github-api/github-api.module';
+import { TimerModule } from '../timer/timer.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { GithubApiModule } from '../github-api/github-api.module';
     ReactionsModule,
     WeatherModule,
     GoogleApiModule,
+    TimerModule,
     forwardRef(() => GithubApiModule),
   ],
   controllers: [ActionReactionController],

@@ -14,6 +14,8 @@ import { ReactionsService } from '../reactions/reactions.service';
 import { CreateReactionDto } from '../reactions/_utils/dto/request/create-reaction.dto';
 import { GithubApiDocument } from '../actions/schemas/github-api.schema';
 import { WebhookService } from '../github-api/services/webhook.service';
+import { TimerService } from '../timer/timer.service';
+import { ActionDocumentType } from '../actions/schemas/actions.schema';
 
 @Injectable()
 export class ActionReactionService {
@@ -25,6 +27,7 @@ export class ActionReactionService {
     private readonly reactionRepository: ReactionRepository,
     private readonly reactionService: ReactionsService,
     private readonly webhookService: WebhookService,
+    private readonly timerService: TimerService,
   ) {}
 
   async getActionReactions(user: UserDocument) {
@@ -95,6 +98,7 @@ export class ActionReactionService {
     if (
       actionReaction.action.actionType !== 'NASA_GET_APOD' &&
       actionReaction.action.actionType !== 'WEATHER_GET_CURRENT' &&
+      actionReaction.action.actionType !== 'TIMER' &&
       queryDto.isActivated
     ) {
       try {
@@ -103,6 +107,9 @@ export class ActionReactionService {
       } catch (e) {
         throw new BadRequestException(e.message);
       }
+    }
+    if (actionReaction.action.actionType === 'TIMER' && queryDto.isActivated) {
+      await this.timerService.waitForThisDate(actionReaction.action as ActionDocumentType);
     }
 
     return this.actionReactionMapper.toGetActionReactionDto(actionReaction);

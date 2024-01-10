@@ -4,12 +4,10 @@ import { GetActionReactionDto } from './_utils/dto/response/get-action-reaction.
 
 @Injectable()
 export class ActionReactionMapper {
-    toGetActionReactionDto = (
-        actionReaction: ActionReactionDocument,
-    ): GetActionReactionDto => ({
-        id: actionReaction._id.toString(),
-        name: actionReaction.actionReactionName,
-        action: actionReaction.action,
-        reaction: actionReaction.reaction,
-    });
+  toGetActionReactionDto = (actionReaction: ActionReactionDocument): GetActionReactionDto => ({
+    id: actionReaction._id.toString(),
+    name: actionReaction.actionReactionName,
+    action: actionReaction.action,
+    reaction: actionReaction.reaction,
+  });
 }

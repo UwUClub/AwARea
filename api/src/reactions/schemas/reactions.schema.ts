@@ -2,10 +2,12 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ReactionTypeEnum } from '../_utils/enum/reaction-type.enum';
 import { HydratedDocument } from 'mongoose';
 import { CreateDraftDocument } from './create-draft.schema';
+import { SendSlackMessageDocument } from './send-slack-message.schema';
+import { CreateSlackChannelDocument } from './create-slack-channel.schema';
 
 export type ReactionDocument = HydratedDocument<Reaction>;
 
-export type ReactionDocumentType = CreateDraftDocument;
+export type ReactionDocumentType = CreateDraftDocument | SendSlackMessageDocument | CreateSlackChannelDocument;
 
 @Schema({ discriminatorKey: 'reactionType' })
 export class Reaction {

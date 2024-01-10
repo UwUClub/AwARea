@@ -14,4 +14,8 @@ export class CreateActionDto {
   @IsString()
   @IsOptional()
   githubRepoName?: string;
+
+  @IsString()
+  @IsOptional()
+  date?: Date;
 }

@@ -110,9 +110,9 @@ Each work repository has its own linter and formatter configuration files.
 
 ## Additional Resources
 
-- [readme](../../README.md)
 - [Technologies](./Technologies.md)
-- [API Documentation](./API.md)
+- [API Documentation (back-end)](./end/Back-end.md)
+- [Front-end Documentation](./end/Front-end.md)
 
 ### Communication Channels
 
