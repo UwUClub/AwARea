@@ -3,8 +3,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../Core/Locator/locator.dart';
+import '../../Core/Manager/google_manager.dart';
 import '../../Core/Manager/slack_manager.dart';
 import '../../Core/Manager/theme_manager.dart';
+import '../../Core/Manager/user_manager.dart';
 import '../../Utils/Extensions/double_extensions.dart';
 import '../ReusableWidgets/mk_background.dart';
 import '../ReusableWidgets/mk_button.dart';
@@ -21,8 +23,10 @@ class ConnectionsView extends StatefulWidget {
 class _ConnectionsViewState extends State<ConnectionsView> {
   ThemeManager themeManager = locator<ThemeManager>();
   SlackManager slackManager = locator<SlackManager>();
+  UserManager userManager = locator<UserManager>();
 
   String slackBotTokenInput = '';
+  bool isGithubLogged = false;
 
   @override
   Widget build(BuildContext context) {
@@ -53,12 +57,25 @@ class _ConnectionsViewState extends State<ConnectionsView> {
               children: <Widget>[
                 Text(AppLocalizations.of(context)!.connectGithub,
                     style: Theme.of(context).textTheme.labelMedium),
-                MkButton(
-                  label: AppLocalizations.of(context)!.connect,
-                  onPressed: () async {
-                    await signInWithGitHub();
-                  },
-                ),
+                if (isGithubLogged)
+                  MkButton(
+                    label: AppLocalizations.of(context)!.logout,
+                    onPressed: () {
+                      setState(() {
+                        isGithubLogged = false;
+                      });
+                    },
+                  )
+                else
+                  MkButton(
+                    label: AppLocalizations.of(context)!.connect,
+                    onPressed: () async {
+                      await signInWithGitHub();
+                      setState(() {
+                        isGithubLogged = true;
+                      });
+                    },
+                  ),
               ],
             ),
             Row(children: <Widget>[
@@ -71,10 +88,18 @@ class _ConnectionsViewState extends State<ConnectionsView> {
               children: <Widget>[
                 Text(AppLocalizations.of(context)!.connectGoogle,
                     style: Theme.of(context).textTheme.labelMedium),
-                MkButton(
-                  label: AppLocalizations.of(context)!.connect,
-                  onPressed: () {},
-                ),
+                if (userManager.isGoogleLogged)
+                  MkButton(
+                    label: AppLocalizations.of(context)!.logout,
+                    onPressed: () {
+                    },
+                  )
+                else
+                  MkButton(
+                    label: AppLocalizations.of(context)!.connect,
+                    onPressed: () {
+                    },
+                  ),
               ],
             ),
             Row(children: <Widget>[

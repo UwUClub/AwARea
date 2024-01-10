@@ -10,6 +10,7 @@ class UserManager {
   String? fullName;
   String? email;
   String? accessToken;
+  bool isGoogleLogged = false;
 
   AuthStateEnum state = AuthStateEnum.splash;
 
@@ -89,7 +90,7 @@ class UserManager {
     state = AuthStateEnum.splash;
   }
 
-  Future<void> storeData(dynamic jsonBody, {bool haveToken = false}) async {
+  Future<void> storeData(dynamic jsonBody, {bool haveToken = false, bool isGoogle = false}) async {
     final Future<SharedPreferences> prefsF = SharedPreferences.getInstance();
     try {
       final SharedPreferences prefs = await prefsF;
@@ -107,6 +108,7 @@ class UserManager {
         email = body['email'] as String;
         accessToken = prefs.getString('accessToken');
       }
+      isGoogleLogged = isGoogle;
     } catch (e) {
       mkPrint('Error: $e');
     }
