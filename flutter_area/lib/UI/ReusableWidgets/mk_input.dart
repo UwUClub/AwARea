@@ -39,10 +39,14 @@ class _MkInputState extends State<MkInput> {
               hintText: widget.placeholder,
               hintStyle: Theme.of(context).textTheme.displayMedium,
               filled: true,
-              fillColor: Theme.of(context).colorScheme.lightColor3,
+              fillColor: Theme.of(context).brightness == Brightness.light
+                  ? Theme.of(context).colorScheme.lightColor3
+                  : Theme.of(context).colorScheme.darkColor3,
               enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: Theme.of(context).colorScheme.lightColor4,
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Theme.of(context).colorScheme.lightColor4
+                          : Theme.of(context).colorScheme.darkColor4,
                       width: 0.5)),
               contentPadding: EdgeInsets.symmetric(
                   horizontal: 16.0.ratioW(), vertical: 11.0.ratioH())),
