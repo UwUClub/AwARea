@@ -29,4 +29,12 @@ export class UsersService {
       githubName: myGithubProfile.login,
     });
   }
+
+  async removeGithubToken(user: UserDocument) {
+    return this.usersRepository.updateOneById(user._id, {
+      githubAccessToken: null,
+      githubId: null,
+      githubName: null,
+    });
+  }
 }

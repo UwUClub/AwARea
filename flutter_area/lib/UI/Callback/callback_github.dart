@@ -24,7 +24,6 @@ class CallbackGithubView extends StatefulWidget {
 
 class CallbackGithubViewState extends State<CallbackGithubView> {
   String? token;
-  bool? isSignedIn;
   UserManager userManager = locator<UserManager>();
   GithubManager githubManager = locator<GithubManager>();
 
@@ -56,7 +55,6 @@ class CallbackGithubViewState extends State<CallbackGithubView> {
         setState(() {
           // ignore: avoid_dynamic_calls
           token = jsonDecode(response.body)['access_token'] as String;
-          isSignedIn = true;
         });
         mkPrint(token);
         response = await http.post(
@@ -70,13 +68,14 @@ class CallbackGithubViewState extends State<CallbackGithubView> {
             },
             body: jsonEncode(<String, String>{'githubToken': token!}));
         if (response.statusCode == 201) {
+          userManager.isGithubLogged = true;
+          userManager.notify();
           mkPrint('Github token saved');
         } else {
           mkPrint('Échec de la requête : ${response.statusCode}');
         }
       } else {
         mkPrint('Échec de la requête : ${response.statusCode}');
-        setState(() => isSignedIn = false);
       }
     }
   }

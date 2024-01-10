@@ -27,6 +27,10 @@ export class UsersController {
         @ConnectedUser() user: UserDocument,
         @Body() body: AddGithubTokenDto,
     ) {
+        if (body.githubToken == 'none') {
+            await this.usersService.removeGithubToken(user);
+            return this.usersMapper.toGetUserDto(user);
+        }
         const updatedUser = await this.usersService.updateGithubToken(
             user,
             body.githubToken,
