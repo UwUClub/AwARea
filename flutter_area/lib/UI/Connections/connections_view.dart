@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../Core/Locator/locator.dart';
 import '../../Core/Manager/github_manager.dart';
+import '../../Core/Manager/google_manager.dart';
 import '../../Core/Manager/slack_manager.dart';
 import '../../Core/Manager/theme_manager.dart';
 import '../../Core/Manager/user_manager.dart';
@@ -24,6 +25,7 @@ class _ConnectionsViewState extends State<ConnectionsView> {
   ThemeManager themeManager = locator<ThemeManager>();
   SlackManager slackManager = locator<SlackManager>();
   GithubManager githubManager = locator<GithubManager>();
+  GoogleManager googleManager = locator<GoogleManager>();
 
   String slackBotTokenInput = '';
 
@@ -83,16 +85,16 @@ class _ConnectionsViewState extends State<ConnectionsView> {
                       children: <Widget>[
                         Text(AppLocalizations.of(context)!.connectGoogle,
                             style: Theme.of(context).textTheme.labelMedium),
-                        if (manager.isGoogleLogged!)
-                          MkButton(
-                            label: AppLocalizations.of(context)!.logout,
-                            onPressed: () {},
-                          )
-                        else
-                          MkButton(
-                            label: AppLocalizations.of(context)!.connect,
-                            onPressed: () {},
-                          ),
+                        MkButton(
+                          label: manager.isGoogleLogged!
+                              ? AppLocalizations.of(context)!.logout
+                              : AppLocalizations.of(context)!.connect,
+                          onPressed: () async {
+                            manager.isGithubLogged!
+                                ? await googleManager.signOutFromGoogle()
+                                : () {};
+                          },
+                        ),
                       ],
                     ),
                     Row(children: <Widget>[
