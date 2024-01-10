@@ -25,7 +25,9 @@ This document provides an overview and guidelines for the frontend development o
 - `android` and `ios` folders contain the native code for Android and iOS respectively.
 - `web` folder contains the web code for the application.
 - `lib` folder contains the Dart code for the application.
-- `lib/core` folder contains the core code of the application.
+- `lib/Core` folder contains the core code of the application.
+    - `lib/Core/Locator/locator.dart` contains the locator for the application.
+    - `lib/Core/Manager/X_manager` contains a manager for X service.
 
 ## Troubleshooting and Support
 
@@ -39,9 +41,9 @@ This document provides an overview and guidelines for the frontend development o
 
 ## Additional Resources
 
-- [readme](../../README.md)
-- [Introduction](./Introduction.md)
-- [Technologies](./Technologies.md)
+- [Introduction](../Introduction.md)
+- [Technologies](../Technologies.md)
+- [API Documentation (back-end)](./Back-end.md)
 
 ---
 

@@ -120,6 +120,10 @@ npm run test
 - [MongoDB](https://www.mongodb.com/)
 - [NodeJS](https://nodejs.org/en/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [Git](https://git-scm.com/)
+- [Introduction](../Introduction.md)
+- [Technologies](../Technologies.md)
+- [Frontend Development Documentation](./Front-end.md)
 
 ---
 
