@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../Core/Locator/locator.dart';
 import '../../../Core/Manager/action_reaction_manager.dart';
 import '../../../Utils/Extensions/color_extensions.dart';
 import '../../../Utils/Extensions/double_extensions.dart';
@@ -6,17 +7,17 @@ import '../../../Utils/constants.dart';
 import 'action_form.dart';
 
 class ActionCard extends StatefulWidget {
-  const ActionCard(
-      {super.key, required this.actionReaction, required this.manager});
+  const ActionCard({super.key, required this.actionReaction});
 
   final MkActionReaction actionReaction;
-  final ActionReactionManager manager;
 
   @override
   State<ActionCard> createState() => _ActionCardState();
 }
 
 class _ActionCardState extends State<ActionCard> {
+  ActionReactionManager manager = locator<ActionReactionManager>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,12 +59,11 @@ class _ActionCardState extends State<ActionCard> {
               ActionForm(
                 actionReaction: widget.actionReaction,
                 onSubmit: (Map<String, String> data) => <Future<bool>>{
-                  widget.manager.addAction(
+                  manager.addAction(
                       widget.actionReaction.action.type,
                       widget.actionReaction.name,
                       data,
-                      widget.manager.actionsReactions
-                          .indexOf(widget.actionReaction))
+                      manager.actionsReactions.indexOf(widget.actionReaction))
                 },
               )
             else

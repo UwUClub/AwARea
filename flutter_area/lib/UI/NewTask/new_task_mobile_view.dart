@@ -37,21 +37,19 @@ class _NewTaskMobileViewState extends State<NewTaskMobileView> {
                                 Theme.of(context).brightness == Brightness.light
                                     ? Theme.of(context).colorScheme.lightColor2
                                     : Theme.of(context).colorScheme.darkColor2),
-                        child: Column(
+                        child: const Column(
                           children: <Widget>[
                             ActionSelection(
                               label: 'Météo',
-                              actionTypes: const <ActionType>[
+                              actionTypes: <ActionType>[
                                 ActionType.WEATHER_GET_CURRENT,
                               ],
-                              manager: manager,
                             ),
                             ActionSelection(
                               label: 'Nasa',
-                              actionTypes: const <ActionType>[
+                              actionTypes: <ActionType>[
                                 ActionType.NASA_GET_APOD,
                               ],
-                              manager: manager,
                             ),
                           ],
                         )),
@@ -67,11 +65,9 @@ class _NewTaskMobileViewState extends State<NewTaskMobileView> {
                                 children: <Widget>[
                                   ActionCard(
                                     actionReaction: actionReaction,
-                                    manager: manager,
                                   ),
                                   ReactionCard(
                                     actionReaction: actionReaction,
-                                    manager: manager,
                                   ),
                                 ]),
                         ],

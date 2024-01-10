@@ -41,11 +41,9 @@ class _NewTaskViewState extends State<NewTaskView> {
                             Row(children: <Widget>[
                               ActionCard(
                                 actionReaction: actionReaction,
-                                manager: manager,
                               ),
                               ReactionCard(
                                 actionReaction: actionReaction,
-                                manager: manager,
                               ),
                             ]),
                         ],
@@ -59,25 +57,23 @@ class _NewTaskViewState extends State<NewTaskView> {
                         color: Theme.of(context).brightness == Brightness.light
                             ? Theme.of(context).colorScheme.lightColor2
                             : Theme.of(context).colorScheme.darkColor2),
-                    child: Column(
+                    child: const Column(
                       children: <Widget>[
                         ActionSelection(
                           label: 'Météo',
-                          actionTypes: const <ActionType>[
+                          actionTypes: <ActionType>[
                             ActionType.WEATHER_GET_CURRENT,
                           ],
-                          manager: manager,
                         ),
                         ActionSelection(
                           label: 'Nasa',
-                          actionTypes: const <ActionType>[
+                          actionTypes: <ActionType>[
                             ActionType.NASA_GET_APOD,
                           ],
-                          manager: manager,
                         ),
                         ActionSelection(
                           label: 'Github',
-                          actionTypes: const <ActionType>[
+                          actionTypes: <ActionType>[
                             ActionType.PULL_REQUEST_CREATED,
                             ActionType.ISSUE_OPENED,
                             ActionType.BRANCH_MERGED,
@@ -88,7 +84,6 @@ class _NewTaskViewState extends State<NewTaskView> {
                             ActionType.STAR_ADDED,
                             ActionType.STAR_REMOVED
                           ],
-                          manager: manager,
                         ),
                       ],
                     ))

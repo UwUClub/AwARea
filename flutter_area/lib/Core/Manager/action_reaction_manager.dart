@@ -89,6 +89,8 @@ class MkAction {
 
 enum ReactionType {
   CREATE_DRAFT,
+  SEND_SLACK_MESSAGE,
+  CREATE_SLACK_CHANNEL,
   NONE,
 }
 
@@ -97,6 +99,10 @@ extension ReactionTypeExtension on ReactionType {
     switch (this) {
       case ReactionType.CREATE_DRAFT:
         return 'Create Draft';
+      case ReactionType.SEND_SLACK_MESSAGE:
+        return 'Send Slack Message';
+      case ReactionType.CREATE_SLACK_CHANNEL:
+        return 'Create Slack Channel';
       case ReactionType.NONE:
         return 'None';
       default:
