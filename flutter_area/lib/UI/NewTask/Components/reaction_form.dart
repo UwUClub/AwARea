@@ -24,6 +24,10 @@ class _ReactionFormState extends State<ReactionForm> {
     switch (widget.reactionType) {
       case ReactionType.CREATE_DRAFT:
         fieldLabels = <String>['destinationEmail', 'subject', 'body'];
+      case ReactionType.SEND_SLACK_MESSAGE:
+        fieldLabels = <String>['channelName', 'message'];
+      case ReactionType.CREATE_SLACK_CHANNEL:
+        fieldLabels = <String>['channelName'];
       case ReactionType.NONE:
         break;
     }
