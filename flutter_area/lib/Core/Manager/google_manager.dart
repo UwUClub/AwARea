@@ -24,6 +24,7 @@ class GoogleManager {
     if (res.statusCode == 201) {
       final UserManager userManager = locator<UserManager>();
       userManager.storeData(jsonBody);
+      userManager.notify();
       return true;
     }
     return false;
@@ -47,4 +48,6 @@ class GoogleManager {
     }
     return false;
   }
+
+  Future signOutFromGoogle() async {}
 }

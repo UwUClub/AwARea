@@ -23,8 +23,18 @@ export class UsersController {
 
   @Protect()
   @Post('github-token')
-  async updateGithubToken(@ConnectedUser() user: UserDocument, @Body() body: AddGithubTokenDto) {
-    const updatedUser = await this.usersService.updateGithubToken(user, body.githubToken);
+  async updateGithubToken(
+    @ConnectedUser() user: UserDocument,
+    @Body() body: AddGithubTokenDto,
+  ) {
+    if (body.githubToken == 'none') {
+      await this.usersService.removeGithubToken(user);
+      return this.usersMapper.toGetUserDto(user);
+    }
+    const updatedUser = await this.usersService.updateGithubToken(
+      user,
+      body.githubToken,
+    );
     return this.usersMapper.toGetUserDto(updatedUser);
   }
 }

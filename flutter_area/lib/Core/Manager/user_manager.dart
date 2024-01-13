@@ -1,15 +1,18 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/constants.dart';
 import '../../Utils/mk_print.dart';
 
-class UserManager {
+class UserManager extends ChangeNotifier {
   String? username;
   String? fullName;
   String? email;
   String? accessToken;
+  bool? isGoogleLogged;
+  bool? isGithubLogged;
 
   AuthStateEnum state = AuthStateEnum.splash;
 
@@ -105,13 +108,18 @@ class UserManager {
         fullName = user['fullName'] as String;
         email = user['email'] as String;
         accessToken = body['accessToken'] as String;
+        isGoogleLogged = user['isLoggedInGoogle'] as bool;
+        isGithubLogged = user['isLoggedInGithub'] as bool;
         prefs.setString('accessToken', accessToken!);
       } else {
         username = body['username'] as String?;
         fullName = body['fullName'] as String;
         email = body['email'] as String;
+        isGoogleLogged = body['isLoggedInGoogle'] as bool;
+        isGithubLogged = body['isLoggedInGithub'] as bool;
         accessToken = prefs.getString('accessToken');
       }
+      print('$isGoogleLogged $isGithubLogged');
     } catch (e) {
       mkPrint('Error: $e');
     }
@@ -143,6 +151,10 @@ class UserManager {
       return msg.join(', ');
     }
     return null;
+  }
+
+  void notify() {
+    notifyListeners();
   }
 }
 
