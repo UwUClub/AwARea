@@ -7,7 +7,7 @@ import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
 import '../ReusableWidgets/mk_background.dart';
 import 'Components/action_card.dart';
-import 'Components/action_selection.dart';
+import 'Components/action_selection_list.dart';
 import 'Components/reaction_card.dart';
 
 class NewTaskMobileView extends StatefulWidget {
@@ -37,22 +37,7 @@ class _NewTaskMobileViewState extends State<NewTaskMobileView> {
                                 Theme.of(context).brightness == Brightness.light
                                     ? Theme.of(context).colorScheme.lightColor2
                                     : Theme.of(context).colorScheme.darkColor2),
-                        child: const Column(
-                          children: <Widget>[
-                            ActionSelection(
-                              label: 'Météo',
-                              actionTypes: <ActionType>[
-                                ActionType.WEATHER_GET_CURRENT,
-                              ],
-                            ),
-                            ActionSelection(
-                              label: 'Nasa',
-                              actionTypes: <ActionType>[
-                                ActionType.NASA_GET_APOD,
-                              ],
-                            ),
-                          ],
-                        )),
+                        child: const ActionSelectionList()),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 20.0.ratioW()),
                       child: Column(

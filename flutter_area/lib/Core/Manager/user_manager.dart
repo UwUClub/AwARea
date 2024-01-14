@@ -103,21 +103,18 @@ class UserManager extends ChangeNotifier {
       final SharedPreferences prefs = await prefsF;
       final Map<String, dynamic> body = jsonBody as Map<String, dynamic>;
       if (!haveToken) {
+        accessToken = body['accessToken'] as String;
+        prefs.setString('accessToken', accessToken!);
+      } else {
+        accessToken = prefs.getString('accessToken');
+      }
+      if (body['user'] != null && body['user']['username'] != null) {
         final Map<String, dynamic> user = body['user'] as Map<String, dynamic>;
         username = user['username'] as String?;
         fullName = user['fullName'] as String;
         email = user['email'] as String;
-        accessToken = body['accessToken'] as String;
         isGoogleLogged = user['isLoggedInGoogle'] as bool;
         isGithubLogged = user['isLoggedInGithub'] as bool;
-        prefs.setString('accessToken', accessToken!);
-      } else {
-        username = body['username'] as String?;
-        fullName = body['fullName'] as String;
-        email = body['email'] as String;
-        isGoogleLogged = body['isLoggedInGoogle'] as bool;
-        isGithubLogged = body['isLoggedInGithub'] as bool;
-        accessToken = prefs.getString('accessToken');
       }
       print('$isGoogleLogged $isGithubLogged');
     } catch (e) {

@@ -28,6 +28,7 @@ class MkActionReaction {
 enum ActionType {
   NASA_GET_APOD,
   WEATHER_GET_CURRENT,
+  TIMER,
   PULL_REQUEST_CREATED,
   ISSUE_OPENED,
   BRANCH_MERGED,
@@ -47,6 +48,8 @@ extension ActionTypeExtension on ActionType {
         return 'NASA Get APOD';
       case ActionType.WEATHER_GET_CURRENT:
         return 'Weather Get Current';
+      case ActionType.TIMER:
+        return 'Timer';
       case ActionType.PULL_REQUEST_CREATED:
         return 'Pull Request Created';
       case ActionType.ISSUE_OPENED:
@@ -91,6 +94,7 @@ enum ReactionType {
   CREATE_DRAFT,
   SEND_SLACK_MESSAGE,
   CREATE_SLACK_CHANNEL,
+  SEND_EMAIL,
   NONE,
 }
 
@@ -103,6 +107,8 @@ extension ReactionTypeExtension on ReactionType {
         return 'Send Slack Message';
       case ReactionType.CREATE_SLACK_CHANNEL:
         return 'Create Slack Channel';
+      case ReactionType.SEND_EMAIL:
+        return 'Send Email';
       case ReactionType.NONE:
         return 'None';
       default:

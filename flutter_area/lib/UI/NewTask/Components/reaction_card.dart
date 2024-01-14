@@ -51,6 +51,7 @@ class _ReactionCardState extends State<ReactionCard> {
                           label: 'Google',
                           reactionTypes: const <ReactionType>[
                             ReactionType.CREATE_DRAFT,
+                            ReactionType.SEND_EMAIL,
                           ],
                           setReaction: (ReactionType type) {
                             setState(() {

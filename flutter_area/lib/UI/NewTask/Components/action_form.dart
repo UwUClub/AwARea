@@ -29,6 +29,8 @@ class _ActionFormState extends State<ActionForm> {
         fieldLabels = <String>[];
       case ActionType.WEATHER_GET_CURRENT:
         fieldLabels = <String>['location'];
+      case ActionType.TIMER:
+        fieldLabels = <String>['date'];
       case ActionType.PULL_REQUEST_CREATED ||
             ActionType.ISSUE_OPENED ||
             ActionType.BRANCH_MERGED ||
@@ -42,6 +44,17 @@ class _ActionFormState extends State<ActionForm> {
       case ActionType.NONE:
         break;
     }
+  }
+
+  String convertDateFormat(String date) {
+    final List<String> dateParts = date.split(' ');
+    if (dateParts.length < 2) {
+      return date;
+    }
+    final List<String> dateParts2 = dateParts[0].split('/');
+    final String result =
+        '${dateParts2[2]}-${dateParts2[1]}-${dateParts2[0]}T${dateParts[1]}.000Z';
+    return result;
   }
 
   @override
@@ -58,6 +71,9 @@ class _ActionFormState extends State<ActionForm> {
               labelText: fieldLabels[i],
               labelStyle:
                   const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              hintText: fieldLabels[i] == 'date'
+                  ? 'format: dd/mm/yyyy hh:mm:ss'
+                  : null,
             ),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
@@ -73,6 +89,9 @@ class _ActionFormState extends State<ActionForm> {
               data[fieldLabels[i]] = fieldValues[i];
             }
             data['actionType'] = widget.actionReaction.action.type.name;
+            if (data['date'] != null) {
+              data['date'] = convertDateFormat(data['date']!);
+            }
             widget.onSubmit(data);
           },
           child: Text(AppLocalizations.of(context)!.createAction),
