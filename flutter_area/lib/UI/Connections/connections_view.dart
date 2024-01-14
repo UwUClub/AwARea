@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 import '../../Core/Locator/locator.dart';
@@ -96,10 +97,21 @@ class _ConnectionsViewState extends State<ConnectionsView> {
                               ? AppLocalizations.of(context)!.logout
                               : AppLocalizations.of(context)!.connect,
                           onPressed: () async {
-                            if (userManager.isGithubLogged!) {
-                              await googleManager.signOutFromGoogle();
+                            if (userManager.isGoogleLogged!) {
+                              await googleManager.setGoogleToken('none');
                             } else {
-                              // todo connect to google
+                              final GoogleSignInAccount? res =
+                                  await googleManager.openGoogleAuthPopup();
+                              if (res == null) {
+                                return;
+                              }
+                              final GoogleSignInAuthentication googleToken =
+                                  await res.authentication;
+                              if (googleToken.accessToken == null) {
+                                return;
+                              }
+                              googleManager
+                                  .setGoogleToken(googleToken.accessToken!);
                             }
                           },
                         ),
