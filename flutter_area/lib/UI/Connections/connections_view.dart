@@ -13,6 +13,7 @@ import '../../Utils/Extensions/double_extensions.dart';
 import '../ReusableWidgets/mk_background.dart';
 import '../ReusableWidgets/mk_button.dart';
 import '../ReusableWidgets/mk_input.dart';
+import 'connections_viewmodel.dart';
 
 class ConnectionsView extends StatefulWidget {
   const ConnectionsView({super.key});
@@ -26,16 +27,18 @@ class _ConnectionsViewState extends State<ConnectionsView> {
   SlackManager slackManager = locator<SlackManager>();
   GithubManager githubManager = locator<GithubManager>();
   GoogleManager googleManager = locator<GoogleManager>();
+  UserManager userManager = locator<UserManager>();
 
   String slackBotTokenInput = '';
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) => locator<UserManager>(),
+      create: (BuildContext context) => ConnectionsViewModel(),
       builder: (BuildContext context, Widget? child) {
-        return Consumer<UserManager>(
-          builder: (BuildContext context, UserManager manager, Widget? child) {
+        return Consumer<ConnectionsViewModel>(
+          builder:
+              (BuildContext context, ConnectionsViewModel vm, Widget? child) {
             return MkBackground(
               child: Padding(
                 padding: EdgeInsets.only(
@@ -64,13 +67,16 @@ class _ConnectionsViewState extends State<ConnectionsView> {
                         Text(AppLocalizations.of(context)!.connectGithub,
                             style: Theme.of(context).textTheme.labelMedium),
                         MkButton(
-                          label: manager.isGithubLogged!
+                          label: userManager.isGithubLogged!
                               ? AppLocalizations.of(context)!.logout
                               : AppLocalizations.of(context)!.connect,
                           onPressed: () async {
-                            manager.isGithubLogged!
-                                ? await githubManager.signOutFromGitHub()
-                                : await githubManager.signInWithGitHub();
+                            if (userManager.isGithubLogged!) {
+                              await githubManager.signOutFromGitHub();
+                              vm.notify();
+                            } else {
+                              await githubManager.signInWithGitHub();
+                            }
                           },
                         ),
                       ],
@@ -86,13 +92,16 @@ class _ConnectionsViewState extends State<ConnectionsView> {
                         Text(AppLocalizations.of(context)!.connectGoogle,
                             style: Theme.of(context).textTheme.labelMedium),
                         MkButton(
-                          label: manager.isGoogleLogged!
+                          label: userManager.isGoogleLogged!
                               ? AppLocalizations.of(context)!.logout
                               : AppLocalizations.of(context)!.connect,
                           onPressed: () async {
-                            manager.isGithubLogged!
-                                ? await googleManager.signOutFromGoogle()
-                                : () {};
+                            if (userManager.isGithubLogged!) {
+                              await googleManager.signOutFromGoogle();
+                              vm.notify();
+                            } else {
+                              // todo connect to google
+                            }
                           },
                         ),
                       ],
