@@ -5,4 +5,5 @@ export class GetUserDto {
   email: string;
   isLoggedInGoogle: boolean;
   isLoggedInGithub: boolean;
+  slackConnected: boolean;
 }

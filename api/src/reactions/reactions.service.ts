@@ -13,9 +13,15 @@ export class ReactionsService {
     CREATE_DRAFT: (user: UserDocument, reaction: ReactionDocumentType) => Promise<any>;
     CREATE_SLACK_CHANNEL: (user: UserDocument, reaction: ReactionDocumentType) => Promise<any>;
     SEND_SLACK_MESSAGE: (user: UserDocument, reaction: ReactionDocumentType) => Promise<any>;
+    SEND_EMAIL: (user: UserDocument, reaction: ReactionDocumentType) => Promise<any>;
   };
 
-  private readonly bodyNeeded: { CREATE_DRAFT: string[]; CREATE_SLACK_CHANNEL: string[]; SEND_SLACK_MESSAGE: string[] };
+  private readonly bodyNeeded: {
+    CREATE_DRAFT: string[];
+    CREATE_SLACK_CHANNEL: string[];
+    SEND_SLACK_MESSAGE: string[];
+    SEND_EMAIL: string[];
+  };
 
   constructor(
     private readonly googleApiService: GoogleApiService,
@@ -27,18 +33,20 @@ export class ReactionsService {
         return await this.googleApiService.createDraft(user, reaction);
       },
       CREATE_SLACK_CHANNEL: async (user: UserDocument, reaction: ReactionDocumentType) => {
-        console.log('create slack channel');
         return await this.slackService.createChannel(user, reaction);
       },
       SEND_SLACK_MESSAGE: async (user: UserDocument, reaction: ReactionDocumentType) => {
-        console.log('send slack message');
         return await this.slackService.sendMessage(user, reaction);
+      },
+      SEND_EMAIL: async (user: UserDocument, reaction: ReactionDocumentType) => {
+        return await this.googleApiService.sendMail(user, reaction);
       },
     };
     this.bodyNeeded = {
       CREATE_DRAFT: ['destinationEmail', 'subject', 'body'],
       CREATE_SLACK_CHANNEL: ['channelName'],
       SEND_SLACK_MESSAGE: ['channelName', 'message'],
+      SEND_EMAIL: ['destinationEmail', 'subject', 'body'],
     };
   }
 
@@ -61,6 +69,8 @@ export class ReactionsService {
         return this.reactionsRepository.sendSlackMessage(data.channelName, data.message);
       case 'CREATE_SLACK_CHANNEL':
         return this.reactionsRepository.createSlackChannel(data.channelName);
+      case 'SEND_EMAIL':
+        return this.reactionsRepository.sendEmail(data.destinationEmail, data.body, data.subject);
       default:
         throw new BadRequestException('Y a pas ca ici');
     }

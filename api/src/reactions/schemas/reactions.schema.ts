@@ -4,10 +4,15 @@ import { HydratedDocument } from 'mongoose';
 import { CreateDraftDocument } from './create-draft.schema';
 import { SendSlackMessageDocument } from './send-slack-message.schema';
 import { CreateSlackChannelDocument } from './create-slack-channel.schema';
+import { SendEmailDocument } from './send-email.schema';
 
 export type ReactionDocument = HydratedDocument<Reaction>;
 
-export type ReactionDocumentType = CreateDraftDocument | SendSlackMessageDocument | CreateSlackChannelDocument;
+export type ReactionDocumentType =
+  | CreateDraftDocument
+  | SendSlackMessageDocument
+  | CreateSlackChannelDocument
+  | SendEmailDocument;
 
 @Schema({ discriminatorKey: 'reactionType' })
 export class Reaction {

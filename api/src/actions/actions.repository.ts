@@ -83,4 +83,10 @@ export class ActionsRepository {
       .findByIdAndUpdate(actionId, { webhookId: webhookId }, { new: true })
       .orFail(new NotFoundException(`Action ${actionId} not found`))
       .exec();
+
+  removeActionById = (id: Types.ObjectId) =>
+    this.actionModel
+      .findByIdAndDelete(id)
+      .orFail(new NotFoundException(`Action ${id} not found`))
+      .exec();
 }

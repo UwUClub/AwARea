@@ -22,6 +22,15 @@ export class GoogleApiService {
     this.oAuth2Client.setCredentials({ access_token: accessToken });
   }
 
+  async testConnection(accessToken: string) {
+    try {
+      await this.getGoogleProfile(accessToken);
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
+
   private async getGoogleProfile(accessToken: string) {
     this.setAccessToken(accessToken);
     try {
@@ -54,6 +63,24 @@ export class GoogleApiService {
           message: {
             raw: this.createMailFromInfo(reaction.email, reaction.subject, reaction.body),
           },
+        },
+      })
+      .catch(() => {
+        throw new UnauthorizedException('Bad access token');
+      });
+  }
+
+  async sendMail(user: UserDocument, reaction: ReactionDocumentType) {
+    if (reaction.reactionType !== 'SEND_EMAIL') throw new UnauthorizedException('Bad reaction type');
+    if (!user.googleAccessToken) throw new UnauthorizedException('Not connected with google');
+    this.setAccessToken(user.googleAccessToken);
+    const gmail = google.gmail({ version: 'v1', auth: this.oAuth2Client });
+    return gmail.users.messages
+      .send({
+        userId: 'me',
+        requestBody: {
+          id: '',
+          raw: this.createMailFromInfo(reaction.email, reaction.subject, reaction.body),
         },
       })
       .catch(() => {
