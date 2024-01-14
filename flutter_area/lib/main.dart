@@ -1,17 +1,20 @@
-// ignore_for_file: unreachable_from_main
-
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'Core/Locator/locator.dart';
 import 'Core/Manager/theme_manager.dart';
+import 'UI/Boostrap/boostrap_view.dart';
 import 'UI/Callback/callback_github.dart';
-import 'UI/Home/home_view.dart';
 import 'UI/Login/login_screen.dart';
+import 'UI/MainNavigator/main_navigator.dart';
+import 'UI/MainNavigator/main_navigator_mobile.dart';
+import 'UI/Splash/splash_view.dart';
 import 'Utils/constants.dart';
 import 'Utils/theme_data.dart';
 
-void main() {
+void main() async {
+  await dotenv.load();
   setupLocator();
   runApp(const MyApp());
 }
@@ -42,13 +45,16 @@ class MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
-            initialRoute: '/login',
+            initialRoute: '/',
             routes: <String, WidgetBuilder>{
+              '/': (BuildContext context) => const BoostrapView(),
               '/login': (BuildContext context) => const LoginScreen(),
-              '/home': (BuildContext context) => const HomeView(),
+              '/home': (BuildContext context) =>
+                  kIsPc ? const MainNavigator() : const MainNavigatorMobile(),
+              '/splash': (BuildContext context) => const SplashView(),
               '/callback': (BuildContext context) => const CallbackGithubView(),
             });
       },
     );
-  }
+    }
 }

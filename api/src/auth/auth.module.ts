@@ -10,22 +10,20 @@ import { EnvironmentVariables } from 'src/_utils/config';
 import { GoogleApiModule } from '../google-api/google-api.module';
 
 @Module({
-    imports: [
-        UsersModule,
-        PassportModule,
-        GoogleApiModule,
-        JwtModule.registerAsync({
-            useFactory: async (
-                configService: ConfigService<EnvironmentVariables, true>,
-            ) => ({
-                global: true,
-                secret: configService.get('JWT_SECRET'),
-                signOptions: { expiresIn: '1d' },
-            }),
-            inject: [ConfigService],
-        }),
-    ],
-    controllers: [AuthController],
-    providers: [AuthService, JwtStrategy],
+  imports: [
+    UsersModule,
+    PassportModule,
+    GoogleApiModule,
+    JwtModule.registerAsync({
+      useFactory: async (configService: ConfigService<EnvironmentVariables, true>) => ({
+        global: true,
+        secret: configService.get('JWT_SECRET'),
+        signOptions: { expiresIn: '1d' },
+      }),
+      inject: [ConfigService],
+    }),
+  ],
+  controllers: [AuthController],
+  providers: [AuthService, JwtStrategy],
 })
 export class AuthModule {}

@@ -8,10 +8,10 @@ export type WeatherActionDocument = HydratedDocument<WeatherAction>;
 
 @Schema()
 export class WeatherAction extends OmitType(Action, ['actionType'] as const) {
-    actionType: ActionTypeEnum.WEATHER_GET_CURRENT;
+  actionType: ActionTypeEnum.WEATHER_GET_CURRENT;
 
-    @Prop({ required: true })
-    city: string;
+  @Prop({ required: true })
+  city: string;
 }
 
 export const WeatherActionSchema = SchemaFactory.createForClass(WeatherAction);

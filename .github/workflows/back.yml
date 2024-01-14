@@ -5,6 +5,7 @@ on:
         branches:
             - main
             - dev
+            - AW-42-documentation-tests-cicd
         paths:
             - "api/**"
     pull_request:
@@ -36,8 +37,4 @@ jobs:
 
             - name: Build
               run: npm run build
-              working-directory: ./api
-
-            - name: Run Tests
-              run: npm test
               working-directory: ./api

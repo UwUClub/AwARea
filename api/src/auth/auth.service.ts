@@ -15,67 +15,60 @@ import { GoogleApiService } from '../google-api/google-api.service';
 
 @Injectable()
 export class AuthService {
-    private oAuth2Client: OAuth2Client;
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly usersRepository: UsersRepository,
+    private readonly usersMapper: UsersMapper,
+    private readonly jwtService: JwtService,
+    private readonly googleApiService: GoogleApiService,
+  ) {}
 
-    constructor(
-        private readonly usersService: UsersService,
-        private readonly usersRepository: UsersRepository,
-        private readonly usersMapper: UsersMapper,
-        private readonly jwtService: JwtService,
-        private readonly googleApiService: GoogleApiService,
-    ) {}
+  async signUp(createUserDto: CreateUserDto): Promise<SuccesLoginDto> {
+    const user = await this.usersService.create(createUserDto);
 
-    async signUp(createUserDto: CreateUserDto): Promise<SuccesLoginDto> {
-        const user = await this.usersService.create(createUserDto);
+    return {
+      user: await this.usersMapper.toGetUserDto(user),
+      accessToken: await this.createToken(user),
+    };
+  }
 
-        return {
-            user: this.usersMapper.toGetUserDto(user),
-            accessToken: await this.createToken(user),
-        };
+  async signIn(signInDto: SignInDto): Promise<SuccesLoginDto> {
+    let user: UserDocument;
+
+    if (isEmail(signInDto.usernameOrEmail)) {
+      user = await this.usersRepository.findOneByEmail(signInDto.usernameOrEmail);
+    } else {
+      user = await this.usersRepository.findOneByUsername(signInDto.usernameOrEmail);
     }
+    if (!user || !compareSync(signInDto.password, user.password))
+      throw new UnauthorizedException('Invalid credentials');
 
-    async signIn(signInDto: SignInDto): Promise<SuccesLoginDto> {
-        let user: UserDocument;
+    return {
+      user: await this.usersMapper.toGetUserDto(user),
+      accessToken: await this.createToken(user),
+    };
+  }
 
-        if (isEmail(signInDto.usernameOrEmail)) {
-            user = await this.usersRepository.findOneByEmail(
-                signInDto.usernameOrEmail,
-            );
-        } else {
-            user = await this.usersRepository.findOneByUsername(
-                signInDto.usernameOrEmail,
-            );
-        }
-        if (!user || !compareSync(signInDto.password, user.password))
-            throw new UnauthorizedException('Invalid credentials');
-
-        return {
-            user: this.usersMapper.toGetUserDto(user),
-            accessToken: await this.createToken(user),
-        };
+  async connectWithGoogle(googleUser: GoogleLoginDto) {
+    const info = await this.googleApiService.loginWithGoogle(googleUser);
+    let user = await this.usersRepository.findOneByGoogleId(info.data.id);
+    if (!user) {
+      user = await this.usersRepository.createOAuthUser({
+        fullName: info.data.name,
+        email: info.data.email,
+        googleId: info.data.id,
+        googleAccessToken: googleUser.accessToken,
+      });
+    } else {
+      user = await this.usersRepository.updateOneById(user._id, {
+        googleAccessToken: googleUser.accessToken,
+      });
     }
+    return {
+      user: await this.usersMapper.toGetUserDto(user),
+      accessToken: await this.createToken(user),
+    };
+  }
 
-    async connectWithGoogle(googleUser: GoogleLoginDto) {
-        const info = await this.googleApiService.loginWithGoogle(googleUser);
-        let user = await this.usersRepository.findOneByGoogleId(info.data.id);
-        if (!user) {
-            user = await this.usersRepository.createOAuthUser({
-                fullName: info.data.name,
-                email: info.data.email,
-                googleId: info.data.id,
-                googleAccessToken: googleUser.accessToken,
-            });
-        } else {
-            user = await this.usersRepository.updateOneById(user._id, {
-                googleAccessToken: googleUser.accessToken,
-            });
-        }
-        return {
-            user: this.usersMapper.toGetUserDto(user),
-            accessToken: await this.createToken(user),
-        };
-    }
-
-    private createToken = (user: UserDocument) =>
-        this.jwtService.signAsync({ sub: user._id.toString() });
+  private createToken = (user: UserDocument) => this.jwtService.signAsync({ sub: user._id.toString() });
 }
