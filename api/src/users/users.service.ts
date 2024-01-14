@@ -1,11 +1,11 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { UsersRepository } from './users.repository';
 import { CreateUserDto } from './_utils/dto/request/create-user.dto';
 import { UserDocument } from './users.schema';
-import axios from 'axios';
 import { GithubApiService } from '../github-api/services/github-api.service';
 import { UpdateUserDto } from './_utils/dto/request/update-user.dto';
 import { UsersMapper } from './users.mapper';
+import { GoogleApiService } from '../google-api/google-api.service';
 
 @Injectable()
 export class UsersService {
@@ -13,6 +13,7 @@ export class UsersService {
     private readonly usersRepository: UsersRepository,
     private readonly githubApiService: GithubApiService,
     private readonly userMapper: UsersMapper,
+    private readonly googleService: GoogleApiService,
   ) {}
 
   async create(userDto: CreateUserDto) {
@@ -31,6 +32,18 @@ export class UsersService {
       githubId: myGithubProfile.id,
       githubName: myGithubProfile.login,
     });
+  }
+
+  async updateGoogleToken(user: UserDocument, googleToken: string) {
+    if (googleToken === 'none')
+      return await this.usersRepository
+        .updateOneById(user._id, { googleAccessToken: null })
+        .then(this.userMapper.toGetUserDto);
+
+    if (!(await this.googleService.testConnection(googleToken))) throw new UnauthorizedException('Bad access token');
+    const newUser = await this.usersRepository.updateOneById(user._id, { googleAccessToken: googleToken });
+    if (!newUser) throw new InternalServerErrorException('Fail to update user');
+    return this.userMapper.toGetUserDto(newUser);
   }
 
   async removeGithubToken(user: UserDocument) {
