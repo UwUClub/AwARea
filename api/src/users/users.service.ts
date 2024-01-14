@@ -40,7 +40,7 @@ export class UsersService {
       githubName: null,
     });
   }
-  
+
   async update(user: UserDocument, body: UpdateUserDto) {
     user = await this.usersRepository.updateOneById(user._id, body);
 

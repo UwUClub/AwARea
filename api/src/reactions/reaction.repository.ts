@@ -41,7 +41,7 @@ export class ReactionRepository {
       message: message,
     });
 
-    sendEmail = (email: string, body: string, subject: string) =>
+  sendEmail = (email: string, body: string, subject: string) =>
     this.sendEmailModel.create({
       email: email,
       body: body,
