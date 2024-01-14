@@ -39,6 +39,7 @@ class _ConnectionsViewState extends State<ConnectionsView> {
         return Consumer<ConnectionsViewModel>(
           builder:
               (BuildContext context, ConnectionsViewModel vm, Widget? child) {
+            userManager.connectionsViewModel = vm;
             return MkBackground(
               child: Padding(
                 padding: EdgeInsets.only(
@@ -73,7 +74,6 @@ class _ConnectionsViewState extends State<ConnectionsView> {
                           onPressed: () async {
                             if (userManager.isGithubLogged!) {
                               await githubManager.signOutFromGitHub();
-                              vm.notify();
                             } else {
                               await githubManager.signInWithGitHub();
                             }
@@ -98,7 +98,6 @@ class _ConnectionsViewState extends State<ConnectionsView> {
                           onPressed: () async {
                             if (userManager.isGithubLogged!) {
                               await googleManager.signOutFromGoogle();
-                              vm.notify();
                             } else {
                               // todo connect to google
                             }

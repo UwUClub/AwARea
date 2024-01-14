@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../UI/Connections/connections_viewmodel.dart';
 import '../../Utils/constants.dart';
 import '../../Utils/mk_print.dart';
 
@@ -12,6 +13,7 @@ class UserManager {
   String? accessToken;
   bool? isGoogleLogged;
   bool? isGithubLogged;
+  ConnectionsViewModel? connectionsViewModel;
 
   AuthStateEnum state = AuthStateEnum.splash;
 

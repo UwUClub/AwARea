@@ -29,7 +29,7 @@ class GithubManager {
         body: jsonEncode(<String, String>{'githubToken': 'none'}));
     if (response.statusCode == 201) {
       userManager.isGithubLogged = false;
-      userManager.notify();
+      userManager.connectionsViewModel?.notify();
     }
   }
 }
