@@ -9,6 +9,7 @@ import '../ReusableWidgets/mk_background.dart';
 import 'Components/action_card.dart';
 import 'Components/action_selection_list.dart';
 import 'Components/reaction_card.dart';
+import 'new_task_viewmodel.dart';
 
 class NewTaskMobileView extends StatefulWidget {
   const NewTaskMobileView({super.key});
@@ -18,14 +19,17 @@ class NewTaskMobileView extends StatefulWidget {
 }
 
 class _NewTaskMobileViewState extends State<NewTaskMobileView> {
+  ActionReactionManager actionReactionManager =
+      locator<ActionReactionManager>();
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) => locator<ActionReactionManager>(),
+      create: (BuildContext context) => NewTaskViewModel(),
       builder: (BuildContext context, Widget? child) {
-        return Consumer<ActionReactionManager>(
-          builder: (BuildContext context, ActionReactionManager manager,
-              Widget? child) {
+        return Consumer<NewTaskViewModel>(
+          builder: (BuildContext context, NewTaskViewModel vm, Widget? child) {
+            actionReactionManager.newTaskViewModel = vm;
             return SafeArea(
               child: MkBackground(
                 child: SingleChildScrollView(
@@ -43,7 +47,7 @@ class _NewTaskMobileViewState extends State<NewTaskMobileView> {
                       child: Column(
                         children: <Widget>[
                           for (final MkActionReaction actionReaction
-                              in manager.actionsReactions)
+                              in actionReactionManager.actionsReactions)
                             Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

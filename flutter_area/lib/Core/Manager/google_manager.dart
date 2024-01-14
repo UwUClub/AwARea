@@ -25,7 +25,7 @@ class GoogleManager {
       final UserManager userManager = locator<UserManager>();
       userManager.storeUser(jsonBody['user'] as Map<String, dynamic>);
       userManager.storeAccessToken(jsonBody['accessToken'] as String);
-      userManager.notify();
+      userManager.connectionsViewModel?.notify();
       return true;
     }
     return false;

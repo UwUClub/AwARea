@@ -69,7 +69,7 @@ class CallbackGithubViewState extends State<CallbackGithubView> {
             body: jsonEncode(<String, String>{'githubToken': token!}));
         if (response.statusCode == 201) {
           userManager.isGithubLogged = true;
-          userManager.notify();
+          userManager.connectionsViewModel?.notify();
           mkPrint('Github token saved');
         } else {
           mkPrint('Échec de la requête : ${response.statusCode}');
