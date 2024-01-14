@@ -47,7 +47,7 @@ class _ActionCardState extends State<ActionCard> {
                 IconButton(
                   icon: const Icon(Icons.delete),
                   onPressed: () {
-                    // manager.deleteAction...
+                    manager.deleteActionReaction(widget.actionReaction.id);
                   },
                 ),
               ],
