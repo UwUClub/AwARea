@@ -34,7 +34,8 @@ class UserManager extends ChangeNotifier {
           }));
       final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
       if (res.statusCode == 201) {
-        storeData(jsonBody);
+        storeUser(jsonBody['user'] as Map<String, dynamic>);
+        storeAccessToken(jsonBody['accessToken'] as String);
         return (true, null);
       }
       // ignore: avoid_dynamic_calls
@@ -58,7 +59,8 @@ class UserManager extends ChangeNotifier {
         }));
     final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
     if (res.statusCode == 201) {
-      storeData(jsonBody);
+      storeUser(jsonBody['user'] as Map<String, dynamic>);
+      storeAccessToken(jsonBody['accessToken'] as String);
       return (true, null);
     }
     // ignore: avoid_dynamic_calls
@@ -77,7 +79,7 @@ class UserManager extends ChangeNotifier {
       mkPrint(res.statusCode);
       if (res.statusCode == 200) {
         final dynamic jsonBody = jsonDecode(res.body) as Map<String, dynamic>;
-        await storeData(jsonBody, haveToken: true);
+        storeUser(jsonBody as Map<String, dynamic>);
         return true;
       }
     } catch (e) {
@@ -97,29 +99,18 @@ class UserManager extends ChangeNotifier {
     state = AuthStateEnum.splash;
   }
 
-  Future<void> storeData(dynamic jsonBody, {bool haveToken = false}) async {
-    final Future<SharedPreferences> prefsF = SharedPreferences.getInstance();
-    try {
-      final SharedPreferences prefs = await prefsF;
-      final Map<String, dynamic> body = jsonBody as Map<String, dynamic>;
-      if (!haveToken) {
-        accessToken = body['accessToken'] as String;
-        prefs.setString('accessToken', accessToken!);
-      } else {
-        accessToken = prefs.getString('accessToken');
-      }
-      if (body['user'] != null && body['user']['username'] != null) {
-        final Map<String, dynamic> user = body['user'] as Map<String, dynamic>;
-        username = user['username'] as String?;
-        fullName = user['fullName'] as String;
-        email = user['email'] as String;
-        isGoogleLogged = user['isLoggedInGoogle'] as bool;
-        isGithubLogged = user['isLoggedInGithub'] as bool;
-      }
-      print('$isGoogleLogged $isGithubLogged');
-    } catch (e) {
-      mkPrint('Error: $e');
-    }
+  void storeUser(Map<String, dynamic> userJson) {
+    username = userJson['username'] as String?;
+    fullName = userJson['fullName'] as String?;
+    email = userJson['email'] as String;
+    isGoogleLogged = userJson['isLoggedInGoogle'] as bool;
+    isGithubLogged = userJson['isLoggedInGithub'] as bool;
+  }
+
+  Future<void> storeAccessToken(String token) async {
+    accessToken = token;
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('accessToken', accessToken!);
   }
 
   Future<bool> createDraft(String name, String email) async {
