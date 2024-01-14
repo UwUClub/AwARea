@@ -27,7 +27,7 @@ export class AuthService {
     const user = await this.usersService.create(createUserDto);
 
     return {
-      user: this.usersMapper.toGetUserDto(user),
+      user: await this.usersMapper.toGetUserDto(user),
       accessToken: await this.createToken(user),
     };
   }
@@ -44,7 +44,7 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
 
     return {
-      user: this.usersMapper.toGetUserDto(user),
+      user: await this.usersMapper.toGetUserDto(user),
       accessToken: await this.createToken(user),
     };
   }
@@ -65,7 +65,7 @@ export class AuthService {
       });
     }
     return {
-      user: this.usersMapper.toGetUserDto(user),
+      user: await this.usersMapper.toGetUserDto(user),
       accessToken: await this.createToken(user),
     };
   }
