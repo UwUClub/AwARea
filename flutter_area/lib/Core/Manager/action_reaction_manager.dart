@@ -247,4 +247,24 @@ class ActionReactionManager extends ChangeNotifier {
     actionsReactions[index].reaction = null;
     notifyListeners();
   }
+
+  Future<void> deleteActionReaction(String actionReactionId) async {
+    try {
+      final UserManager userManager = locator<UserManager>();
+      final http.Response res = await http.delete(
+          Uri.parse('$kBaseUrl/action-reaction/$actionReactionId'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ${userManager.accessToken}',
+          });
+      if (res.statusCode != 200) {
+        return;
+      }
+      actionsReactions.removeWhere(
+          (MkActionReaction element) => element.id == actionReactionId);
+      notifyListeners();
+    } catch (e) {
+      mkPrint('Error: $e');
+    }
+  }
 }
