@@ -44,7 +44,7 @@ class _ProfileViewState extends State<ProfileView> {
                 onPressed: () async {
                   await userManager.logout();
                   // ignore: use_build_context_synchronously
-                  Navigator.of(context).pushNamed('/');
+                  Navigator.of(context).pop();
                 })
           ]),
         ],
