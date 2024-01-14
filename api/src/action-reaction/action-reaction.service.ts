@@ -80,16 +80,11 @@ export class ActionReactionService {
     );
 
     if (!actionReaction) throw new BadRequestException('Action reaction does not exist');
-    const action = queryDto.actionId
-      ? await this.actionRepository.getActionById(new Types.ObjectId(queryDto.actionId))
-      : null;
-
-    const reaction = queryDto.reactionId ? await this.reactionRepository.getReactionById(queryDto.reactionId) : null;
 
     actionReaction = await this.actionReactionRepository.updateActionReaction(
       actionReaction._id,
-      action,
-      reaction,
+      null,
+      null,
       queryDto.isActivated,
     );
     if (actionReaction.action instanceof Types.ObjectId)

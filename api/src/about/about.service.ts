@@ -98,6 +98,10 @@ export class AboutService {
                 name: 'Create draft',
                 description: 'Create a draft on gmail',
               },
+              {
+                name: 'Send email',
+                description: 'Create and send an email with gmail',
+              },
             ],
           },
         ],

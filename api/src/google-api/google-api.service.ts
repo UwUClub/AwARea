@@ -70,7 +70,23 @@ export class GoogleApiService {
       });
   }
 
-  async sendMail(user: UserDocument, reaction: ReactionDocumentType) {}
+  async sendMail(user: UserDocument, reaction: ReactionDocumentType) {
+    if (reaction.reactionType !== 'SEND_EMAIL') throw new UnauthorizedException('Bad reaction type');
+    if (!user.googleAccessToken) throw new UnauthorizedException('Not connected with google');
+    this.setAccessToken(user.googleAccessToken);
+    const gmail = google.gmail({ version: 'v1', auth: this.oAuth2Client });
+    return gmail.users.messages
+      .send({
+        userId: 'me',
+        requestBody: {
+          id: '',
+          raw: this.createMailFromInfo(reaction.email, reaction.subject, reaction.body),
+        },
+      })
+      .catch(() => {
+        throw new UnauthorizedException('Bad access token');
+      });
+  }
 
   async loginWithGoogle(googleLogin: GoogleLoginDto) {
     return this.getGoogleProfile(googleLogin.accessToken);

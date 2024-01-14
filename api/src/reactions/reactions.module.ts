@@ -10,6 +10,7 @@ import { GoogleApiModule } from '../google-api/google-api.module';
 import { SendSlackMessageSchema } from './schemas/send-slack-message.schema';
 import { CreateSlackChannelSchema } from './schemas/create-slack-channel.schema';
 import { SlackModule } from '../slack/slack.module';
+import { SendEmailSchema } from './schemas/send-email.schema';
 
 @Module({
   imports: [
@@ -29,6 +30,10 @@ import { SlackModule } from '../slack/slack.module';
           {
             name: ReactionTypeEnum.CREATE_SLACK_CHANNEL,
             schema: CreateSlackChannelSchema,
+          },
+          {
+            name: ReactionTypeEnum.SEND_EMAIL,
+            schema: SendEmailSchema,
           },
         ],
       },
