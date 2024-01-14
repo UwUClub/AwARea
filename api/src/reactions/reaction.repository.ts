@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ReactionTypeEnum } from './_utils/enum/reaction-type.enum';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { CreateDraft } from './schemas/create-draft.schema';
 import { Reaction } from './schemas/reactions.schema';
 import { UserDocument } from 'src/users/users.schema';
@@ -40,4 +40,7 @@ export class ReactionRepository {
 
   getReactionById = (id: string, user: UserDocument) =>
     this.reactionModel.findOne({ _id: id }).orFail(new NotFoundException('Reaction not found')).exec();
+
+  removeReactionById = (id: Types.ObjectId) =>
+    this.reactionModel.findOneAndDelete({ _id: id }).orFail(new NotFoundException('Reaction not found')).exec();
 }

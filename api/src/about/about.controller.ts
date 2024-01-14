@@ -11,6 +11,6 @@ export class AboutController {
 
   @Get()
   async getAbout(@Req() request: Request) {
-    return this.aboutService.getAbout(request.ip);
+    return this.aboutService.getAbout(request.headers.host);
   }
 }

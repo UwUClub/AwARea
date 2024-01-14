@@ -59,7 +59,8 @@ export class ActionReactionService {
     if (actionReaction.user._id.toString() !== user._id.toString())
       throw new BadRequestException('You are not the owner of this action reaction');
     const action = await this.actionService.createAction(user, queryDto);
-    actionReaction = await this.actionReactionRepository.updateActionReaction(actionReaction._id, action, null, null);
+    if (actionReaction.action !== null) await this.actionRepository.removeActionById(actionReaction.action._id);
+    await this.actionReactionRepository.updateActionReaction(actionReaction._id, action, null, null);
     return this.actionReactionMapper.toGetActionReactionDto(actionReaction);
   }
 
@@ -67,6 +68,7 @@ export class ActionReactionService {
     if (actionReaction.user._id.toString() !== user._id.toString())
       throw new BadRequestException('You are not the owner of this action reaction');
     const reaction = await this.reactionService.createReaction(user, queryDto);
+    if (actionReaction.reaction !== null) await this.reactionRepository.removeReactionById(actionReaction.reaction._id);
     actionReaction = await this.actionReactionRepository.updateActionReaction(actionReaction._id, null, reaction, null);
     return this.actionReactionMapper.toGetActionReactionDto(actionReaction);
   }
@@ -82,9 +84,7 @@ export class ActionReactionService {
       ? await this.actionRepository.getActionById(new Types.ObjectId(queryDto.actionId))
       : null;
 
-    const reaction = queryDto.reactionId
-      ? await this.reactionRepository.getReactionById(queryDto.reactionId, user)
-      : null;
+    const reaction = queryDto.reactionId ? await this.reactionRepository.getReactionById(queryDto.reactionId) : null;
 
     actionReaction = await this.actionReactionRepository.updateActionReaction(
       actionReaction._id,
@@ -113,5 +113,17 @@ export class ActionReactionService {
     }
 
     return this.actionReactionMapper.toGetActionReactionDto(actionReaction);
+  }
+
+  async removeActionReaction(actionReactionId: string, user: UserDocument) {
+    const actionReaction = await this.actionReactionRepository.getActionReactionById(
+      new Types.ObjectId(actionReactionId),
+      user._id,
+    );
+    if (!actionReaction) throw new BadRequestException('Action reaction does not exist');
+    if (actionReaction.action) await this.actionRepository.removeActionById(actionReaction.action._id);
+    if (actionReaction.reaction) await this.reactionRepository.removeReactionById(actionReaction.reaction._id);
+    await this.actionReactionRepository.removeActionReactionById(actionReaction._id, user);
+    return { message: 'Action reaction successfully deleted' };
   }
 }

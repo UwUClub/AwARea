@@ -22,6 +22,15 @@ export class GoogleApiService {
     this.oAuth2Client.setCredentials({ access_token: accessToken });
   }
 
+  async testConnection(accessToken: string) {
+    try {
+      await this.getGoogleProfile(accessToken);
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
+
   private async getGoogleProfile(accessToken: string) {
     this.setAccessToken(accessToken);
     try {
@@ -60,6 +69,8 @@ export class GoogleApiService {
         throw new UnauthorizedException('Bad access token');
       });
   }
+
+  async sendMail(user: UserDocument, reaction: ReactionDocumentType) {}
 
   async loginWithGoogle(googleLogin: GoogleLoginDto) {
     return this.getGoogleProfile(googleLogin.accessToken);

@@ -6,9 +6,10 @@ import { User, UserSchema } from './users.schema';
 import { UsersRepository } from './users.repository';
 import { UsersMapper } from './users.mapper';
 import { GithubApiModule } from '../github-api/github-api.module';
+import { GoogleApiModule } from '../google-api/google-api.module';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]), GithubApiModule],
+  imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]), GithubApiModule, GoogleApiModule],
   controllers: [UsersController],
   providers: [UsersService, UsersRepository, UsersMapper],
   exports: [UsersService, UsersRepository, UsersMapper],

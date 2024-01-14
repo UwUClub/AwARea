@@ -4,12 +4,15 @@ import { CreateUserDto } from './_utils/dto/request/create-user.dto';
 import { UserDocument } from './users.schema';
 import axios from 'axios';
 import { GithubApiService } from '../github-api/services/github-api.service';
+import { UpdateUserDto } from './_utils/dto/request/update-user.dto';
+import { UsersMapper } from './users.mapper';
 
 @Injectable()
 export class UsersService {
   constructor(
     private readonly usersRepository: UsersRepository,
     private readonly githubApiService: GithubApiService,
+    private readonly userMapper: UsersMapper,
   ) {}
 
   async create(userDto: CreateUserDto) {
@@ -36,5 +39,11 @@ export class UsersService {
       githubId: null,
       githubName: null,
     });
+  }
+  
+  async update(user: UserDocument, body: UpdateUserDto) {
+    user = await this.usersRepository.updateOneById(user._id, body);
+
+    return this.userMapper.toGetUserDto(user);
   }
 }

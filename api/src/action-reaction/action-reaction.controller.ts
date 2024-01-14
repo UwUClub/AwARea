@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotImplementedException, Param, Patch, Post } from '@nestjs/common';
 import { ActionReactionService } from './action-reaction.service';
 import { Protect } from '../auth/_utils/decorators/protect.decorator';
 import { ConnectedUser } from '../auth/_utils/decorators/connected-user.decorator';
@@ -67,5 +67,11 @@ export class ActionReactionController {
     @ConnectedUser() user: UserDocument,
   ) {
     return this.actionReactionService.updateActionReaction(user, id, body);
+  }
+
+  @Protect()
+  @Delete(':action_reaction_id')
+  deleteActionReaction(@Param('action_reaction_id') id: string, @ConnectedUser() user: UserDocument) {
+    return this.actionReactionService.removeActionReaction(id, user);
   }
 }

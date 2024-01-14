@@ -69,4 +69,10 @@ export class ActionReactionRepository {
     this.actionReactionModel.findOne({ _id: id, user: userId }).exec();
 
   getActionReactionByIdNotConnected = (id: string) => this.actionReactionModel.findOne({ _id: id }).exec();
+
+  removeActionReactionById = (id: Types.ObjectId, user: UserDocument) =>
+    this.actionReactionModel
+      .findOneAndDelete({ _id: id, user: user._id })
+      .orFail(new NotFoundException('Action reaction not found'))
+      .exec();
 }
