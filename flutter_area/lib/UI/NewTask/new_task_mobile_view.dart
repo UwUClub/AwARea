@@ -18,10 +18,13 @@ class NewTaskMobileView extends StatefulWidget {
 }
 
 class _NewTaskMobileViewState extends State<NewTaskMobileView> {
+  ActionReactionManager actionReactionManager =
+      locator<ActionReactionManager>();
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) => locator<ActionReactionManager>(),
+      create: (BuildContext context) => actionReactionManager,
       builder: (BuildContext context, Widget? child) {
         return Consumer<ActionReactionManager>(
           builder: (BuildContext context, ActionReactionManager manager,

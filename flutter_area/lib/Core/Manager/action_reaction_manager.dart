@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../../UI/NewTask/new_task_viewmodel.dart';
 import '../../Utils/constants.dart';
 import '../../Utils/mk_print.dart';
 import '../Locator/locator.dart';
@@ -133,6 +134,7 @@ class MkReaction {
 
 class ActionReactionManager extends ChangeNotifier {
   List<MkActionReaction> actionsReactions = <MkActionReaction>[];
+  NewTaskViewModel? newTaskViewModel;
 
   Future<void> getActionsReactions() async {
     try {
@@ -177,7 +179,7 @@ class ActionReactionManager extends ChangeNotifier {
       name: name,
       action: MkAction(type: type),
     ));
-    notifyListeners();
+    newTaskViewModel?.notify();
   }
 
   Future<bool> addAction(ActionType actionType, String name,
@@ -214,7 +216,7 @@ class ActionReactionManager extends ChangeNotifier {
       actionsReactions[localIndex].id = id;
       actionsReactions[localIndex].name = name;
       actionsReactions[localIndex].action = MkAction(type: actionType);
-      notifyListeners();
+      newTaskViewModel?.notify();
       return true;
     } catch (e) {
       mkPrint('Error: $e');
@@ -239,7 +241,7 @@ class ActionReactionManager extends ChangeNotifier {
       final int index = actionsReactions.indexWhere(
           (MkActionReaction element) => element.id == actionReactionId);
       actionsReactions[index].reaction = MkReaction(type: type);
-      notifyListeners();
+      newTaskViewModel?.notify();
       return true;
     } catch (e) {
       mkPrint('Error: $e');
@@ -251,7 +253,7 @@ class ActionReactionManager extends ChangeNotifier {
     final int index = actionsReactions.indexWhere(
         (MkActionReaction element) => element.id == actionReactionId);
     actionsReactions[index].reaction = null;
-    notifyListeners();
+    newTaskViewModel?.notify();
   }
 
   Future<void> deleteActionReaction(String actionReactionId) async {
@@ -268,7 +270,7 @@ class ActionReactionManager extends ChangeNotifier {
       }
       actionsReactions.removeWhere(
           (MkActionReaction element) => element.id == actionReactionId);
-      notifyListeners();
+      newTaskViewModel?.notify();
     } catch (e) {
       mkPrint('Error: $e');
     }

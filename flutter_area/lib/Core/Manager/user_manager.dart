@@ -1,12 +1,11 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utils/constants.dart';
 import '../../Utils/mk_print.dart';
 
-class UserManager extends ChangeNotifier {
+class UserManager {
   String? username;
   String? fullName;
   String? email;
@@ -139,10 +138,6 @@ class UserManager extends ChangeNotifier {
       return msg.join(', ');
     }
     return null;
-  }
-
-  void notify() {
-    notifyListeners();
   }
 }
 
