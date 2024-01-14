@@ -7,7 +7,7 @@ import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
 import '../ReusableWidgets/mk_background.dart';
 import 'Components/action_card.dart';
-import 'Components/action_selection.dart';
+import 'Components/action_selection_list.dart';
 import 'Components/reaction_card.dart';
 
 class NewTaskView extends StatefulWidget {
@@ -57,36 +57,7 @@ class _NewTaskViewState extends State<NewTaskView> {
                         color: Theme.of(context).brightness == Brightness.light
                             ? Theme.of(context).colorScheme.lightColor2
                             : Theme.of(context).colorScheme.darkColor2),
-                    child: const Column(
-                      children: <Widget>[
-                        ActionSelection(
-                          label: 'Météo',
-                          actionTypes: <ActionType>[
-                            ActionType.WEATHER_GET_CURRENT,
-                          ],
-                        ),
-                        ActionSelection(
-                          label: 'Nasa',
-                          actionTypes: <ActionType>[
-                            ActionType.NASA_GET_APOD,
-                          ],
-                        ),
-                        ActionSelection(
-                          label: 'Github',
-                          actionTypes: <ActionType>[
-                            ActionType.PULL_REQUEST_CREATED,
-                            ActionType.ISSUE_OPENED,
-                            ActionType.BRANCH_MERGED,
-                            ActionType.PULL_REQUEST_REVIEW_REQUESTED,
-                            ActionType.PULL_REQUEST_REVIEW_REQUEST_REMOVED,
-                            ActionType.BRANCH_CREATED,
-                            ActionType.BRANCH_DELETED,
-                            ActionType.STAR_ADDED,
-                            ActionType.STAR_REMOVED
-                          ],
-                        ),
-                      ],
-                    ))
+                    child: const ActionSelectionList())
               ]),
             );
           },

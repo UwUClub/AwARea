@@ -28,6 +28,8 @@ class _ReactionFormState extends State<ReactionForm> {
         fieldLabels = <String>['channelName', 'message'];
       case ReactionType.CREATE_SLACK_CHANNEL:
         fieldLabels = <String>['channelName'];
+      case ReactionType.SEND_EMAIL:
+        fieldLabels = <String>['destinationEmail', 'subject', 'body'];
       case ReactionType.NONE:
         break;
     }
