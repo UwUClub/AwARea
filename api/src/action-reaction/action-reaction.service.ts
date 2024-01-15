@@ -69,7 +69,10 @@ export class ActionReactionService {
       throw new BadRequestException('You are not the owner of this action reaction');
     const reaction = await this.reactionService.createReaction(user, queryDto);
     if (actionReaction.reaction !== null) await this.reactionRepository.removeReactionById(actionReaction.reaction._id);
+    if (actionReaction.action !== null) 
     actionReaction = await this.actionReactionRepository.updateActionReaction(actionReaction._id, null, reaction, null);
+    if (actionReaction.action && actionReaction.reaction)
+      return this.updateActionReaction(user, actionReaction._id.toString(), {isActivated: true})
     return this.actionReactionMapper.toGetActionReactionDto(actionReaction);
   }
 
