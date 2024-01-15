@@ -3,5 +3,5 @@ import { ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../../jwt/jwt-auth.guard';
 
 export function Protect() {
-    return applyDecorators(ApiBearerAuth(), UseGuards(JwtAuthGuard));
+  return applyDecorators(ApiBearerAuth(), UseGuards(JwtAuthGuard));
 }

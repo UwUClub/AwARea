@@ -19,9 +19,9 @@ services:
             - 8080:8080
         depends_on:
             - mongo
-        restart: always
         environment:
-            - MONGO_URL=mongodb://mongo/awarea
+            - MONGO_URI=mongodb://mongo/awarea
+        restart: always
 
     frontend:
         build:

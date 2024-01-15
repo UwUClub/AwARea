@@ -9,7 +9,6 @@ import '../../Utils/Extensions/double_extensions.dart';
 import '../../Utils/constants.dart';
 import '../ReusableWidgets/mk_button.dart';
 import '../ReusableWidgets/mk_input.dart';
-import 'google_button.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
@@ -27,67 +26,102 @@ class SignupFormState extends State<SignupForm> {
   String _email = '';
   String _password = '';
   String? _errorMessage;
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 108.0.ratioH()),
+      padding: EdgeInsets.symmetric(
+          vertical:
+              kDeviceWidth > kLargeScreenWidth ? 32.0.ratioH() : 50.0.ratioH()),
       width: MediaQuery.of(context).size.width,
-      color: Theme.of(context).brightness == Brightness.light
-          ? Theme.of(context).colorScheme.lightColor2
-          : Theme.of(context).colorScheme.darkColor2,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16.0.ratioW()),
+        color: Theme.of(context).brightness == Brightness.light
+            ? Theme.of(context).colorScheme.lightColor2
+            : Theme.of(context).colorScheme.darkColor2,
+      ),
       child: Center(
-        child: SizedBox(
+        child: Container(
+          padding: kDeviceWidth > kLargeScreenWidth
+              ? null
+              : EdgeInsets.symmetric(horizontal: 100.0.ratioH()),
           width: kDeviceWidth > kLargeScreenWidth ? 333.0.ratioW() : null,
           child: Column(children: <Widget>[
-            const GoogleButton(),
+            // const GoogleButton(),
             Text(AppLocalizations.of(context)!.signUpTitle,
-                style: Theme.of(context).textTheme.headlineLarge),
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineLarge
+                    ?.copyWith(fontSize: kIsPc ? 26 : 20)),
             Divider(
               color: Theme.of(context).colorScheme.lightColor4,
             ),
-            SizedBox(height: 53.0.ratioH()),
+            SizedBox(
+                height: kDeviceWidth > kLargeScreenWidth
+                    ? 15.0.ratioH()
+                    : 40.0.ratioH()),
             MkInput(
                 label: AppLocalizations.of(context)!.fullName,
                 onChanged: (String text) => setState(() => _fullName = text),
                 placeholder: AppLocalizations.of(context)!.fullNamePlaceholder),
-            SizedBox(height: 20.0.ratioH()),
+            SizedBox(
+                height: kDeviceWidth > kLargeScreenWidth
+                    ? 15.0.ratioH()
+                    : 40.0.ratioH()),
             MkInput(
                 label: AppLocalizations.of(context)!.username,
                 onChanged: (String text) => setState(() => _username = text),
                 placeholder: AppLocalizations.of(context)!.usernamePlaceholder),
-            SizedBox(height: 20.0.ratioH()),
+            SizedBox(
+                height: kDeviceWidth > kLargeScreenWidth
+                    ? 15.0.ratioH()
+                    : 40.0.ratioH()),
             MkInput(
                 label: AppLocalizations.of(context)!.email,
                 onChanged: (String text) => setState(() => _email = text),
                 placeholder: AppLocalizations.of(context)!.emailPlaceholder),
-            SizedBox(height: 20.0.ratioH()),
+            SizedBox(height: 10.0.ratioH()),
             MkInput(
                 label: AppLocalizations.of(context)!.password,
                 onChanged: (String text) => setState(() => _password = text),
-                placeholder: AppLocalizations.of(context)!.passwordPlaceholder),
-            SizedBox(height: 28.0.ratioH()),
+                displayed: false),
+            SizedBox(
+                height: kDeviceWidth > kLargeScreenWidth
+                    ? 15.0.ratioH()
+                    : 40.0.ratioH()),
             if (_errorMessage == null)
               const SizedBox()
             else
               Text(_errorMessage!,
                   style: Theme.of(context).textTheme.headlineLarge?.merge(
                       TextStyle(
-                          color: Theme.of(context).colorScheme.redColor))),
-            SizedBox(height: 20.0.ratioH()),
-            MkButton(
-                labelColor: Theme.of(context).colorScheme.darkColor1,
-                backgroundColor: Theme.of(context).colorScheme.lightColor3,
-                label: '${AppLocalizations.of(context)!.signup}...',
-                onPressed: () async {
-                  final (bool success, String? error) = await userManager
-                      .signUp(_email, _password, _username, _fullName);
-                  if (success) {
-                    Navigator.of(context).pushNamed('/home');
-                  } else {
-                    setState(() => _errorMessage = error);
-                  }
-                }),
+                          color: Theme.of(context).colorScheme.redColor,
+                          fontSize:
+                              kDeviceWidth > kLargeScreenWidth ? null : 12))),
+            SizedBox(height: 10.0.ratioH()),
+            if (loading)
+              CircularProgressIndicator(
+                  color: Theme.of(context).colorScheme.redColor)
+            else
+              MkButton(
+                  labelColor: Theme.of(context).colorScheme.darkColor1,
+                  backgroundColor: Theme.of(context).colorScheme.lightColor3,
+                  label: '${AppLocalizations.of(context)!.signup}...',
+                  onPressed: () async {
+                    setState(() => loading = true);
+                    final (bool success, String? error) = await userManager
+                        .signUp(_email, _password, _username, _fullName);
+                    if (success) {
+                      Navigator.of(context).pushNamed('/home');
+                      setState(() => loading = false);
+                    } else {
+                      setState(() {
+                        _errorMessage = error;
+                        loading = false;
+                      });
+                    }
+                  }),
           ]),
         ),
       ),

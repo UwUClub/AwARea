@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../Core/Locator/locator.dart';
-import '../../Core/Manager/user_manager.dart';
+import '../../Core/Manager/google_manager.dart';
 import '../../Utils/Extensions/color_extensions.dart';
 import '../../Utils/Extensions/double_extensions.dart';
 
@@ -13,31 +13,22 @@ class GoogleButton extends StatelessWidget {
   });
 
   Future<void> loginWithGoogle(BuildContext context) async {
-    final UserManager userManager = locator<UserManager>();
+    final GoogleManager googleManager = locator<GoogleManager>();
 
-    const List<String> scopes = <String>[
-      'email',
-      'https://www.googleapis.com/auth/gmail.addons.current.action.compose',
-      'https://www.googleapis.com/auth/gmail.compose',
-    ];
+    final GoogleSignInAccount? res = await googleManager.openGoogleAuthPopup();
+    if (res == null) {
+      return;
+    }
 
-    final GoogleSignIn googleSignIn = GoogleSignIn(
-      scopes: scopes,
-    );
-
-    try {
-      final GoogleSignInAccount? res = await googleSignIn.signIn();
-      final GoogleSignInAuthentication token = await res!.authentication;
-      if (token.accessToken == null || res.displayName == null) {
-        return;
-      }
-      final bool success = await userManager.loginWithGoogle(
-          token.accessToken!, res.displayName!, res.email);
-      if (success) {
-        Navigator.of(context).pushNamed('/home');
-      }
-    } catch (error) {
-      print(error);
+    final GoogleSignInAuthentication token = await res.authentication;
+    if (token.accessToken == null || res.displayName == null) {
+      return;
+    }
+    final bool success = await googleManager.loginWithGoogle(
+        token.accessToken!, res.displayName!, res.email);
+    if (success) {
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pushNamed('/home');
     }
   }
 

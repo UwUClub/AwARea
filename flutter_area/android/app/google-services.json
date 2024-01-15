@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "295533130266",
+    "project_id": "maker-area",
+    "storage_bucket": "maker-area.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295533130266:android:6ab94c91b5a80eb52417a3",
+        "android_client_info": {
+          "package_name": "com.uwuclub.maker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295533130266-6ebnkrmahq3hh9ftbilaaa9bnni7clvt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhI34W4M0J4RLe-VC_pt3inEWmmfrlWXM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295533130266-6ebnkrmahq3hh9ftbilaaa9bnni7clvt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "295533130266-1hlo2h5s174uktsjluh46hdinq3uh8jh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.uwuclub.maker"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
