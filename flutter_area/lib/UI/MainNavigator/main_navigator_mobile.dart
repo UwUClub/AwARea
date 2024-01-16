@@ -9,6 +9,7 @@ import '../../Utils/Extensions/double_extensions.dart';
 import '../Connections/connections_mobile_view.dart';
 import '../Home/home_mobile_view.dart';
 import '../NewTask/new_task_mobile_view.dart';
+import '../Profile/profile_mobile_view.dart';
 import '../ReusableWidgets/mk_background.dart';
 import '../Settings/settings_mobile_view.dart';
 
@@ -121,7 +122,7 @@ class _MainNavigatorMobileState extends State<MainNavigatorMobile> {
         ),
         body: <Widget>[
           const HomeMobileView(),
-          const Center(child: Text('Account')),
+          const ProfileMobileView(),
           const SettingsMobileView(),
           const ConnectionsMobileView(),
           const NewTaskMobileView()

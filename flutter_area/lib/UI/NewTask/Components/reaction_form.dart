@@ -43,7 +43,11 @@ class _ReactionFormState extends State<ReactionForm> {
           TextFormField(
             style: const TextStyle(fontSize: 12),
             onChanged: (String value) {
-              fieldValues[i] = value;
+              if (fieldValues.length <= i) {
+                fieldValues.add(value);
+              } else {
+                fieldValues[i] = value;
+              }
             },
             decoration: InputDecoration(
               labelText: fieldLabels[i],
