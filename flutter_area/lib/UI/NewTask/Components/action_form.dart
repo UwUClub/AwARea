@@ -46,10 +46,10 @@ class _ActionFormState extends State<ActionForm> {
     }
   }
 
-  String convertDateFormat(String date) {
+  String? convertDateFormat(String date) {
     final List<String> dateParts = date.split(' ');
     if (dateParts.length < 2) {
-      return date;
+      return null;
     }
     final List<String> dateParts2 = dateParts[0].split('/');
     final String result =
@@ -65,7 +65,11 @@ class _ActionFormState extends State<ActionForm> {
           TextFormField(
             style: const TextStyle(fontSize: 12),
             onChanged: (String value) {
-              fieldValues[i] = value;
+              if (fieldValues.length <= i) {
+                fieldValues.add(value);
+              } else {
+                fieldValues[i] = value;
+              }
             },
             decoration: InputDecoration(
               labelText: fieldLabels[i],
@@ -90,7 +94,11 @@ class _ActionFormState extends State<ActionForm> {
             }
             data['actionType'] = widget.actionReaction.action.type.name;
             if (data['date'] != null) {
-              data['date'] = convertDateFormat(data['date']!);
+              final String? convertedDate = convertDateFormat(data['date']!);
+              if (convertedDate == null) {
+                return;
+              }
+              data['date'] = convertedDate;
             }
             widget.onSubmit(data);
           },
