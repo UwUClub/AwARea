@@ -55,13 +55,16 @@ class _NewTaskViewState extends State<NewTaskView> {
                     ),
                   ),
                 ),
-                Container(
-                    padding: EdgeInsets.all(30.0.ratioW()),
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? Theme.of(context).colorScheme.lightColor2
-                            : Theme.of(context).colorScheme.darkColor2),
-                    child: const ActionSelectionList())
+                SingleChildScrollView(
+                  child: Container(
+                      padding: EdgeInsets.all(30.0.ratioW()),
+                      decoration: BoxDecoration(
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? Theme.of(context).colorScheme.lightColor2
+                                  : Theme.of(context).colorScheme.darkColor2),
+                      child: const ActionSelectionList()),
+                )
               ]),
             );
           },

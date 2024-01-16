@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 import '../../Core/Locator/locator.dart';
-import '../../Core/Manager/github_manager.dart';
+import '../../Core/Manager/google_manager.dart';
 import '../../Core/Manager/slack_manager.dart';
 import '../../Core/Manager/theme_manager.dart';
 import '../../Core/Manager/user_manager.dart';
@@ -24,8 +25,8 @@ class ConnectionsMobileView extends StatefulWidget {
 class _ConnectionsMobileStateView extends State<ConnectionsMobileView> {
   ThemeManager themeManager = locator<ThemeManager>();
   SlackManager slackManager = locator<SlackManager>();
-  GithubManager githubManager = locator<GithubManager>();
   UserManager userManager = locator<UserManager>();
+  GoogleManager googleManager = locator<GoogleManager>();
 
   String slackBotTokenInput = '';
 
@@ -71,12 +72,6 @@ class _ConnectionsMobileStateView extends State<ConnectionsMobileView> {
                           )
                         ],
                       ),
-                      MkButton(
-                        label: AppLocalizations.of(context)!.connect,
-                        onPressed: () async {
-                          await githubManager.signInWithGitHub();
-                        },
-                      ),
                       const Divider(
                         endIndent: 0,
                         indent: 0,
@@ -97,8 +92,27 @@ class _ConnectionsMobileStateView extends State<ConnectionsMobileView> {
                         ],
                       ),
                       MkButton(
-                        label: AppLocalizations.of(context)!.connect,
-                        onPressed: () {},
+                        label: userManager.isGoogleLogged!
+                            ? AppLocalizations.of(context)!.logout
+                            : AppLocalizations.of(context)!.connect,
+                        onPressed: () async {
+                          if (userManager.isGoogleLogged!) {
+                            await googleManager.setGoogleToken('none');
+                          } else {
+                            final GoogleSignInAccount? res =
+                                await googleManager.openGoogleAuthPopup();
+                            if (res == null) {
+                              return;
+                            }
+                            final GoogleSignInAuthentication googleToken =
+                                await res.authentication;
+                            if (googleToken.accessToken == null) {
+                              return;
+                            }
+                            googleManager
+                                .setGoogleToken(googleToken.accessToken!);
+                          }
+                        },
                       ),
                       const Divider(
                         endIndent: 0,
